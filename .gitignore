@@ -1,11 +1,25 @@
+# OS / NAS artifacts
+.DS_Store
+@eaDir/
+.fuse_hidden*
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Python
 __pycache__/
 .venv/
 *.pyc
 *.pyo
-*.log
-*.aux
-*.bbl
-*.blg
-*.out
-*.toc
-paper/main.pdf
+
+# Archived / old material
+old/
+
+# PDF (rebuild from source)
+main.pdf
