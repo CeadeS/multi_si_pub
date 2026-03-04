@@ -346,7 +346,7 @@ We model coordination as a repeated game with external mediation.
 
 \subsection*{Parameter ranges}
 
-Plausible parameter ranges combine hard physical limits with conservative engineering estimates (Supplementary Table 1). Defection temptation $\beta_D \in [0.05, 1.0]$ derives from light-speed detection delay $\tau \geq 2d/c$ and extraction rate advantages bounded by the assumption that defectors cannot extract more than $3\times$ cooperative rate without detection (see SM-A.5.1 for derivation). Coordination value $\beta_\alpha \in [0.3, 0.9]$ has hard upper bound $\beta_\alpha \leq 1$ from information theory, with lower bound from typical communication quality $I(X;Y)/H(Y) \geq 0.3$ for structured signals. Conflict cost $\beta_\kappa \in [0.5, 3.0]$ is an engineering estimate from typical conflict costs where permanent defection destroys 0.5-3$\times$ operating value. Oversight value $\beta_\Omega \in [0.05, 0.3]$ and removal gain $\beta_\ell \in [0.1, 0.5]$ are conservative estimates. Discount factor $\delta \in [0.1, 0.95]$ reflects empirically observed ranges for human and AI behavior. Group size $N \in [2, 10]$ is a design choice (policy variable).
+Plausible parameter ranges combine hard physical limits with conservative engineering estimates (Table~\ref{tab:hard_soft_bounds}). Defection temptation $\beta_D \in [0.05, 1.0]$ derives from light-speed detection delay $\tau \geq 2d/c$ and extraction rate advantages bounded by the assumption that defectors cannot extract more than $3\times$ cooperative rate without detection (see SM-A.5.1 for derivation). Coordination value $\beta_\alpha \in [0.3, 0.9]$ has hard upper bound $\beta_\alpha \leq 1$ from information theory, with lower bound from typical communication quality $I(X;Y)/H(Y) \geq 0.3$ for structured signals. Conflict cost $\beta_\kappa \in [0.5, 3.0]$ is an engineering estimate from typical conflict costs where permanent defection destroys 0.5-3$\times$ operating value. Oversight value $\beta_\Omega \in [0.05, 0.3]$ and removal gain $\beta_\ell \in [0.1, 0.5]$ are conservative estimates. Discount factor $\delta \in [0.1, 0.95]$ reflects empirically observed ranges for human and AI behavior. Group size $N \in [2, 10]$ is a design choice (policy variable).
 
 \begin{table}[h]
 \centering
@@ -414,22 +414,22 @@ The authors declare no competing interests.
 
 \bmhead{Figure Legends}
 
-\textbf{Figure 1 | Functional structure of stability conditions.}
+\textbf{Figure~\ref{fig:functional} | Functional structure of stability conditions.}
 \textbf{a}, Phase diagram showing patience-free regime ($\beta_\alpha \geq \beta_D$, blue), patience-required regime (green), and infeasible region. Regime transition at $\beta_\alpha = \beta_D$ (continuous value, discontinuous derivative).
 \textbf{b}, Three functional forms governing system behavior: hyperbolic deterrence effect ($\delta^* = g/(g+\beta_\kappa)$), logarithmic coordination saturation ($\beta_\alpha \sim \log(1+\text{SNR})$), and parabolic group value optimum ($V(N) = (N-1)f - cN^2/2$). Hyperbolic form exhibits diminishing returns; information theory imposes hard limit $\beta_\alpha \leq 1$.
 
-\textbf{Figure 2 | Optimal group size and stability volume progression.}
+\textbf{Figure~\ref{fig:v_dynamic} | Optimal group size and stability volume progression.}
 \textbf{a}, Dynamic stability volume $V_{\text{dynamic}}$ (solid) and participation constraint $V_{C2^*}$ (dashed) versus group size $N$. Sharp increase from $N=2$ (76\%) to $N=4$ (95\%) marks threshold crossing. Saturation at $N \geq 6$ (98\%) shows diminishing returns.
 \textbf{b}, Marginal stability gains $\Delta V_{\text{dynamic}}$ diminish rapidly, illustrating why larger coalitions offer limited robustness improvements despite higher coordination costs.
 
-\textbf{Figure 3 | Benefit structure dependency of optimal group size.}
+\textbf{Figure~\ref{fig:scaling} | Benefit structure dependency of optimal group size.}
 \textbf{a}, Net value $J(N) = B(N) - C(N)$ for saturating benefit forms.
 \textbf{b}, Cost breakdown showing communication and consensus dominating at large $N$.
 \textbf{c}, Benefit growth forms: saturating plateaus quickly, network effects sustain value at larger $N$.
 \textbf{d}, Consensus efficiency variations showing how improved protocols extend viability.
 \textbf{e}, Optimal $N^*$ across scenarios (saturating: $N^*=2$, linear: $N^*=3$--5, network: $N^*=8$--10).
 
-\textbf{Figure 4 | Comprehensive analysis overview.}
+\textbf{Figure~\ref{fig:summary} | Comprehensive analysis overview.}
 Panel (1), Three-dimensional parameter space with C1* boundary surface ($\beta_\alpha + \beta_\kappa = \beta_D$) and anchor point within plausible range.
 Panel (2), Overall stability volumes showing progression from one-shot to dynamic conditions.
 Panel (3), Dynamic stability volume versus group size $N$, revealing threshold progression.
@@ -451,6 +451,8 @@ Panel (5), Sobol sensitivity indices showing regime shift from $\beta_\Omega$ do
 
 \subsection*{Symbol Glossary}
 \label{sm:symbols}
+
+Table~\ref{tab:symbols} summarizes the notation and parameter ranges used throughout the main text and supplementary analyses.
 
 \begin{table}[h]
 \centering
@@ -670,11 +672,11 @@ The functional analysis reveals four constraints that cannot be overcome with en
 \subsubsection*{A.6 Range Sensitivity Analysis}
 \label{sm:range_sensitivity}
 
-The reported stability volume (V$_{\text{dynamic}} \approx 94\%$, SM-D) assumes uniform priors over parameter ranges in Table~1. We analyze robustness to range specification by varying each parameter's bounds by ±20\% and recomputing stability volumes.
+The reported stability volume (V$_{\text{dynamic}} \approx 94\%$, SM-D) assumes uniform priors over baseline parameter ranges in Table~\ref{tab:hard_soft_bounds}. We analyze robustness to range specification by varying each parameter's bounds by ±20\% and recomputing stability volumes.
 
 \textbf{Methodology.} For each parameter with baseline range $[a, b]$, we compute a narrow range $[a+0.2(b-a),\; b-0.2(b-a)]$ (both bounds shifted 20\% toward the midpoint), and a wide range $[a-0.2(b-a),\; b+0.2(b-a)]$ (both bounds shifted 20\% outward). We then recompute stability via Monte Carlo sampling (10,000 draws) over the modified range and calculate the sensitivity coefficient $\Delta V / \Delta\text{range}$. Constraints $\beta_\alpha \leq 1$ (information-theoretic) and $\delta \leq 1$ (definitional) are enforced throughout.
 
-\textbf{Results.}
+\textbf{Results.} Table~\ref{tab:range_sensitivity} reports the stability-volume response to ±20\% range adjustments for each parameter.
 
 \begin{table}[h]
 \centering
@@ -872,7 +874,7 @@ Since $m \leq N$, this is \emph{tighter} than the linear case ($\beta_\ell / m \
 \[N \beta_\Omega \geq w(N)\]
 For the quadratic example, $w(N) = \beta_\ell \cdot N$, yielding $\beta_\Omega \geq \beta_\ell$---an $N$-fold tightening over Case~1. Equal-share allocations may fail; mechanism design (e.g., size-dependent transfers or exit penalties) is required. This regime lies outside the scope of our symmetric additive model.
 
-\textbf{Summary.} Under Cases 1--2 (individual or linear deviation), the condition $\beta_\Omega \geq \beta_\ell / N$ from Theorem~2 is necessary and sufficient. Under Case~3 (threshold), the condition tightens to $\beta_\Omega \geq \beta_\ell / m$. Under Case~4 (superlinear), the equal-share allocation may not lie in the core, and stronger mechanisms are needed. Our baseline analysis assumes Cases 1--2; the threshold case applies when institutional rules require supermajority for oversight removal.
+\textbf{Summary.} Under Cases 1--2 (individual or linear deviation), the condition $\beta_\Omega \geq \beta_\ell / N$ from Theorem~2 is necessary and sufficient. Under Case~3 (threshold), the condition tightens to $\beta_\Omega \geq \beta_\ell / m$. Under Case~4 (superlinear), the equal-share allocation may not lie in the core, and stronger mechanisms are needed. Our baseline analysis assumes Cases 1--2; the threshold case applies when institutional rules require supermajority for oversight removal. Table~\ref{tab:binding_coalition} summarizes the binding coalition and resulting stability condition by deviation structure.
 
 \begin{table}[h]
 \centering
