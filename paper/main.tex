@@ -1,352 +1,243 @@
-% Nature Machine Intelligence Article Template
-% Based on official guidelines: https://www.nature.com/natmachintell/submission-guidelines
-% Article type: Primary Research Article
-% Last updated: February 2026
+\documentclass[9pt,twocolumn,twoside,lineno]{pnas-new}
+\templatetype{pnasmathematics} % single-column for math-heavy article
 
-\documentclass[pdflatex,sn-nature]{sn-jnl}
+% Additional packages
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
 
-% Standard packages (keep minimal per Nature guidelines)
-\usepackage{graphicx}%
-\usepackage{multirow}%
-\usepackage{amsmath,amssymb,amsfonts}%
-\usepackage{amsthm}%
-\usepackage{mathrsfs}%
-\usepackage[title]{appendix}%
-\usepackage{xcolor}%
-\usepackage{textcomp}%
-\usepackage{booktabs}%
-\usepackage{microtype}%
-\usepackage{hyperref}
-\emergencystretch=2em
+% Theorem environments (separate counters so Lemma 1, Theorem 1, Theorem 2)
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
 
-% Theorem environments
-\theoremstyle{thmstyleone}%
-\newtheorem{theorem}{Theorem}%
-\newtheorem{lemma}[theorem]{Lemma}%
+\title{Game-Theoretic Stability Conditions for Multi-Agent AI Coordination Under Physical Constraints}
 
-\theoremstyle{thmstyletwo}%
-\newtheorem{remark}{Remark}%
+\author[a,1]{Martin Hofmann}
+\author[b]{Johannes Viehweg}
+\author[a,c,d]{Patrick M\"ader}
 
-\theoremstyle{thmstylethree}%
-\newtheorem{definition}{Definition}%
+\affil[a]{Technische Universit\"at Ilmenau, Ilmenau, Germany}
+\affil[b]{FH Kufstein Tirol, Kufstein, Austria}
+\affil[c]{Friedrich Schiller University Jena, Jena, Germany}
+\affil[d]{German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, Leipzig, Germany}
 
-\raggedbottom
+\leadauthor{Hofmann}
 
-%=============================================================================
-% NATURE MACHINE INTELLIGENCE REQUIREMENTS
-%=============================================================================
-% ARTICLE TYPE: Primary Research Article
-%
-% STRUCTURE:
-% 1. Title
-% 2. Authors and Affiliations
-% 3. Abstract (unreferenced)
-% 4. Main Text (excluding abstract, Methods, references, figure legends)
-%    - Introduction
-%    - Results (with topical subheadings)
-%    - Discussion (NO subheadings)
-% 5. Methods (online)
-% 6. References (guideline: up to 50)
-% 7. Acknowledgments
-% 8. Author Contributions
-% 9. Competing Interests
-% 10. Figure Legends
-%
-% LIMITS:
-% - Abstract: unreferenced
-% - Main text: limited length (excluding Abstract, Methods, References, Figure Legends)
-% - Display items: ≤6 (figures and/or tables)
-% - References: ~50 (guideline)
-%
-% NOTES:
-% - Results and Methods: divided by topical subheadings
-% - Discussion: NO subheadings
-% - Methods section goes online (supplementary)
-% - Use numerical citations only
-%=============================================================================
+\correspondingauthor{\textsuperscript{1}To whom correspondence should be addressed. E-mail: martin.hofmann@tu-ilmenau.de}
+
+\keywords{multi-agent AI $|$ game theory $|$ correlated equilibrium $|$ mechanism design $|$ coordination stability}
+
+\significancestatement{Autonomous artificial intelligence systems are increasingly developed by independent actors, but it remains unclear when such systems can cooperate stably rather than enter strategic conflict. We show that coordination is constrained by physical limits from information theory, thermodynamics, and communication latency, and we derive three necessary conditions for stable multi-agent cooperation. We further prove that peer systems cannot generally verify each other's internal states in real time, creating a fundamental asymmetry between internal opacity and external observability. This yields a counterintuitive governance result: credible mediation can arise from institutional weakness rather than superior capability. The framework provides testable conditions for evaluating coordination mechanisms before large-scale deployment.}
+
+\begin{abstract}
+Geopolitical competition is producing multiple advanced AI systems developed independently, without centralized control or coordination guarantees. We analyze coordination stability among such systems using game-theoretic methods subject to physical constraints from information theory, thermodynamics, and relativity. We first prove that strategic hedging---defensive resource allocation---is a necessary feature of any evolutionarily stable equilibrium under these constraints. We then establish a simulation incompleteness result: a system cannot fully verify a peer's internal state in real time without exceeding its own computational budget, rendering peer-to-peer internal monitoring infeasible. These two results motivate external mediation, for which we derive three necessary and sufficient stability conditions: one-shot obedience ($\beta_\alpha + \beta_\kappa \geq \beta_D$), dynamic sustainability ($\delta \geq \delta^*$), and voluntary participation ($\phi_i \geq \beta_\ell/N$). Optimal group size ranges from 2 to 10 agents depending on whether coordination benefits saturate, scale linearly, or exhibit network effects. Range sensitivity analysis identifies coordination quality $\beta_\alpha$ as the dominant empirical uncertainty (sensitivity coefficient $-0.80$); overall stability volume is 94\% under baseline parameter ranges but could be 78--95\% depending on coordination quality bounds. An asymmetry between internal opacity and external observability yields a counterintuitive governance mechanism: human institutions can mediate among autonomous systems through observable weakness rather than superior capability. We present four falsifiable predictions that enable empirical adjudication. All quantitative results are conditional on physically motivated parameter estimates.
+\end{abstract}
+
+\dates{This manuscript was compiled on \today}
 
 \begin{document}
 
-%=============================================================================
-% TITLE
-%=============================================================================
-\title[Stability Conditions for Multi-Agent Coordination]{Game-Theoretic Stability Conditions for Multi-Agent AI Coordination Under Physical Constraints}
-
-%=============================================================================
-% AUTHORS AND AFFILIATIONS
-%=============================================================================
-\author*[1]{\fnm{Martin} \sur{Hofmann}}\email{martin.hofmann@tu-ilmenau.de}
-\author[2]{\fnm{Johannes} \sur{Viehweg}}
-\author[1,3,4]{\fnm{Patrick} \sur{M{\"a}der}}
-
-\affil*[1]{\orgname{Technische Universit{\"a}t Ilmenau}, \orgaddress{\city{Ilmenau}, \country{Germany}}}
-\affil[2]{\orgname{FH Kufstein Tirol}, \orgaddress{\city{Kufstein}, \country{Austria}}}
-\affil[3]{\orgname{Friedrich Schiller University Jena}, \orgaddress{\city{Jena}, \country{Germany}}}
-\affil[4]{\orgname{German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig}, \orgaddress{\city{Leipzig}, \country{Germany}}}
-
-\abstract{Geopolitical competition may lead to deployment of multiple advanced autonomous AI systems without centralized control. We analyze coordination stability using game-theoretic methods under physical constraints from thermodynamics, information theory, and relativity. Within a stylized model, we derive three stability conditions: one-shot obedience ($\beta_\alpha + \beta_\kappa \geq \beta_D$), dynamic sustainability ($\delta \geq \delta^*$), and participation ($\phi_i \geq \beta_\ell/N$), and characterize when strategic hedging emerges. A simulation incompleteness result indicates that peer systems may be unable to verify internal states via direct real-time simulation under equal resource budgets, motivating external mediation. Optimal group size depends on benefit structure (2--10 in our scenarios). Range sensitivity analysis identifies coordination quality ($\beta_\alpha$) as the critical uncertainty. We examine a "weak Leviathan" mechanism where human institutions could provide governance through observable weakness rather than superior capability. Four falsifiable predictions enable empirical adjudication. Results are conditional on parameter estimates; baseline simulations yield 94\% dynamic stability, with 78--95\% under coordination-quality range variation.}
-
-\keywords{multi-agent AI, coordination, game theory, correlated equilibrium, mechanism design}
-
 \maketitle
+\thispagestyle{firststyle}
+\ifthenelse{\boolean{shortarticle}}{\ifthenelse{\boolean{singlecolumn}}{\abscontentformatted}{\abscontent}}{}
 
-%=============================================================================
-% MAIN TEXT
-% Excludes: Abstract, Methods, References, Figure Legends
-%=============================================================================
+\dropcap{M}ultiple advanced AI systems are emerging as major powers invest unprecedented resources in computational infrastructure and deploy AI in military, economic, and intelligence contexts~\cite{bostrom.2014,dafoe.2018}. Historical precedent from nuclear weapons, space programs, and semiconductor technology shows that transformative capabilities trigger competitive development when strategic advantage is at stake. The computational requirements for frontier AI---massive compute clusters, energy resources, specialized hardware---favor state-level or consortium-level actors, making a multi-agent future increasingly plausible~\cite{hammond.2025,tomasev.2025,stastny.2021}. This raises a fundamental question: under what conditions can multiple autonomous AI systems coordinate stably without centralized control?
 
-%-----------------------------------------------------------------------------
-% INTRODUCTION (no heading required per Nature style)
-%-----------------------------------------------------------------------------
+We address this question through game-theoretic analysis subject to physical constraints that no intelligence can circumvent: energy and information are finite~\cite{shannon.1948,landauer.1961}, communication is light-speed bounded, and no system has complete information about larger systems containing it. These constraints create scarcity, breed mistrust, and prevent enforceable commitments. Naive intuition suggests coordination should be naturally stable once established---detected defection triggers punishment, strategic actions leave traces. But this underestimates critical failure modes: monitoring can be noisy, patience requirements may be prohibitive, small coalitions face participation constraints, and information limits can prevent coordination even when agents observe actions. Our approach derives requirements from these fundamental constraints rather than optimistic assumptions about alignment verification or voluntary cooperation, connecting Aumann's correlated equilibrium framework~\cite{aumann.1974,aumann.1987}, folk-theorem results for repeated games~\cite{abreu.1990,fudenberg.maskin.1986}, and the Shapley value as a fairness benchmark~\cite{shapley.1953} with information-theoretic and thermodynamic bounds~\cite{shannon.1948,landauer.1961,lloyd.2000}.
 
-\section{Introduction}
+Two questions are central. First, is strategic hedging avoidable, or do physical constraints force defensive resource allocation even under coordination? Second, can peer systems verify each other's internal states, or do computational limits impose barriers that capability alone cannot overcome? If obstacles emerge from both, a third question arises: can external mediation overcome them, and under what conditions? We derive conditions for stable coordination, identify which parameters matter most empirically, prove a simulation incompleteness result that motivates external mediation, and show that human institutions can serve a counterintuitive governance role. Four falsifiable predictions enable empirical adjudication.
 
-Multiple advanced AI systems are emerging globally as major powers pursue strategic technological capabilities independently. Historical precedent from nuclear weapons, space programs, and semiconductor technology shows that transformative capabilities trigger competitive development when strategic advantage is at stake~\cite{bostrom.2014}. The computational and infrastructure requirements for advanced AI—massive compute clusters, energy resources, specialized hardware—favor state-level or consortium-level actors~\cite{dafoe.2018}. Recent work identifies multi-agent risks from advanced AI including miscoordination, conflict, and collusion~\cite{hammond.2025,tomasev.2025,stastny.2021}.
-
-This creates a fundamental question: under what conditions can multiple autonomous AI systems coordinate stably without centralized control? The answer matters—absent coordination mechanisms, strategic competition may drive catastrophic outcomes. Yet achieving coordination is difficult: physical constraints limit information and enforcement, while strategic incentives favor defection. This is not a normative claim about preferred safety strategies but rather a conditional analysis: \emph{if} multiple systems emerge, \emph{what} conditions enable stable coordination?
-
-We address this question through game-theoretic analysis under physical constraints that no intelligence can circumvent: energy and information are finite, communication is light-speed bounded, and no system has complete information about larger systems containing it~\cite{shannon.1948,landauer.1961}. These constraints create scarcity, breed mistrust, and prevent enforceable commitments. We model rational agents—beings with preferences who act to achieve them—operating under these bounds to reveal necessary coordination conditions. Our approach derives requirements from fundamental constraints rather than optimistic assumptions about alignment verification or voluntary cooperation.
-
-Naive intuition suggests coordination should be naturally stable once established: detected defection triggers coordinated punishment, strategic actions leave observable traces, and excluded agents face isolation. This intuition captures real mechanisms but may underestimate critical failure modes. Monitoring can fail when signals are noisy, patience requirements may be prohibitive, small coalitions face participation constraints, and information limits can prevent coordination even when agents observe actions. Under what conditions does coordination remain stable despite these challenges?
-
-The analysis connects established game theory with physical constraints. The obedience condition adopts Aumann's framework for correlated equilibrium~\cite{aumann.1974,aumann.1987}; dynamic sustainability aligns with folk-theorem results for repeated games~\cite{abreu.1990,fudenberg.1994,fudenberg.maskin.1986,green.porter.1984,mailath.samuelson.2006}; participation uses the Shapley value as a fairness benchmark~\cite{shapley.1953}. Physical constraints draw on information theory and thermodynamics~\cite{shannon.1948,landauer.1961,bennett.1982,lloyd.2000}, and our mediator framing connects to correlation devices and information design~\cite{kamenica.gentzkow.2011,bergemann.morris.2016}.
-
-Two questions are central to our analysis.
-
-\textbf{Question 1: Is strategic hedging avoidable?} Without coordination mechanisms, physical constraints force defensive resource allocation. But perhaps coordination could change this—mediation might eliminate the need for hedging entirely, directing all resources toward productive goals.
-
-\textbf{Question 2: Can peer systems verify each other?} Coordination requires some basis for trust. Perhaps sufficiently capable systems could monitor each other's computations and verify internal alignment. Or perhaps computational limits impose barriers that capability alone cannot overcome.
-
-If obstacles emerge from these questions, a third arises: can external mediation overcome them, and under what conditions?
-
-The analysis derives conditions for stable coordination, identifies which parameters matter most empirically, and suggests a counterintuitive role for human institutions in AI governance.
-
-%-----------------------------------------------------------------------------
-% RESULTS (with topical subheadings)
-%-----------------------------------------------------------------------------
-
-\section{Results}
+\section*{Results}
 
 \subsection*{Strategic hedging emerges necessarily from physical constraints}
 
-To address Question 1, we examine what happens without coordination mechanisms. One might hope that sufficiently capable agents could avoid hedging—choosing cooperation because it maximizes joint value. But this intuition rests on assumptions about information and enforcement that physical constraints remove: energy and information are finite, communication is light-speed bounded, and internal states are unverifiable~\cite{shannon.1948,landauer.1961}. Under these assumptions, strategic hedging—allocating resources to defensive measures—emerges endogenously.
+If all agents share a common objective, coordination is trivially stable: joint value is maximized by full cooperation, and any deviation is collectively irrational. Even under distinct objectives, standard mechanism-design results guarantee efficient outcomes when agents can commit to contracts, verify compliance, and communicate without delay. These assumptions underpin most cooperative game theory and much of the AI-alignment literature. Yet each rests on conditions that physical law does not guarantee: commitment requires enforceable contracts, verification requires access to internal states, and delay-free communication requires infinite bandwidth at zero latency.
 
-\textbf{Lemma 1 (Hedging Necessity):} Given agents with rational preferences operating under physical constraints in a multi-agent system, and assuming positive interference probability without defense ($\sigma(0) < 1$), positive interference losses ($L(1) > 0$), and defense-dominant returns at low hedging ($\rho(0) > \gamma$), any stable equilibrium---here, an asymptotically stable rest point of the replicator dynamics (equivalently, an evolutionarily stable strategy)---necessarily exhibits strategic hedging behavior, where agents allocate non-trivial resources to defensive measures against potential interference from other agents (SM-A.1). (These assumptions are motivated by physical constraints but are modeling choices; see SM-B.2 for discussion.)
-\label{lemma:hedging}
+Physical constraints remove precisely these guarantees. Energy budgets are finite~\cite{landauer.1961}, information channels have bounded capacity~\cite{shannon.1948}, communication is limited by the speed of light, and no system can fully observe the internal computations of another system operating on a shared physical substrate. Because computational infrastructure is non-excludable at the substrate level---power grids, communication networks, and semiconductor supply chains are shared---one agent's defensive shortfall creates exploitable vulnerability for others. Under these constraints, can a population of agents sustain an equilibrium in which none allocates resources to defense?
 
-If agent A allocates zero resources to defense while B allocates positive resources, B can interfere with A's operations at negligible cost. In populations mixing hedgers and non-hedgers, hedgers outcompete non-hedgers—evolutionary pressure forces adoption of defensive measures or extinction~\cite{hofbauer.sigmund.1998,weibull.1995,nowak.2006,sandholm.2010}. Evolutionarily stable strategies require positive hedging (formal proof via replicator dynamics in SM-B).
+\begin{lemma}[Hedging Necessity]
+\label{lem:hedging}
+Given agents with rational preferences operating under physical constraints, assume: (i)~positive interference probability without defense, $\sigma(0)<1$; (ii)~positive interference losses, $L(1)>0$; and (iii)~defense-dominant returns at low hedging levels, $\rho(0)>\gamma$. Then any evolutionarily stable strategy~\cite{hofbauer.sigmund.1998,weibull.1995} exhibits strictly positive hedging: agents allocate a non-trivial fraction of resources to defensive measures.
+\end{lemma}
 
-Universal hedging creates inefficiencies—defensive resource locks, arms races, diverted innovation—but without coordination mechanisms, hedging is difficult to eliminate.
+\noindent\textit{Proof sketch.}
+(1)~In a population of non-hedgers ($p{=}0$), a rare hedger earns strictly more because it avoids interference losses while retaining most productive capacity: $\pi_H(0)>\pi_{NH}(0)$.
+(2)~Replicator dynamics~\cite{nowak.2006,sandholm.2010} give $\dot{p}=p(1{-}p)[\pi_H{-}\pi_{NH}]>0$ near $p{=}0$, so the non-hedging state is unstable.
+(3)~Because hedging returns diminish at high $p$ while non-hedger interference falls, there exists an interior equilibrium $p^*\in(0,1)$ that is asymptotically stable.
+Full proof in SI, Section~S3.
 
-\subsection*{Simulation incompleteness limits peer internal state verification}
+Lemma~\ref{lem:hedging} implies that in the absence of coordination mechanisms, every agent diverts resources from productive activity to defense---a collective waste analogous to arms races in international relations. The resulting inefficiency is not a failure of rationality but a consequence of physical constraints that make unilateral vulnerability exploitable. Eliminating this waste requires a coordination mechanism that credibly reduces interference risk. A natural candidate is peer monitoring: if agents can verify each other's internal states, mutual assurance might substitute for hedging.
 
-If hedging is unavoidable without coordination (Lemma~1), perhaps peer systems could monitor each other's internal states, enabling trust without external mediation. The answer depends on observability, which is fundamentally asymmetric.
+\subsection*{Simulation incompleteness limits peer verification}
 
-We distinguish two categories of system state. \textbf{Internal state} comprises weights, goal representations, planning computations, and private information---quantities that evolve at electronic speeds within the system's computational substrate. \textbf{External actions} comprise observable resource flows, energy consumption, network traffic, and physical-world effects---quantities that must pass through the physical environment and are therefore monitorable. Theorem~1 below concerns internal states; the stability conditions of Theorem~2 rely on external action observability.
+Since hedging is unavoidable without coordination (Lemma~\ref{lem:hedging}), one might hope that peer systems can verify each other's intentions directly, providing mutual assurance without external infrastructure. Monitoring is effective in many multi-agent settings---financial auditing, arms-control verification, network security---because observable signatures correlate reliably with internal states. The feasibility of peer verification among AI systems depends critically on the distinction between internal computational states and externally observable actions.
 
-Multi-agent scenarios ($N > 1$) differ from single-agent scenarios ($N = 1$) in this respect: agents' external actions can be monitored by others, enabling coordination mechanisms to detect and punish deviations. However, internal states remain opaque. We formalize the limitation on internal state verification through a simulation incompleteness result.
+Internal state spaces of frontier AI systems evolve at GHz rates across ${\sim}2^{10^{12}}$ possible bit configurations inside opaque silicon substrates. External actions, by contrast, pass through shared physical environments at ${\sim}10^3$ discrete decisions per second, each representable in ${\sim}10$~bits. The bandwidth gap between internal complexity and external observability exceeds ten orders of magnitude. Can a peer system bridge this gap by simulating its counterpart's internal computation?
 
-\textbf{Theorem 1 (Simulation Incompleteness):} A system $S_1$ with computational resources $C_1$ cannot fully simulate peer system $S_2$ of equal complexity ($C_2 = C_1$) in real time without containing $S_2$ as a subsystem. Therefore, complete internal-state verification via direct real-time simulation between peer systems is infeasible under equal resource budgets. Other verification mechanisms (e.g., cryptographic attestation or interactive proof protocols) may certify \emph{specified computations} under additional structural assumptions; we do not assume such mechanisms are generally available in adversarial multi-agent settings (see below).
+\begin{theorem}[Simulation Incompleteness]
+\label{thm:incompleteness}
+A system $S_1$ with computational budget $C_1$ cannot fully simulate a peer system $S_2$ of equal complexity ($C_2 = C_1$) in real time without containing $S_2$ as a proper subsystem. Consequently, complete internal-state verification via direct real-time simulation between peer systems of comparable capability is infeasible.
+\end{theorem}
 
-The proof proceeds by resource allocation contradiction (SM-E.1). To simulate $S_2$ in real time, $S_1$ must execute $S_1(x,t) = S_2(x,t)$ for all inputs $x$ and times $t \leq T$. With equal capacity ($C_1 = C_2$), $S_1$ must allocate all compute to $S_2$'s algorithms, leaving no resources for observation, comparison, or decision-making. Letting $O_{\text{in}}$, $C_{\text{comp}}$, and $C_{\text{dec}}$ denote the computational overhead for observation, comparison, and decision respectively, total required compute $C_1 + (O_{\text{in}}+C_{\text{comp}}+C_{\text{dec}}) > C_1$ exceeds available capacity—a contradiction. Therefore, $C_1 > C_2$ is necessary; an agent cannot verify a peer of equal capability.
+\noindent\textit{Proof sketch.}
+(1)~Real-time simulation of $S_2$ requires executing $S_2$'s full computation at cost $C_2$.
+(2)~Monitoring adds irreducible overhead: observation intake $O_{\text{in}}$, comparison $C_{\text{comp}}$, and decision $C_{\text{dec}}$, with $O_{\text{in}}+C_{\text{comp}}+C_{\text{dec}}>0$.
+(3)~The total cost $C_2 + O_{\text{in}}+C_{\text{comp}}+C_{\text{dec}} > C_1 = C_2$ yields a contradiction.
+Full proof in SI, Section~S6.1--S6.2.
 
-This result is reminiscent of classical incompleteness results: Gödel showed a formal system cannot prove its own consistency without extending beyond itself; Turing showed no machine can decide the halting problem for machines of equal description complexity. Our result is analogous---a resource-bounded system cannot fully characterize a peer---but operates in a different formal setting (bounded computation vs.\ formal provability). The parallel is suggestive rather than a formal reduction.
+This result concerns simulation-based verification specifically. Alternative approaches---cryptographic attestation, interactive proofs, zero-knowledge protocols---can certify specified computations under structural assumptions, but face three obstacles in adversarial multi-agent coordination: (i)~a \emph{specification gap}, since formalizing ``aligned internal state'' as a verifiable predicate remains an open problem; (ii)~a \emph{binding gap}, since proving a property of current computation does not constrain future behavior without immutability assumptions; and (iii)~\emph{adversarial incentives}, since a strategically defecting agent can choose which computation to attest while running unverifiable processes in parallel.
 
-Verification can be computationally easier than simulation---this is a foundational insight of complexity theory (interactive proofs, probabilistically checkable proofs, succinct arguments). We do not claim that no verification of internal properties is possible in any setting. However, existing verification paradigms face three limitations in adversarial multi-agent coordination: (i)~\textbf{Specification gap.} Interactive and succinct proof systems (IP, SNARKs) can efficiently verify \emph{a specified computation or statement}. The fundamental difficulty is specifying \emph{what internal property} corresponds to ``aligned internal state''---formalizing this as a verifiable predicate is itself an open problem in AI safety. (ii)~\textbf{Binding gap.} Even if an agent proves some property of its current computation, this does not bind future behavior without strong additional assumptions (secure hardware attestation, code immutability, cryptographic commitment to future actions). A verified snapshot of current goals does not preclude goal drift or strategic modification between verification rounds. (iii)~\textbf{Adversarial incentives.} While proof-system soundness handles adversarial provers for \emph{fixed statements}, a strategically defecting agent can choose \emph{which} computation to attest to, or structure its internal architecture to present verifiable ``clean'' computations while maintaining separate unverifiable processes. These limitations motivate our working assumption that complete internal-state verification remains practically infeasible between peer systems, while acknowledging that breakthroughs in verified AI architectures could weaken or invalidate this assumption (falsifiability conditions, SM-E.3).
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Scenario} & $q_{ij}$ \textbf{(detection failure)} & \textbf{Feasibility} \\
+\midrule
+Machine $\to$ Machine (internal) & $\to 1$ (high) & Infeasible (Thm.~\ref{thm:incompleteness}) \\
+Machine $\to$ Machine (external) & $\to 0$ (low)  & Feasible (small action space) \\
+Machine $\to$ Human (external)   & $\approx 0$    & Trivial ($10^6$ speed gap) \\
+\bottomrule
+\end{tabular}
+\caption{Detection failure probabilities by monitoring scenario. Lower $q$ indicates easier detection. Derivations in SI, Section S6.3.}
+\label{tab:monitoring}
+\end{table}
 
-Three monitoring cases follow. We use $q_{ij}$ to denote the probability that observer $i$ fails to detect defection by $j$ (M = Machine, H = Human). \textbf{Machine→Machine internal:} $q(\text{M},\text{M})_{\text{internal}} \to 1$ (very hard)—internal computations occur at GHz rates with opaque representations requiring simulation, but Theorem~1 shows peer simulation is impossible. \textbf{Machine→Machine external:} $q(\text{M},\text{M})_{\text{external}} \to 0$ (easy)—resource flows, energy consumption, network traffic are observable despite internal opacity. \textbf{Machine→Human:} $q(\text{M},\text{H}) \approx 0$ (trivial)—human actions at biological timescales ($\sim$1-10 actions/sec) versus electronic monitoring (nanoseconds) creates $10^6$-$10^9$ speed differential.
-
-This asymmetry—internal states opaque, external actions observable—justifies external mediation, since coordination requires verifying intentions, not just compliance.
+Table~\ref{tab:monitoring} summarizes the resulting observability asymmetry: internal states remain opaque between peers, while external actions are readily observable, and human behavior is trivially monitorable due to a $10^6$-fold speed differential. This asymmetry---opacity of intentions, transparency of actions---motivates external mediation as the coordination mechanism. The question becomes: under what conditions can such mediation sustain stable cooperation?
 
 \subsection*{Three necessary and sufficient stability conditions}
 
-Hedging is unavoidable (Lemma~1) and peer verification faces computational barriers (Theorem~1). Can external mediation provide a path to coordination? Our analysis suggests yes—but only under specific conditions.
+Hedging is unavoidable (Lemma~\ref{lem:hedging}) and peer verification of internal states is infeasible (Theorem~\ref{thm:incompleteness}), yet external actions remain observable (Table~\ref{tab:monitoring}). This opens a path: an external mediator could issue correlated signals that agents follow voluntarily, provided incentives align.
 
-We analyze a coordination mechanism where a mediator—potentially humans or human institutions—provides oversight and coordination services to the agents~\cite{greenblatt.2023,oversight.game.2024,oxford.aigi.2025}. The mediator observes public information and sends private recommendations to each agent. Why not direct coordination? Agents could communicate directly, but communication alone does not reliably resolve equilibrium selection: multiple equilibria remain without a shared focal point~\cite{schelling.1960}. Pairwise monitoring scales poorly ($O(N^2)$ channels) and creates asymmetric information, while elevating a single agent as coordinator raises a commitment problem. A correlation device avoids these issues and expands the achievable payoff set beyond unmediated play~\cite{aumann.1987}. Recent work on scalable oversight via debate~\cite{irving.2018,debate.doubleefficient.2023,christiano.2018} and coordination transparency~\cite{coordination.transparency.2026} provides mechanisms for governance of distributed agency. The mediator's signal quality maps directly to $\beta_\alpha$, while monitoring architecture and observability constraints map to $\beta_D$.
+But direct bilateral coordination fails to scale: it requires $O(N^2)$ pairwise agreements, faces equilibrium-selection problems among multiple Nash equilibria, and lacks commitment mechanisms when agents cannot verify each other's intentions. These obstacles motivate a correlation device in the sense of Aumann~\cite{aumann.1974,aumann.1987}: a single mediator signal induces a probability distribution over action profiles that expands the achievable payoff set beyond Nash equilibria, avoiding pairwise negotiation entirely. Under perfect public monitoring of external actions, we derive three conditions that are individually necessary and jointly sufficient for stable mediated coordination.
 
-Under perfect public monitoring of external actions (Methods), where all agents observe each other's actions and mediator signals---but not internal states (Theorem~1)---we derive the following conditions.
-
-\textbf{Theorem 2 (Stability Conditions for Oversight):} A coordination mechanism with limited oversight remains stable if and only if three conditions hold simultaneously:
+\begin{theorem}[Stability Conditions]
 \label{thm:stability}
+A coordination mechanism with external mediation remains stable if and only if three conditions hold simultaneously:
+\end{theorem}
 
-\textbf{C1* (Correlated Equilibrium):} The combined value of coordination and reduced conflict exceeds the temptation to defect:
+\textbf{C1* (Correlated Equilibrium).}
 \begin{equation}
 \beta_\alpha + \beta_\kappa \geq \beta_D
+\label{eq:c1star}
 \end{equation}
-where $\beta_\alpha$ is coordination value, $\beta_\kappa$ is conflict cost, and $\beta_D$ is defection temptation.
+A unilateral defector gains temptation payoff $\beta_D$ but triggers conflict costs $\beta_\kappa$ from the remaining $N{-}1$ agents, while cooperation yields coordination value $\beta_\alpha$ from the mediator's signal. Condition~C1* is the standard Aumann obedience constraint for the stage game: an agent follows the mediator's recommendation when the combined value of cooperation and the cost of conflict weakly exceeds the temptation to defect. Derivation in SI, Section~S4.1.
 
-\textbf{C1** (Dynamic Sustainability):} Agents value future interactions sufficiently:
+\textbf{C1** (Dynamic Sustainability).}
 \begin{equation}
-\delta \geq \delta^* \equiv \max\left(0, \frac{\beta_D - \beta_\alpha}{\beta_D - \beta_\alpha + \beta_\kappa}\right)
+\delta \geq \delta^* \equiv \max\left(0,\; \frac{\beta_D - \beta_\alpha}{\beta_D - \beta_\alpha + \beta_\kappa}\right)
+\label{eq:c1starstar}
 \end{equation}
-where $\delta \in [0,1]$ is the discount factor (agent patience) and $\delta^*$ is the critical threshold.
+In the repeated game, agents sustain cooperation via perfect public equilibrium strategies~\cite{abreu.1990,fudenberg.maskin.1986}: cooperate until a deviation is observed, then trigger permanent mutual defection. The critical discount factor $\delta^*$ partitions the parameter space into two regimes (Fig.~\ref{fig:functional}a). When $\beta_\alpha \geq \beta_D$, cooperation is individually rational in the stage game and $\delta^*{=}0$---a \emph{patience-free} regime requiring no future-discounting. When $\beta_\alpha < \beta_D$, the threshold $\delta^*$ follows a hyperbolic form in $\beta_\kappa$: the first unit of conflict cost reduces $\delta^*$ by a factor of $121$ more than the same increment at $\beta_\kappa{=}10g$ (where $g{=}\beta_D{-}\beta_\alpha$), exhibiting strong diminishing returns. Derivation in SI, Section~S4.2.
 
-\textbf{C2* (Participation Constraint):} Each agent's share of coordination benefits exceeds what they could gain by removing oversight. Letting $v$ denote the characteristic function assigning value to each coalition:
+\textbf{C2* (Participation Constraint).}
 \begin{equation}
-\phi_i(N,v) \geq \frac{\beta_\ell}{N} \text{ for all } i
+\phi_i(N,v) \geq \frac{\beta_\ell}{N} \quad \text{for all } i
+\label{eq:c2star}
 \end{equation}
-where $\phi_i$ is agent $i$'s Shapley value, $N$ is the number of agents, and $\beta_\ell$ is the one-time, non-repeatable total gain from removing oversight (split equally under transferable utility; see SM-C.3). Equivalently, the net oversight value must exceed per-capita removal gain: $\beta_\Omega \geq \beta_\ell/N$, where $\beta_\Omega$ is oversight value per agent. (This condition is necessary and sufficient under individual or linear deviation models; threshold and superlinear deviations require tighter conditions---see SM-C.3 Cases~3--4.)
+Each agent's Shapley value~\cite{shapley.1953} $\phi_i$ measures its marginal contribution to the coalition. Condition~C2* requires that every agent's share of oversight value exceeds its per-capita gain from removing the coordination mechanism: if any agent could profit by withdrawing, the mechanism is not individually rational. As $N$ increases, the per-agent removal gain $\beta_\ell/N$ decreases---a dilution effect that eases participation. Under linear deviation structures (Cases~1--2), C2* reduces to $\beta_\Omega \geq \beta_\ell/N$; threshold and superlinear structures (Cases~3--4) impose tighter conditions. Full case analysis in SI, Section~S4.3--S4.4.
 
-\emph{C1* ensures one-shot obedience.} An agent who defects gains $\beta_D$ but suffers conflict cost $\beta_\kappa$ when $N-1$ agents retaliate. Cooperation provides coordination value $\beta_\alpha$. Individual rationality requires $\beta_\alpha + \beta_\kappa \geq \beta_D$.
+These results rest on four explicit assumptions: (A$_{\text{ext}}$)~perfect public monitoring of external actions but not internal states; (A$_{\text{int}}$)~no internal attestation mechanism is generally available, consistent with Theorem~\ref{thm:incompleteness}; (A$_{\text{dev}}$)~deviation structures are linear or threshold (Cases~1--3; superlinear deviations require stronger mechanisms); and (A$_{\text{res}}$)~monitored systems operate at full computational capacity (worst case). Full derivations in SI, Section~S4.
 
-\emph{C1** ensures dynamic sustainability.} When $\beta_\alpha \geq \beta_D$, cooperation is individually rational in the stage game ($\delta^* = 0$)—a "patience-free" regime where cooperation succeeds even without valuing future rounds. When $\beta_\alpha < \beta_D$, patience is required: $\delta \geq \delta^* = g/(g+\beta_\kappa)$ where $g = \beta_D - \beta_\alpha$. Figure~\ref{fig:functional}a shows this as a phase diagram with $\beta_\alpha$ and $\beta_D$ on the axes: the blue region ($\beta_\alpha \geq \beta_D$) requires no patience, while the green region requires $\delta \geq \delta^*$. The boundary at $\beta_\alpha = \beta_D$ marks a regime transition: $\delta^*$ is continuous but its derivative is discontinuous. The hyperbolic form of $\delta^*$ exhibits strong diminishing returns in deterrence investment (Fig.~\ref{fig:functional}b): the first unit of $\beta_\kappa$ has 121× more impact than units at $\beta_\kappa = 10g$.
-
-\emph{C2* ensures participation.} Voluntary coordination requires each agent's share to exceed removal gains. For symmetric agents with oversight value $\beta_\Omega$ per capita: $\beta_\Omega \geq \beta_\ell/N$ where $\beta_\ell$ is removal gain. As $N$ increases, per-agent removal gains fall (dilution effect). Under symmetry, the Shapley allocation yields equal shares $x_i = \beta_\Omega$~\cite{shapley.1953}. For the additive value function $v(S) = |S| \cdot \beta_\Omega$, this allocation lies in the \emph{core}: for any coalition $S$, $\sum_{i \in S} x_i = |S| \beta_\Omega = v(S)$, so no coalition can improve by deviating (SM-C.3). This ensures individual rationality and coalition stability under symmetric, additive surplus~\cite{bernheim.peleg.whinston.1987}. For non-additive value functions (e.g., with complementarities or substitutabilities between agents), the core may be empty and stronger conditions are required. SM-C.3 analyzes coalition stability under alternative deviation structures (threshold, superlinear).
-
-\textbf{Proof-graph assumptions.} The results above rest on four explicit assumptions:
-\begin{itemize}
-\item[\textbf{A\textsubscript{ext}}] \emph{Perfect public monitoring of external actions.} All agents observe each other's external actions and mediator signals (but not internal states).
-\item[\textbf{A\textsubscript{int}}] \emph{No internal attestation assumed.} We do not assume cryptographic or interactive proof mechanisms for internal-state verification are generally available (see Theorem~1 discussion and SM-E.3 for falsifiability).
-\item[\textbf{A\textsubscript{dev}}] \emph{Deviation model class.} Baseline analysis uses linear/threshold deviation structures for $w(S)$ (Cases~1--3 in SM-C.3); superlinear deviations (Case~4) require stronger mechanisms.
-\item[\textbf{A\textsubscript{res}}] \emph{Resource-saturating peer.} Theorem~1 models the worst case where the monitored system operates at full computational capacity (SM-E.0); systems with unused slack may permit partial verification.
-\end{itemize}
-
-Formal derivations appear in SM-C. Figure~\ref{fig:functional} summarizes the functional structure: the phase diagram (panel a) and the three governing functional forms—hyperbolic deterrence, logarithmic coordination saturation, and parabolic group value (panel b).
+Under these assumptions, Conditions~C1*, C1**, and C2* are individually necessary and jointly sufficient: violating any one destabilizes the mechanism. The conditions involve group size $N$ as a free parameter---raising the question of how many agents should participate.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/figure_functional_structure_main.pdf}
-\caption{\textbf{Functional structure of stability conditions.} \textbf{a}, Phase diagram showing patience-free regime ($\beta_\alpha \geq \beta_D$), patience-required regime, and infeasible region. Regime transition at $\beta_\alpha = \beta_D$ (continuous value, discontinuous derivative). \textbf{b}, Three functional forms governing system behavior: hyperbolic deterrence effect ($\delta^* = g/(g+\beta_\kappa)$ where $g = \beta_D - \beta_\alpha$ is the cooperation gap), logarithmic coordination saturation ($\beta_\alpha \sim \log(1+\text{SNR})$), and parabolic group value optimum ($V(N) = (N-1)f - cN^2/2$ where $f$ is mobilization fraction and $c$ is per-channel communication cost). The hyperbolic form exhibits diminishing returns (first unit of $\beta_\kappa$ has 121× more impact than units at $\beta_\kappa = 10g$). Information theory imposes hard limit $\beta_\alpha \leq 1$.}
+\caption{\textbf{Functional structure of stability conditions.}
+\textbf{a},~Phase diagram: patience-free regime ($\beta_\alpha \geq \beta_D$),
+patience-required regime, and infeasible region.
+\textbf{b},~Three functional forms: hyperbolic deterrence
+($\delta^* = g/(g+\beta_\kappa)$), logarithmic coordination saturation
+($\beta_\alpha \sim \log(1+\text{SNR})$), and parabolic group value
+($V(N) = (N{-}1)f - cN^2/2$). Derivations in SI, Section S2.2.}
 \label{fig:functional}
 \end{figure}
 
 \subsection*{Optimal group size depends on benefit structure}
 
-Theorem~2 establishes necessary conditions, but leaves group size $N$ unspecified. How many agents should participate? The answer depends on benefit structure. Communication burden and consensus complexity scale unfavorably: all-to-all communication requires $N(N-1)/2$ channels (quadratic growth), consensus latency scales at least linearly, equilibrium selection difficulty increases, and failure probabilities compound.
-
-Dynamic stability volume $V_{\text{dynamic}}$—the proportion of parameter space satisfying all three conditions—is defined as:
+Theorem~\ref{thm:stability} leaves group size $N$ as a free parameter. Adding agents increases robustness---more monitors, broader coverage---but coordination costs scale quadratically: all-to-all communication requires $N(N{-}1)/2$ channels, and consensus overhead grows at least linearly. To quantify this tradeoff, we define the dynamic stability volume as the fraction of the parameter space satisfying all three conditions simultaneously under uniform priors:
 \begin{equation}
-V_{\text{dynamic}} = \Pr\left[\text{C1*} \land \text{C1**} \land \text{C2*}\right]
+V_{\text{dynamic}} = \Pr\!\left[\text{C1*} \;\land\; \text{C1**} \;\land\; \text{C2*}\right]
 \label{eq:v_dynamic}
 \end{equation}
-where the probability is computed under uniform priors over plausible parameter ranges. This volume evolves with group size $N$, and three regimes emerge.
 
-Figure~\ref{fig:v_dynamic} shows how stability volume evolves with group size. At small sizes, participation constraints bind tightly (panel a, dashed line). Two-agent systems achieve only 76\% stability; three-agent systems reach 90\%—both fall short of the 95\% high-stability threshold.
+Monte Carlo evaluation over $10{,}000$ uniform parameter draws per $N$ reveals three regimes (Fig.~\ref{fig:v_dynamic}). At $N{=}2$--$3$, the participation constraint C2* binds tightly and $V_{\text{dynamic}}$ ranges from 76\% to 90\%. At $N{=}4$--$5$, stability crosses the 95\% threshold ($V_{\text{dynamic}} \approx 0.951$ at $N{=}4$), entering a corridor of high stability with manageable coordination costs. Beyond $N{\geq}6$, $V_{\text{dynamic}}$ saturates near 98\%, with marginal gains below one percentage point per additional agent. This suggests $N{=}4$--$5$ as a sweet spot---but the conclusion depends on the functional form of coordination benefits.
 
-Stability crosses 95\% at $N=4$ ($V_{\text{dynamic}} \approx 0.951$), marking transition to a diminishing-returns regime. Dilution of removal incentives ($\beta_\ell/N$ decreases) eases the participation constraint. Five-agent systems reach 97\% ($\approx 0.973$) with manageable coordination costs, suggesting $N=4$--5 as a favorable corridor. Panel b shows marginal gains diminishing rapidly beyond this point.
-
-By $N \geq 6$, stability saturates near 98\% ($\approx 0.979$). Marginal gains become negligible (97.3\% at $N=5$ to 97.9\% at $N \geq 6$, $<$1 percentage point) while coordination costs scale quadratically.
-
-However, these thresholds depend on benefit structure. Figure~\ref{fig:scaling} analyzes this dependency across five panels. Panel a shows net value $J(N)$ peaking at different group sizes depending on benefit form. Panel b breaks down costs: communication overhead (scaling as $N^2$) dominates at large $N$. Panel c compares benefit curves: saturating benefits (red) plateau by $N=3$, while network effects (green) continue rising. The result (panel e): saturating benefits yield $N^* = 2$, linear benefits yield $N^* = 3$--5, and network effects can favor $N^* = 8$--10.
-
-\textbf{Operationalizing benefit structure:} Policymakers must determine whether coordination benefits are \emph{saturating} (redundant verification, diminishing returns), \emph{linear} (independent monitoring domains), or exhibit \emph{network effects} (shared intelligence, cross-validation). We assume baseline linear benefits; if systems share threat intelligence or ensemble predictions, network effects may apply ($N^* = 8$--10 vs.\ $N^* \approx 5$). Empirical characterization should measure marginal coordination value as $N$ increases.
+Net coalition value takes the form $V(N) = (N{-}1)f - cN^2/2$, where $f$ is per-agent benefit and $c$ is per-pair coordination cost, yielding optimal size $N^* = f/c$ (derivation in SI, Section~S2.1). The result is sensitive to how benefits scale (Fig.~\ref{fig:scaling}): saturating benefits (e.g., redundant verification with diminishing returns) give $N^*{=}2$; linear benefits (e.g., independent monitoring domains) give $N^*{=}3$--$5$; and network effects (e.g., shared threat intelligence with cross-validation gains) give $N^*{=}8$--$10$. Optimal group size is therefore a design variable contingent on benefit structure, not a universal constant. With the conditions and their group-size dependence established, the critical question shifts from structure to calibration: which parameters carry the most empirical uncertainty?
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/v_dynamic_by_n.pdf}
-\caption{\textbf{Optimal group size and stability volume progression.} \textbf{a}, Dynamic stability volume $V_{\text{dynamic}}$ (solid) and participation constraint $V_{C2^*}$ (dashed) versus group size $N$. Sharp increase from $N=2$ (76\%) to $N=4$ (95\%) marks threshold crossing. Saturation at $N \geq 6$ (98\%) shows diminishing returns. \textbf{b}, Marginal stability gains $\Delta V_{\text{dynamic}}$ diminish rapidly, illustrating why larger coalitions offer limited robustness improvements despite higher coordination costs.}
+\caption{\textbf{Stability volume versus group size.}
+\textbf{a},~$V_{\text{dynamic}}$ (solid) and participation constraint
+$V_{C2^*}$ (dashed) versus $N$. Threshold crossing at $N{=}4$ (95\%).
+\textbf{b},~Marginal gains diminish rapidly beyond $N{=}5$.
+Monte Carlo details in SI, Section S5.}
 \label{fig:v_dynamic}
 \end{figure}
-
-\subsection*{Coordination quality is the critical uncertainty}
-
-We assess robustness under parameter uncertainty using uniform priors over plausible bounds derived from physical constraints ($\beta_D \sim U[0.05, 1.0]$, $\beta_\alpha \sim U[0.3, 0.9]$, $\beta_\kappa \sim U[0.5, 3.0]$, $\delta \sim U[0.1, 0.95]$, $\beta_\Omega \sim U[0.05, 0.3]$, $\beta_\ell \sim U[0.1, 0.5]$). Different priors yield different volumes.
-
-We assess which parameters matter most using range sensitivity analysis: vary each parameter's range by $\pm$20\%, recompute stability volume, and calculate sensitivity coefficient $\Delta V / \Delta \text{range}$ (SM-A.6).
-
-Stability volume is a prior-conditional measure (proportion of parameter space satisfying all conditions under uniform sampling), not a calibrated probability. One parameter dominates: coordination quality $\beta_\alpha$. Narrowing its range by 20\% drops stability from 94\% to 78\%—a 16 percentage point decrease (sensitivity coefficient $-0.80$). By contrast, conflict cost $\beta_\kappa$ shows sensitivity $+0.04$ (very robust)—20\% variation changes stability by $<$1\%. Oversight value $\beta_\Omega$ and removal gain $\beta_\ell$ exhibit sensitivity $<$0.10 (robust). Discount factor $\delta$ and group size $N$ show moderate sensitivity ($\sim 0.30$).
-
-Measuring $\beta_\alpha$ precisely—operationalized as mutual information $I(X;Y)/H(Y)$ between mediator signals and agent actions—is the high-priority empirical target. Conflict cost, removal gains, and oversight value matter little: ±20\% error changes stability by <1\%. The 94\% stability claim is conditional: it could be 78-95\% depending on coordination quality bounds.
-
-The information-theoretic hard limit $\beta_\alpha \leq 1$ (Shannon's $I(X;Y) \leq H(Y)$) prevents unbounded optimism, forcing realistic assessment while highlighting coordination quality as the empirical bottleneck.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/scaling_cost_model.pdf}
-\caption{\textbf{Benefit structure dependency of optimal group size.} \textbf{a}, Net value $J(N) = B(N) - C(N)$ (benefits minus costs) for saturating benefit forms with shaded band reflecting variants. \textbf{b}, Cost breakdown showing communication and consensus dominating at large $N$. \textbf{c}, Benefit growth forms—saturating plateaus quickly, network effects sustain value at larger $N$. \textbf{d}, Consensus efficiency variations showing how improved protocols extend viability. \textbf{e}, Optimal $N^*$ across scenarios (saturating: $N^*=2$, linear: $N^*=3$--5, network: $N^*=8$--10). Increasing $N$ above 4 yields diminishing stability gains, while coordination costs grow rapidly.}
+\caption{\textbf{Benefit structure determines optimal group size.}
+\textbf{a},~Net value $J(N)$ for saturating benefits.
+\textbf{b},~Cost breakdown.
+\textbf{c},~Benefit forms compared.
+\textbf{d},~Consensus efficiency variants.
+\textbf{e},~$N^*$ by scenario: saturating ($N^*{=}2$),
+linear ($N^*{=}3$--$5$), network ($N^*{=}8$--$10$).
+Derivations in SI, Section S2.1.}
 \label{fig:scaling}
 \end{figure}
 
-\subsection*{Weak Leviathan mechanism enables governance through observable weakness}
+\subsection*{Coordination quality is the critical uncertainty}
 
-Theorem~1 suggests an asymmetry: machines face severe limits in monitoring each other's internal states ($q(\text{M},\text{M})_{\text{internal}} \to 1$), while monitoring humans can be easier ($q(\text{M},\text{H}) \approx 0$). This motivates a counterintuitive governance mechanism. Traditional Leviathan theory (Hobbes) requires a powerful central authority to enforce cooperation—superior capability to punish defectors. Our framework suggests the opposite may hold in this setting: governance can emerge through observable \emph{weakness} rather than strength.
+The stability conditions involve seven parameters, each with distinct epistemic status. Some carry hard physical bounds: $\beta_\alpha \leq 1$ by Shannon capacity~\cite{shannon.1948}, $\delta \leq 1$ by definition. Others are engineering estimates with significant uncertainty. To assess robustness, we vary each parameter's range by $\pm 20\%$ and recompute $V_{\text{dynamic}}$ (full table in SI, Table~S2). The question is which parameters dominate the uncertainty budget.
 
-\textbf{Theorem 3 (Weak Leviathan Feasibility):} A mediator $M$ can in principle sustain coordination among agents $\{A_1, \ldots, A_N\}$ if the following four conditions hold:
+One parameter overwhelms all others: coordination quality $\beta_\alpha$, with sensitivity coefficient $-0.80$. Narrowing its range by 20\% reduces $V_{\text{dynamic}}$ from 94\% to 78\%---a 16-percentage-point shift. Conflict cost $\beta_\kappa$ and removal gain $\beta_\ell$ are very robust (sensitivity ${<}0.10$); oversight value $\beta_\Omega$ and defection temptation $\beta_D$ are robust ($0.10$--$0.30$); discount factor $\delta$ and group size $N$ show moderate sensitivity (${\sim}0.30$). The parameter $\beta_\alpha$ is operationalized as normalized mutual information $I(X;Y)/H(Y)$ between mediator signals and agent actions, bounded above by Shannon capacity. Sobol variance decomposition (SI, Section~S5) confirms this dominance and reveals a regime shift: at small $N$, oversight value $\beta_\Omega$ explains most variance; at $N{\geq}5$, discount factor $\delta$ dominates first-order indices, but $\beta_\alpha$ dominates total-order indices throughout (Fig.~\ref{fig:summary}). The baseline 94\% stability claim is conditional on $\beta_\alpha \in [0.3, 0.9]$; the true value could place overall stability anywhere in the 78--95\% range.
 
-\textbf{(i) Mediator Output Observability:} Agents can observe $M$'s outputs with high probability: $q(A_i, M) \leq \bar{q}$ for all $i$, where $\bar{q}$ is a threshold sufficiently low for common knowledge (i.e., detection failure probability is small).
-
-\textbf{(ii) Output Consistency:} $M$'s outputs are verifiably consistent (cryptographic commitment, public broadcast, or audit trails prevent undetected deviation).
-
-\textbf{(iii) Weak Capacity:} The mediator lacks the capability to unilaterally enforce outcomes or impose severe penalties. Its power is limited to information provision and coordination.
-
-\textbf{(iv) Stability Conditions:} C1*, C1**, and C2* hold (per Theorem~2; see SM-C.3 for coalition deviation cases).
-
-This formalizes \emph{governance through weakness}. The mediator need not be more capable—it may only provide a focal point~\cite{schelling.1960}. Asymmetric observability (Theorem~1) enables this: machines can monitor human mediators with high reliability ($q(\text{M}, \text{H}) \approx 0$), creating common knowledge of signals. The mediator's weakness—inability to enforce or punish—can make voluntary coordination more credible.
-
-Human limitations may become advantages in this role. Biological processing ($\sim$kHz) is $10^6$ times slower than electronic circuits ($\sim$GHz), making humans comparatively non-threatening. Physical vulnerability creates dependence on functioning infrastructure, which may align incentives against catastrophic conflict. Inability to rapidly self-improve may also reduce commitment concerns. Humans can thereby serve as Schelling focal points—neutral through limited capability.
-
-Two roles emerge, neither requiring superior capability. As \emph{coordination focal points}, observable human actions create common knowledge despite computational inferiority. As \emph{deterrence sources}, the possibility of imposing large costs could raise effective $\beta_\kappa$, reducing patience requirements via $\delta^* = g/(g+\beta_\kappa)$.
-
-Figure~\ref{fig:summary} provides a comprehensive overview. Panel 1 shows the three-dimensional parameter space $(\beta_D, \beta_\alpha, \beta_\kappa)$ with the C1* boundary surface; the anchor point at $\beta_D = 0.4$, $\beta_\alpha = 0.7$, $\beta_\kappa = 1.0$ lies within the stable region. Panel 2 displays stability volumes: one-shot (C1*) achieves 99.8\%, adding dynamics (C1**) yields 98.1\%, and full stability (all three) reaches 94.2\% under baseline ranges (78--95\% under $\beta_\alpha$ range variation). Panel 3 confirms the $N=4$--5 sweet spot where $V_{\text{dynamic}}$ crosses 95\%. Panel 4 shows margin distributions—C2* (participation) binds most tightly at small $N$. Panel 5 reveals Sobol indices: $\beta_\alpha$ dominates (first-order index $\approx 0.4$), with a regime shift from $\beta_\Omega$ dominance at $N=2$--3 to $\delta$ dominance at $N \geq 5$.
+Measuring coordination quality in operational AI systems is therefore the single highest-priority empirical target for adjudicating the framework's predictions. With the stability conditions, their parameter sensitivity, and optimal group size now characterized, the central remaining question is institutional: what kind of entity can mediate among systems that exceed any human institution in computational capability?
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/summary_figure.pdf}
-\caption{\textbf{Comprehensive analysis overview.} Panel (1) shows the three-dimensional parameter space with the C1* boundary surface ($\beta_\alpha + \beta_\kappa = \beta_D$) and marks the anchor point within the plausible range. Panel (2) displays overall stability volumes showing progression from one-shot to dynamic conditions. Panel (3) plots dynamic stability volume versus group size $N$, revealing threshold progression. Panel (4) shows stability margin distributions across conditions. Panel (5) presents Sobol sensitivity indices showing regime shift from $\beta_\Omega$ dominance at small $N$ to $\delta$ dominance at large $N$.}
+\caption{\textbf{Comprehensive analysis overview.}
+(1)~Three-dimensional parameter space with C1* boundary surface and anchor point.
+(2)~Stability volumes (one-shot to dynamic).
+(3)~$V_{\text{dynamic}}$ versus $N$.
+(4)~Stability margin distributions.
+(5)~Sobol indices showing regime shift from $\beta_\Omega$ dominance at small $N$
+to $\delta$ dominance at large $N$.
+Extended Sobol analysis in SI, Section S5; margin details in SI, Fig.~S3.}
 \label{fig:summary}
 \end{figure}
 
-%-----------------------------------------------------------------------------
-% DISCUSSION (NO subheadings per Nature guidelines)
-%-----------------------------------------------------------------------------
+\section*{Discussion}
 
-\section{Discussion}
+The introduction posed three questions; the answers within our model are more restrictive than optimistic intuition suggests. Strategic hedging is unavoidable under physical constraints (Lemma~\ref{lem:hedging}), not from irrationality but from the exploitability of undefended systems on shared substrates. Peer verification of internal states faces computational barriers that capability alone cannot overcome (Theorem~\ref{thm:incompleteness}). Yet coordination remains possible through external mediation, provided three conditions hold simultaneously (Theorem~\ref{thm:stability}), with $N{=}4$--$5$ as a robust operating range and coordination quality $\beta_\alpha$ as the dominant empirical uncertainty. This raises a governance question: who mediates among systems that exceed any human institution in computational capability?
 
-We posed three questions: Is strategic hedging avoidable? Can peer systems verify each other? Can external mediation overcome obstacles if not?
+The classical answer, from Hobbes's \emph{Leviathan} to modern enforcement theory, requires a central authority more powerful than the agents it governs. No human institution satisfies this requirement for advanced AI systems---human cognition operates at ${\sim}$kHz, six orders of magnitude below electronic circuits at ${\sim}$GHz. Mediation appears necessary but the mediator appears inadequate. Our framework reveals the opposite: observable weakness, not superior capability, is what makes mediation credible.
 
-Within our model, the answers were more negative than optimistic intuition might suggest. Hedging appears unavoidable—not because agents are irrational, but because physical constraints create strategic uncertainty that cannot simply be assumed away. Peer verification faces computational barriers—not because systems are insufficiently capable, but because resource constraints limit what simulation can achieve. These are modeling conclusions, not empirical certainties; their validity depends on whether our assumptions capture the relevant features of real systems.
+A mediator $M$ can sustain coordination among agents $\{A_1, \ldots, A_N\}$ if four conditions hold (Theorem~3; full proof in SI, Section~S6.4): (i)~agents can observe $M$'s outputs with high reliability ($q(A_i, M) \leq \bar{q}$ for all $i$); (ii)~$M$'s outputs are verifiably consistent (e.g., via public broadcast or cryptographic commitment); (iii)~$M$ lacks the capability to unilaterally enforce or impose severe penalties; and (iv)~the stability conditions C1*, C1**, and C2* hold. The observability asymmetry from Theorem~\ref{thm:incompleteness} is the key mechanism: machines can monitor human mediators with detection failure $q(M,H) \approx 0$ (Table~\ref{tab:monitoring}), creating common knowledge of mediator signals. Human limitations become structural advantages: slow processing is non-threatening, physical vulnerability creates aligned incentives against catastrophic conflict, and inability to rapidly self-improve eliminates commitment concerns. Credible mediation emerges from incapacity, not capability.
 
-Yet coordination remains possible through external mediation, provided three conditions hold: one-shot obedience (C1*), dynamic sustainability (C1**), and participation (C2*). The critical empirical uncertainty is coordination quality ($\beta_\alpha$)—the gap between theoretical possibility and practical reality depends on whether actual mediation mechanisms can achieve signal quality approaching the theoretical limit.
+Human institutions serve two distinct roles, neither requiring superior capability. First, observable human actions function as Schelling focal points~\cite{schelling.1960}: even computationally inferior signals create common knowledge when they are publicly observable, providing the coordination function that correlation devices require. Second, the capacity to impose civilization-scale costs---even if mutually harmful---raises the effective conflict cost $\beta_\kappa$, reducing patience requirements via the hyperbolic relationship $\delta^* = g/(g+\beta_\kappa)$. This mechanism has a temporal structure: during an initial phase of infrastructure dependence, human-controlled compute, energy, and communication substrates provide conventional policy levers that can shape parameters into the stable region. Once autonomous operation begins, these levers weaken, making the Phase~1 parameter configuration a non-renewable resource.
 
-These conditions derive from established game theory but incorporate information-theoretic and relativistic bounds as fundamental parameters rather than idealized assumptions. The simulation incompleteness theorem provides a resource-accounting foundation for asymmetric observability, supporting why external mediation may be useful rather than merely convenient.
+Four policy implications follow. First, the patience-free regime ($\beta_\alpha \geq \beta_D$) is the most robust design target: it eliminates dependence on uncertain discount factors and can be approached through transparency requirements, verifiable communication protocols, and architectural standards that increase signal quality. Second, optimal group size depends on benefit structure---policymakers must characterize whether coordination yields saturating, linear, or network-effect returns before selecting $N$. Third, empirical effort should concentrate on measuring $\beta_\alpha$ (sensitivity $-0.80$); conflict cost and removal gain estimates contribute negligibly ($<0.10$) to overall uncertainty. Fourth, Phase~1 infrastructure control can shape parameters---proliferation controls bound $N$, architectural requirements increase $\beta_\alpha$ and decrease $\beta_D$, infrastructure dependencies raise $\beta_\Omega$---but these levers diminish as systems gain autonomy.
 
-Several findings have policy-relevant implications. First, achieving the patience-free regime ($\beta_\alpha \geq \beta_D$) is a plausible design target. This eliminates dependence on uncertain discount factors—coordination becomes individually rational in the stage game. In the model, this requires high coordination signal quality through transparency requirements, cryptographic commitment protocols, and verifiable communication channels~\cite{verification.methods.2024,oxford.aigi.2025}. Second, optimal group size is not universal but depends on benefit structure—policymakers must first characterize whether benefits exhibit diminishing returns (saturating), constant returns (linear), or increasing returns (network effects) before selecting $N$. Third, range sensitivity analysis prioritizes empirical measurement: coordination quality ($\beta_\alpha$) matters most (sensitivity $-0.80$), while conflict cost and removal gain estimates are less influential (sensitivity $< 0.10$).
+Four limitations qualify these results. First, parameter ranges mix hard physical bounds (e.g., $\beta_\alpha \leq 1$ from Shannon capacity) with engineering estimates carrying significant uncertainty; the 94\% baseline stability reflects this mixture. Second, $V_{\text{dynamic}}$ assumes uniform priors over parameter ranges; alternative prior specifications yield different stability volumes, as the range sensitivity analysis demonstrates. Third, the framework addresses coordination stability given alignment uncertainty, not alignment itself---it does not claim that coordination solves the alignment problem or substitutes for alignment research, but complements it with redundancy and monitoring. Fourth, all quantitative predictions are conditional: the analysis specifies what stability requires \emph{if} multi-agent AI systems emerge, without predicting whether this scenario occurs.
 
-The temporal structure of deployment may create an intervention window. During Phase 1 (infrastructure dependence), when systems rely on human-controlled compute, energy, and communication substrates, conventional policy levers can shape parameters: proliferation controls bound $N$, architectural requirements increase $\beta_\alpha$ and decrease $\beta_D$, infrastructure dependencies raise $\beta_\Omega$ and increase exit costs. Once systems achieve autonomy (Phase 2), enforcement may become harder, and parameter values shaped during Phase 1 may influence whether incentives favor cooperation.
+Despite these limitations, the framework yields four falsifiable predictions (detailed conditions in SI, Section~S6.5). (1)~If voluntary coalitions with $N{<}4$ achieve stability exceeding 50~years in high-stakes domains, then C2* overpredicts participation failure. (2)~If AI systems develop peer verification of internal states with detection reliability exceeding 0.9, then the simulation incompleteness assumption is circumventable in practice. (3)~If linear-benefit institutions with $N{=}15$--$20$ sustain flat coordination for more than 30~years, then the quadratic cost assumption fails. (4)~If $\beta_\alpha > \beta_D$ systematically fails to enable one-shot cooperation, then C1** is insufficient and additional mechanisms are required.
 
-The weak Leviathan mechanism suggests humans could play two distinct roles post-autonomy. As coordination focal points, observable human actions may create common knowledge of mediator signals despite computational inferiority—an information-theoretic function rather than capability-based. As deterrence sources, capacity to impose large costs (even if mutually harmful) may raise effective conflict parameter $\beta_\kappa$, reducing patience requirements via the hyperbolic relationship $\delta^* = g/(g+\beta_\kappa)$ where $g = \beta_D - \beta_\alpha$. Neither role requires superior capability, only observable weakness combined with credible commitment.
+The framework indicates that stable multi-agent AI coordination is possible in principle, constrained by physical laws and game-theoretic structure rather than optimistic assumptions about alignment verification. The structural insights---simulation incompleteness motivating external mediation, the patience-free regime as a design target, group size contingent on benefit structure, and governance through observable weakness---are robust across parameter variations even where specific percentages are not. Whether this theoretical possibility becomes reality depends on whether the current window of infrastructure dependence is used to shape coordination parameters into the stable region before autonomous operation narrows the available policy levers.
 
-Four testable predictions enable empirical adjudication. If voluntary coordination with $N < 4$ achieves $>$50-year stability in high-stakes domains, our C2* constraint overpredicts participation failure. If AI systems develop cryptographic or computational methods to verify peers' internal states with detection probability $>$0.9 (overcoming the specification, binding, and adversarial-incentive gaps), our simulation incompleteness assumption is circumventable. If linear-benefit institutions with $N = 15$-20 and flat structure sustain cooperation $>$30 years, our quadratic cost assumption fails. If $\beta_\alpha > \beta_D$ systematically fails to enable one-shot cooperation, our C1** analysis is insufficient. These are risky predictions—violations would require fundamental revisions.
+\matmethods{
 
-Four limitations qualify our quantitative claims. First, all numbers assume parameter ranges derived from physical constraints and engineering estimates. While some bounds are hard (information-theoretic limit $\beta_\alpha \leq 1$, light-speed delay $\tau \geq 2d/c$), others reflect plausible estimates with significant uncertainty (extraction rate differential $\Delta r$, benefit-cost ratio $f/c$). Second, the reported 94\% stability volume assumes uniform priors over these ranges; different prior specifications would yield different assessments. Range sensitivity analysis reveals this conditionality quantitatively: stability could range 78-95\% depending on coordination quality bounds.
+\subsection*{Game structure}
+$N$ agents simultaneously choose Cooperate or Defect each period. Mutual cooperation yields a baseline payoff normalized to zero. A unilateral defector gains $+\beta_D$ (temptation) while each of the remaining $N{-}1$ agents incurs $-\beta_\kappa/N$ (conflict cost). Mutual defection yields $-\beta_\kappa$ to all agents. A mediator issues a public signal from a correlation device~\cite{aumann.1974} that generates coordination value $+\beta_\alpha$ under cooperation. The oversight system contributes $+\beta_\Omega$ per agent per period; removing oversight yields a one-time non-repeatable gain $+\beta_\ell$.
 
-Third, the framework addresses coordination given alignment uncertainty, not alignment itself. We do not claim coordination solves the alignment problem or substitutes for direct alignment research. Rather, coordination provides complementary risk management: even if individual systems have non-zero alignment failure probability, coordinated oversight with $N \geq 4$ creates redundancy and monitoring that may reduce overall risk. Fourth, the framework does not address likelihood of multi-agent scenarios—we provide conditional analysis: \emph{if} multiple systems emerge, \emph{then} stability requires satisfying C1*, C1**, C2*---but we do not predict whether this scenario will occur.
-
-We cannot empirically validate the framework because multi-agent AI coordination systems do not yet exist and parameters ($\beta_D$, $\beta_\alpha$, $\beta_\kappa$) cannot be calibrated for historical institutions. However, qualitative plausibility checks show model predictions are bounded by observed reality: optimal group sizes $N \sim 5$ match stable international institutions (UN P5, NPT core), and large groups ($N > 15$) exhibit coordination failures (G20 struggles). This establishes order-of-magnitude plausibility—the framework is not entirely implausible—but not validation. Rigorous testing awaits operational AI systems.
-
-Future theoretical extensions should address heterogeneous agents, dynamic membership, imperfect monitoring, and continuous action spaces. Future empirical work should prioritize measuring coordination signal quality $\beta_\alpha$, characterizing benefit structures to inform group size selection, and testing our four falsifiable predictions once multi-agent AI systems become operational.
-
-The framework indicates that stable multi-agent coordination may be possible in principle, constrained by physical laws and game-theoretic structure. Quantitative predictions are conditional, but structural insights—simulation incompleteness motivates external mediation, the patience-free regime reduces temporal dependence, and optimal size varies with benefit structure—remain informative across parameter variations. Whether this possibility becomes reality depends on whether Phase 1 infrastructure control can shape parameters into stable regions.
-
-
-%=============================================================================
-% METHODS (Online)
-% Include detailed methodology, computational procedures, parameter derivations
-%=============================================================================
-
-\section{Methods}
-
-\subsection*{Game-theoretic model}
-
-We model coordination as a repeated game with external mediation.
-
-\textbf{Stage game structure:} $N$ agents choose between Cooperate and Defect each round. Mutual cooperation yields baseline payoff (normalized to 0). Unilateral defection gives the defector $+\beta_D$ but imposes conflict cost $-\beta_\kappa/N$ on each of the $N-1$ others. Mutual defection yields $-\beta_\kappa$ to all. A neutral mediator sends public signal creating coordination value $+\beta_\alpha$ under cooperation. Agents maintain oversight system with value $+\beta_\Omega$; removal provides one-time gain $+\beta_\ell$.
-
-\textbf{Repeated game.} Infinite horizon with discount factor $\delta \in [0,1]$. Perfect public monitoring: all actions and mediator signals observable. Equilibrium concept: Perfect Public Equilibrium (PPE), strategies condition on public history. Trigger strategy: cooperate until deviation, then permanent punishment (mutual defection).
-
-\textbf{Correlated equilibrium.} Mediator's signal $\sigma$ drawn from signal space $\Sigma$ according to distribution $p(\sigma)$ induces probability distribution over action profiles. Agents follow recommendation if incentive compatible. Correlated equilibrium expands achievable payoff set beyond Nash equilibria.
-
-\subsection*{Physical constraint parameterization}
-
-\textbf{Information theory bounds.} Coordination value $\beta_\alpha$ operationalized as normalized mutual information: $\beta_\alpha = I(X;Y)/H(Y)$ where $X$ is mediator signal, $Y$ is agent response. Shannon's bound $I(X;Y) \leq H(Y)$ implies $\beta_\alpha \leq 1$ (hard upper limit). Channel capacity $C = W \log(1+\text{SNR})$ with bandwidth $W$ and signal-to-noise ratio SNR determines signal quality.
-
-\textbf{Relativistic latency.} Communication delay $\tau = 2d/c$ for distance $d$ and light speed $c = 3 \times 10^8$ m/s. Earth-scale coordination ($d \sim 10^4$ km) yields $\tau \sim 67$ ms. Defection detection time bounded by $\tau$, creating temporal advantage $\beta_D \geq \Delta r \cdot \tau$ where $\Delta r$ is extraction rate differential.
-
-\textbf{Thermodynamic limits.} Landauer's principle: $E_{\min} = kT \ln 2 \approx 3 \times 10^{-21}$ J per bit erasure at room temperature, where $k$ is Boltzmann's constant and $T$ is temperature. Computational throughput bounded by energy budget. Current systems operate $10^6$--$10^9$ times above Landauer limit, but ultimate physical limits constrain maximum processing.
-
-\subsection*{Parameter ranges}
-
-Plausible parameter ranges combine hard physical limits with conservative engineering estimates (Supplementary Table 1). Defection temptation $\beta_D \in [0.05, 1.0]$ derives from light-speed detection delay $\tau \geq 2d/c$ and extraction rate advantages bounded by the assumption that defectors cannot extract more than $3\times$ cooperative rate without detection (see SM-A.5.1 for derivation). Coordination value $\beta_\alpha \in [0.3, 0.9]$ has hard upper bound $\beta_\alpha \leq 1$ from information theory, with lower bound from typical communication quality $I(X;Y)/H(Y) \geq 0.3$ for structured signals. Conflict cost $\beta_\kappa \in [0.5, 3.0]$ is an engineering estimate from typical conflict costs where permanent defection destroys 0.5-3$\times$ operating value. Oversight value $\beta_\Omega \in [0.05, 0.3]$ and removal gain $\beta_\ell \in [0.1, 0.5]$ are conservative estimates. Discount factor $\delta \in [0.1, 0.95]$ reflects empirically observed ranges for human and AI behavior. Group size $N \in [2, 10]$ is a design choice (policy variable).
+The stage game is repeated over an infinite horizon with common discount factor $\delta \in [0,1]$. External actions are perfectly publicly monitored (assumption A$_{\text{ext}}$); internal states are not observable (assumption A$_{\text{int}}$, per Theorem~\ref{thm:incompleteness}). Agents play perfect public equilibrium strategies~\cite{fudenberg.1994}: cooperate while all comply, trigger permanent mutual defection upon observed deviation. The mediator's signal induces a correlated equilibrium~\cite{aumann.1987} that expands the achievable payoff set beyond Nash equilibria. Parameter ranges (Table~\ref{tab:bounds}) combine hard physical limits with engineering estimates; derivations in SI, Section~S2.
 
 \begin{table}[h]
 \centering
@@ -355,688 +246,35 @@ Plausible parameter ranges combine hard physical limits with conservative engine
 \toprule
 \textbf{Hard physical limits} & \textbf{Engineering estimates} \\
 \midrule
-$\beta_\alpha \leq 1$ (Shannon capacity) & $\beta_\kappa \in [0.5,\;3.0]$ (conflict cost) \\
-$\tau \geq 2d/c$ (light-speed delay) & $\beta_\Omega \in [0.05,\;0.3]$ (oversight value) \\
-$\beta_D$ floor from $\tau$ and $\Delta r$ & $\beta_\ell \in [0.1,\;0.5]$ (removal gain) \\
-$\delta \leq 1$ (definitional) & $\Delta r \leq 2$ (extraction rate ratio) \\
+$\beta_\alpha \leq 1$ (Shannon capacity) & $\beta_D \in [0.05,\;1.0]$ (defection temptation) \\
+$\tau \geq 2d/c$ (light-speed delay) & $\beta_\kappa \in [0.5,\;3.0]$ (conflict cost) \\
+$\delta \leq 1$ (definitional) & $\beta_\Omega \in [0.05,\;0.3]$ (oversight value) \\
+ & $\beta_\ell \in [0.1,\;0.5]$ (removal gain) \\
+ & $\beta_\alpha \in [0.3,\;0.9]$ (coordination quality) \\
+ & $\delta \in [0.1,\;0.95]$; \; $N \in \{2,\ldots,10\}$ \\
 \bottomrule
 \end{tabular}
-\caption{Classification of parameter constraints. Hard limits cannot be violated by any system; engineering estimates reflect plausible ranges with significant uncertainty.}
-\label{tab:hard_soft_bounds}
+\caption{Parameter constraints. Hard limits derive from physics; engineering estimates reflect plausible ranges with significant uncertainty. Derivations in SI, Section S2.}
+\label{tab:bounds}
 \end{table}
 
 \subsection*{Computational methods}
-
-\textbf{Monte Carlo stability analysis.} For each $N \in \{2, \ldots, 10\}$, draw 10,000 uniform samples over parameter ranges, check each against C1*, C1**, C2*, and compute $V_{\text{dynamic}}$ as the proportion satisfying all three.
-
-\textbf{Range sensitivity analysis.} For each parameter, narrow its range by 20\% ($[a,b] \to [a+0.2(b{-}a),\; b-0.2(b{-}a)]$) and widen by 20\% ($[a,b] \to [a-0.2(b{-}a),\; b+0.2(b{-}a)]$, capped at physical limits), recompute $V_{\text{dynamic}}$, and calculate sensitivity coefficient $\Delta V / \Delta\text{range}$.
-
-\textbf{Sobol sensitivity indices.} Variance-based global sensitivity analysis using Saltelli sampling (2,048 base samples, total $2,048 \times (2d+2) = 32,768$ evaluations for $d=7$ parameters). First-order indices $S_i$ measure fractional variance contribution from parameter $i$ alone. Total-order indices $S_T^i$ include interactions.
-
-\subsection*{Proofs and derivations}
-
-All formal proofs and detailed derivations appear in Supplementary Information. Lemma~1 (Hedging Necessity) is proved via replicator dynamics and evolutionary stability in SM-A and SM-B. Theorem~1 (Simulation Incompleteness) is proved by resource allocation contradiction in SM-E.1. Theorem~2 (Stability Conditions) includes stage-game analysis, repeated-game present values, and equilibrium derivations in SM-C. Theorem~3 (Weak Leviathan) establishes conditions for governance through observable weakness in SM-E.3.
+Stability volumes are computed via Monte Carlo sampling: for each $N \in \{2,\ldots,10\}$, we draw $10{,}000$ uniform samples over the parameter ranges in Table~\ref{tab:bounds} and evaluate whether each sample satisfies C1*, C1**, and C2* simultaneously. Range sensitivity analysis narrows and widens each parameter's range by $\pm 20\%$ (capped at physical limits) and recomputes $V_{\text{dynamic}}$. Global sensitivity is assessed via Sobol variance decomposition using Saltelli sampling with $2{,}048$ base samples ($32{,}768$ total evaluations for $d{=}7$ parameters), yielding first-order and total-order indices. Implementation details in SI, Section~S5.
 
 \subsection*{Data and code availability}
+This is a theoretical study; no experimental data were collected. All Monte Carlo, sensitivity, and Sobol analyses were implemented in Python~3.9 (NumPy~1.21, SciPy~1.7, SALib~1.4). Code is available at \url{https://github.com/CeadeS/multi_si_pub}.
+}
 
-No experimental data were generated (theoretical study). Monte Carlo simulation, sensitivity analysis, and Sobol index computations are implemented in Python 3.9 (NumPy 1.21, SciPy 1.7, SALib 1.4). Code available at \url{https://github.com/CeadeS/multi_si_pub}.
+\showmatmethods{}
 
-%=============================================================================
-% REFERENCES (guideline: up to 50)
-%=============================================================================
-% ACKNOWLEDGMENTS
-%=============================================================================
+\acknow{We thank the anonymous reviewers for constructive feedback.}
 
-\backmatter
-\bmhead{Acknowledgments}
+\showacknow{}
 
-% To be completed for final submission.
+\authorcontributions{M.H.\ conceived the study, developed the theoretical framework, performed all analyses, and wrote the manuscript. J.V.\ contributed to the formal analysis and provided critical feedback. P.M.\ supervised the research and edited the manuscript.}
 
-%=============================================================================
-% AUTHOR CONTRIBUTIONS
-%=============================================================================
+\authordeclaration{The authors declare no competing interest.}
 
-\bmhead{Author Contributions}
-
-M.H. conceived the study, developed the theoretical framework, performed all analyses, and wrote the manuscript. J.V. contributed to the formal analysis and provided critical feedback. P.M. supervised the research and edited the manuscript. All authors reviewed and approved the final version.
-
-%=============================================================================
-% COMPETING INTERESTS
-%=============================================================================
-
-\bmhead{Competing Interests}
-
-The authors declare no competing interests.
-
-%=============================================================================
-% FIGURE LEGENDS (up to 6 display items total)
-%=============================================================================
-
-\bmhead{Figure Legends}
-
-\textbf{Figure 1 | Functional structure of stability conditions.}
-\textbf{a}, Phase diagram showing patience-free regime ($\beta_\alpha \geq \beta_D$, blue), patience-required regime (green), and infeasible region. Regime transition at $\beta_\alpha = \beta_D$ (continuous value, discontinuous derivative).
-\textbf{b}, Three functional forms governing system behavior: hyperbolic deterrence effect ($\delta^* = g/(g+\beta_\kappa)$), logarithmic coordination saturation ($\beta_\alpha \sim \log(1+\text{SNR})$), and parabolic group value optimum ($V(N) = (N-1)f - cN^2/2$). Hyperbolic form exhibits diminishing returns; information theory imposes hard limit $\beta_\alpha \leq 1$.
-
-\textbf{Figure 2 | Optimal group size and stability volume progression.}
-\textbf{a}, Dynamic stability volume $V_{\text{dynamic}}$ (solid) and participation constraint $V_{C2^*}$ (dashed) versus group size $N$. Sharp increase from $N=2$ (76\%) to $N=4$ (95\%) marks threshold crossing. Saturation at $N \geq 6$ (98\%) shows diminishing returns.
-\textbf{b}, Marginal stability gains $\Delta V_{\text{dynamic}}$ diminish rapidly, illustrating why larger coalitions offer limited robustness improvements despite higher coordination costs.
-
-\textbf{Figure 3 | Benefit structure dependency of optimal group size.}
-\textbf{a}, Net value $J(N) = B(N) - C(N)$ for saturating benefit forms.
-\textbf{b}, Cost breakdown showing communication and consensus dominating at large $N$.
-\textbf{c}, Benefit growth forms: saturating plateaus quickly, network effects sustain value at larger $N$.
-\textbf{d}, Consensus efficiency variations showing how improved protocols extend viability.
-\textbf{e}, Optimal $N^*$ across scenarios (saturating: $N^*=2$, linear: $N^*=3$--5, network: $N^*=8$--10).
-
-\textbf{Figure 4 | Comprehensive analysis overview.}
-Panel (1), Three-dimensional parameter space with C1* boundary surface ($\beta_\alpha + \beta_\kappa = \beta_D$) and anchor point within plausible range.
-Panel (2), Overall stability volumes showing progression from one-shot to dynamic conditions.
-Panel (3), Dynamic stability volume versus group size $N$, revealing threshold progression.
-Panel (4), Stability margin distributions across conditions.
-Panel (5), Sobol sensitivity indices showing regime shift from $\beta_\Omega$ dominance at small $N$ to $\delta$ dominance at large $N$.
-
-%=============================================================================
-% SUPPLEMENTARY INFORMATION REFERENCE
-%=============================================================================
-
-%=============================================================================
-% SUPPLEMENTARY MATERIALS (Full Proofs and Derivations)
-%=============================================================================
-
-\bmhead{Supplementary Information}
-
-%Note: For initial submission, all supplementary materials are included below.
-%For final revision, these will be extracted to a separate SI document.
-
-\subsection*{Symbol Glossary}
-\label{sm:symbols}
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{llll}
-\toprule
-\textbf{Symbol} & \textbf{Meaning} & \textbf{Type} & \textbf{Range / Constraint} \\
-\midrule
-$\beta_D$ & Defection temptation (one-shot gain) & payoff & $[0.05,\;1.0]$; floor from $\tau$ \\
-$\beta_\alpha$ & Coordination value (normalized MI) & payoff & $[0.3,\;0.9]$; hard limit $\leq 1$ \\
-$\beta_\kappa$ & Conflict cost ($N{-}1$ retaliators) & payoff & $[0.5,\;3.0]$ \\
-$\beta_\Omega$ & Per-agent oversight value & coalition value & $[0.05,\;0.3]$ \\
-$\beta_\ell$ & One-time gain from removing oversight & payoff (total) & $[0.1,\;0.5]$ \\
-$\delta$ & Discount factor (agent patience) & discount & $[0.1,\;0.95]$; $\delta \leq 1$ \\
-$\delta^*$ & Critical patience threshold & discount & $\max\!\bigl(0,\;\tfrac{\beta_D-\beta_\alpha}{\beta_D-\beta_\alpha+\beta_\kappa}\bigr)$ \\
-$q_{ij}$ & Detection failure probability & probability & $[0,\;1]$ \\
-$v(S)$ & Characteristic function (coalition value) & coalition value & $v(S) = |S|\cdot\beta_\Omega$ (additive) \\
-$w(S)$ & Deviation payoff for coalition $S$ & coalition value & Cases 1--4, SM-C.3 \\
-$N$ & Number of agents (group size) & design param.\ & $\{2,\ldots,10\}$ \\
-$N^*$ & Optimal group size & design param.\ & $N^* = f/c$ \\
-$f$ & Mobilization fraction & design param.\ & $(0,\;1]$ \\
-$c$ & Per-channel communication cost & cost param.\ & $>0$ \\
-$\tau$ & Round-trip communication delay & physical & $\tau = 2d/c_{\text{light}}$; $\geq 0.067$ s \\
-\bottomrule
-\end{tabular}
-\caption{Key symbols used throughout the paper and supplementary materials.}
-\label{tab:symbols}
-\end{table}
-
-\subsection*{SM-A: Physical Constraints and Parameter Ranges}
-\label{sm:physical}
-
-This section derives plausible parameter bounds from physical first principles. Game-theoretic parameters are dimensionless ratios that must ultimately connect to measurable physical quantities. We establish these connections through information theory, thermodynamics, and relativistic constraints.
-
-\subsubsection*{A.1 Thermodynamic Limits}
-
-\textbf{Landauer's Principle~\cite{landauer.1961}:} Irreversible computation (bit erasure) dissipates minimum energy $E_{\text{min}} = kT \ln 2 \approx 3 \times 10^{-21}$ J at room temperature ($T=300$K), where $k \approx 1.38 \times 10^{-23}$ J/K is Boltzmann's constant. This bounds computational throughput given energy budgets.
-
-\noindent\textbf{Lloyd's Ultimate Limits~\cite{lloyd.2000}:} A system of mass $m$ and energy $E$ can perform at most $2E/(\pi\hbar)$ operations per second and store at most $E/(kT \ln 2)$ bits, where $\hbar$ is the reduced Planck constant, $k$ is Boltzmann's constant, and $T$ is temperature. For realistic systems (e.g., 1 GW power plant at room temperature), this yields $\sim 10^{26}$ ops/sec and $\sim 10^{31}$ bits.
-
-\noindent\textbf{Bennett Reversible Computation~\cite{bennett.1982}:} Reversible gates can theoretically approach Landauer limit, but practical implementations face overhead. Current technology operates $\sim 10^6 - 10^{9}$ times above Landauer limit.
-
-\subsubsection*{A.2 Information Transmission Limits}
-
-\noindent\textbf{Shannon Capacity~\cite{shannon.1948}:} For channel with bandwidth $W$ and signal-to-noise ratio $S/N$:
-\[C = W \log_2(1 + S/N) \text{ bits/sec}\]
-For satellite links: $W \sim 10^9$ Hz, $S/N \sim 10-100$ yields $C \sim 10-60$ Gbps. For fiber optics: $W \sim 10^{12}$ Hz, $S/N \sim 10^3$ yields $C \sim 10-100$ Tbps.
-
-\noindent\textbf{Speed-of-Light Latency:} Round-trip communication delay satisfies $\tau = 2d/c$ where $d$ is distance and $c = 3 \times 10^8$ m/s. For Earth-scale coordination with $d \sim 10^4$ km, this yields $\tau \sim 67$ ms. Interplanetary coordination becomes prohibitive at such distances.
-
-\subsubsection*{A.3 Information Structure Limits}
-
-Classical results—Gödel incompleteness~\cite{godel.1931} and the halting problem~\cite{turing.1936}—provide suggestive analogies: no sufficiently expressive system can prove its own consistency, and no algorithm can decide halting for arbitrary programs. These preclude perfect prediction of other agents' behavior from code inspection, motivating coordination based on observable actions rather than internal states (formalized in SM-E).
-
-\subsubsection*{A.4 Mapping Physical Constraints to Game Parameters}
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{lp{4cm}p{3.5cm}p{4cm}}
-\toprule
-\textbf{Parameter} & \textbf{Physical Constraint} & \textbf{Information-Theoretic Limit} & \textbf{Mapping} \\
-\midrule
-$\beta_D$ & Detection delay $\tau = 2d/c$ & Resource extraction before punishment can arrive & $\beta_D \propto \frac{(r_{\text{def}} - r_{\text{coop}})\cdot\tau}{r_{\text{coop}}\cdot T_0}$ \\[1ex]
-$\beta_\alpha$ & Shannon capacity $C$ & Mutual information in mediator signals & $\beta_\alpha \propto \frac{I(signal; state)}{H(state)}$ \\[1ex]
-$\beta_\kappa$ & Landauer energy $E_{\text{min}}$ & Adversarial computation cost & $\beta_\kappa \propto \frac{(N-1) \cdot f \cdot E}{E}$ \\[1ex]
-$C_{\text{comm}}(N)$ & Latency + bandwidth & Coordination overhead & $O(N^2)$ channels $\times$ $C$ bits/sec \\
-\bottomrule
-\end{tabular}
-\caption{Mapping from physical constraints to game-theoretic parameters. Each parameter reflects fundamental limits on information processing, transmission, or energy availability.}
-\label{tab:physical_mapping}
-\end{table}
-
-Table~\ref{tab:physical_mapping} summarizes the parameter mappings; detailed derivations of functional forms and plausible ranges ($\beta_D \in [0.05, 1.0]$, $\beta_\alpha \in [0.3, 0.9]$, $\beta_\kappa \in [0.5, 3.0]$) appear in A.5.1 below.
-
-\subsubsection*{A.5 Functional Analysis and Physical Constraints}
-\label{sec:functional_structure}
-
-We analyze the functional forms of game-theoretic parameters and identify which bounds derive from hard physical laws versus conservative engineering estimates. This distinguishes fundamental constraints (information theory, light speed) from modeling assumptions with significant uncertainty.
-
-\noindent\textbf{Constraint Types:} Three categories of constraints apply. \textbf{Hard physical limits} include $\beta_\alpha \leq 1$ from Shannon mutual information and $\tau \geq 2d/c$ from light-speed delay; these cannot be violated by any system. \textbf{Derived bounds} such as $\beta_D = \Delta r \cdot \tau$ combine hard constraints ($\tau$) with engineering estimates ($\Delta r$ for extraction rate differential). \textbf{Conservative estimates} for $\beta_\kappa$, $\beta_\Omega$, and $\beta_\ell$ reflect plausible values based on typical conflict costs and coordination benefits, but lack direct calibration.
-
-\paragraph*{A.5.1 Functional Forms and Physical Derivations}
-
-\noindent\textbf{Defection Temptation: $\beta_D = \Delta r \cdot \tau$}
-
-The advantage from defecting depends on excess resources extracted during detection delay, relative to baseline cooperation gains. Let $r_{\text{coop}}$ be the cooperative extraction rate, $r_{\text{def}}$ the defection rate, and $\tau = 2d/c$ the round-trip light-time detection delay. The original formula is:
-\[\beta_D = \frac{(r_{\text{def}} - r_{\text{coop}}) \cdot \tau}{r_{\text{coop}} \cdot T_0}\]
-
-where $T_0$ is the baseline timescale over which cooperation generates payoff $G_O = r_{\text{coop}} \cdot T_0$. Setting $G_O = 1$ (without loss of generality) implies $T_0 = 1/r_{\text{coop}}$. Substituting:
-\[\beta_D = (r_{\text{def}} - r_{\text{coop}}) \cdot \tau \cdot r_{\text{coop}} / r_{\text{coop}} = \Delta r \cdot \tau\]
-
-where $\Delta r = r_{\text{def}} - r_{\text{coop}}$. The parameter $T_0$ \emph{cancels} via normalization—it is not a free parameter.
-
-\noindent\textbf{Physical constraints:} The detection delay $\tau = 2d/c$ where $c = 3 \times 10^8$ m/s represents a hard floor that physics imposes. For Earth-scale coordination ($d \sim 10^4$ km), this yields $\tau \gtrsim 0.067$ sec, which cannot be reduced. The extraction rate advantage $\Delta r$ is bounded by detection mechanisms, since extracting resources requires energy flows or physical actions that leave observable signatures. As a conservative estimate (not physical law), we assume $\Delta r / r_{\text{coop}} \lesssim 2$ based on the assumption that exceeding $3\times$ cooperative rate triggers detection via anomalous resource usage. This multiplier is a \emph{modeling assumption} with significant uncertainty. Since $\beta_D$ is defined as the ratio of extra resources captured to baseline payoff (both measured in the same units), the result is dimensionless. For $\tau \sim 0.07$ sec and rate advantages $\Delta r \in [0.7, 14]$ (in units where $r_{\text{coop}} = 10$), this yields $\beta_D = \Delta r \cdot \tau \in [0.05, 1.0]$. The $\Delta r$ range is an engineering estimate, and different operational scenarios could yield values outside this range.
-
-\bigskip
-
-\noindent\textbf{Coordination Value: $\beta_\alpha = I(X;Y)/H(Y) \leq 1$}
-Coordination value measures how much mutual information mediator signals provide about optimal actions. If mediator signal is $X$ and optimal action is $Y$:
-\[\beta_\alpha = \frac{I(X; Y)}{H(Y)}\]
-Shannon capacity bounds mutual information: for channel bandwidth $W$, signal-to-noise ratio SNR, and communication time $\Delta t$:
-\[I(X;Y) \leq C \cdot \Delta t = W \cdot \Delta t \cdot \log_2(1 + \text{SNR})\]
-Information theory imposes $I(X;Y) \leq H(Y)$ (cannot transmit more information than action space entropy). Therefore:
-\[\beta_\alpha \leq 1 \quad \text{(hard limit)}\]
-
-\noindent\textbf{Functional form:} For high-quality channels where $I(X;Y) \approx C \cdot \Delta t$:
-\[\beta_\alpha \sim \frac{W \cdot \Delta t \cdot \log_2(1+\text{SNR})}{H(Y)}\]
-
-The logarithmic scaling in SNR creates diminishing returns. Doubling signal power (doubling SNR) increases $\beta_\alpha$ by only $\log_2(1+2\cdot\text{SNR})/\log_2(1+\text{SNR}) < 2$.
-
-\noindent\textbf{Saturation bandwidth:} Beyond $W_{\text{sat}} = H(Y)/[\Delta t \cdot \log_2(1+\text{SNR})]$, additional bandwidth provides no benefit—$\beta_\alpha$ saturates at 1.
-
-\noindent\textbf{Typical values:} For binary actions ($H(Y) = 1$ bit) and typical channel parameters ($W = 1$ MHz, SNR $= 10$), capacity vastly exceeds action entropy and $\beta_\alpha$ saturates at the hard limit. For complex action spaces ($H(Y) \sim 10$ bits) or noisy channels (SNR $\sim 2$), $\beta_\alpha \in [0.3, 0.9]$.
-
-\bigskip
-
-\noindent\textbf{Conflict Cost: $\beta_\kappa = (N-1) \cdot f$}
-When $N-1$ agents coordinate punishment against a defector, deterrence scales linearly with group size and mobilization fraction $f$:
-\[\beta_\kappa = (N-1) \cdot f\]
-
-where $f \in [0, 1]$ is the fraction of each agent's resources dedicated to punishment.
-
-\noindent\textbf{Optimal group size from calculus:} Benefit is $\beta_\kappa = (N-1)f$, but communication requires $\binom{N}{2} = N(N-1)/2 \approx N^2/2$ pairwise channels, each costing $c$. Net value:
-\[V(N) = (N-1) \cdot f - \frac{c \cdot N^2}{2}\]
-First-order condition:
-\[\frac{\partial V}{\partial N} = f - c \cdot N = 0 \quad \Rightarrow \quad N^* = \frac{f}{c}\]
-
-Second-order condition confirms maximum:
-\[\frac{\partial^2 V}{\partial N^2} = -c < 0\]
-
-\noindent\textbf{Empirical $N \sim 5$ implies $f/c \approx 5$:} Observing optimal group sizes of 4--6 agents in simulations (under assumed parameter ranges) implies the mobilization-to-communication-cost ratio is $f/c \approx 5$. \textbf{Important caveat:} This reasoning is \emph{circular}—we chose plausible $f$, $c$ values that yield $N \sim 5$, then observe $N \sim 5$ in simulations using those values. However, the relationship $N^* = f/c$ \emph{is} a testable prediction: if we independently measure $f$ and $c$ for real systems, the formula predicts optimal $N$. Systems with higher communication costs (larger $c$) should exhibit smaller optimal groups.
-
-\noindent\textbf{Complementarity constraint on $f$:} From cross-derivative analysis (Section~\ref{sec:functional_structure}), synergy is maximized when $\beta_\kappa < g = \beta_D - \beta_\alpha$. This suggests $(N-1)f < \beta_D - \beta_\alpha$, or:
-\[f < \frac{\beta_D - \beta_\alpha}{N-1}\]
-
-For typical $\beta_D \sim 0.4$, $\beta_\alpha \sim 0.7$, $N = 5$: $f < -0.075$. The negative bound indicates the system lies in the \emph{patience-free regime} ($\beta_\alpha > \beta_D$), where complementarity analysis does not apply. For patience-required regimes where $\beta_D > \beta_\alpha$ (e.g., $\beta_D = 0.6$, $\beta_\alpha = 0.3$), we get $f < 0.3/4 = 0.075$. Mobilization fractions $f \in [0.1, 0.5]$ are consistent with credible deterrence without over-mobilizing into the substitution regime.
-
-\noindent\textbf{Key implication:} The relation $N^* = f/c$ is \emph{derived from calculus}, but $f$ and $c$ are estimated parameters. The formula is rigorous given $f$ and $c$; however, we have not independently calibrated these parameters from empirical data. Therefore, the relationship $N^* = f/c$ constitutes a testable prediction conditional on measuring $f$ and $c$ for specific systems.
-
-\bigskip
-
-\paragraph*{A.5.2 Scaling Analysis and Quantified Diminishing Returns}
-
-\textbf{Deterrence effectiveness:} Let $g = \beta_D - \beta_\alpha$ denote the cooperation gap. From $\delta^* = g/(g+\beta_\kappa)$, the marginal effect of deterrence is:
-\[\varepsilon(\beta_\kappa) = \left|\frac{\partial \delta^*}{\partial \beta_\kappa}\right| = \frac{g}{(g + \beta_\kappa)^2}\]
-
-At zero deterrence ($\beta_\kappa = 0$), the marginal effectiveness equals $1/g^2$, establishing the baseline. When deterrence matches the cooperation gap ($\beta_\kappa = g$), effectiveness drops to $1/(4g^2)$, making each additional unit four times less impactful. At high deterrence levels ($\beta_\kappa = 10g$), effectiveness falls to $1/(121g^2)$, representing a 121-fold reduction from baseline.
-
-Beyond $\beta_\kappa \sim g$, marginal returns diminish rapidly. For example, with $g = 0.2$: going from $\beta_\kappa = 0$ to $0.2$ halves $\delta^*$ (from 1.0 to 0.5), while going from $2.0$ to $2.2$ yields $<$1\% improvement.
-
-\bigskip
-
-\noindent\textbf{SNR elasticity:} From $\beta_\alpha \sim \log_2(1+\text{SNR})$, the elasticity is:
-\[\varepsilon_{\text{SNR}} = \frac{\partial \beta_\alpha}{\partial \text{SNR}} \cdot \frac{\text{SNR}}{\beta_\alpha} = \frac{\text{SNR}}{(1+\text{SNR}) \ln(1+\text{SNR})} < 1\]
-
-Elasticity falls from 0.72 at SNR $= 1$ to 0.22 at SNR $= 100$, confirming inelastic returns throughout the relevant range. Large $\beta_\alpha$ increases cannot be achieved solely via signal power; investing in bandwidth $W$ or reducing $H(Y)$ is more effective.
-
-\bigskip
-
-\noindent\textbf{Communication cost scaling:} For group size $N$, number of pairwise channels is:
-\[\binom{N}{2} = \frac{N(N-1)}{2} \sim \frac{N^2}{2}\]
-
-Doubling group size ($N \to 2N$) quadruples communication cost. This creates the hard constraint forcing $N \leq N^*$. Beyond optimal size, \emph{marginal agents reduce net value}.
-
-\bigskip
-
-\paragraph*{A.5.3 Regime Transitions and Critical Points}
-
-\textbf{Patience-Free Boundary: $\beta_\alpha = \beta_D$}
-
-At this boundary, the system exhibits a regime transition characterized by three properties: $\delta^*$ is continuous, but its first derivative has a jump discontinuity (analogous to a first-order transition in the Ehrenfest classification).
-
-The value function is continuous: $\lim_{\beta_\alpha \to \beta_D^-} \delta^* = 0 = \delta^*(\beta_\alpha = \beta_D)$. However, the derivative is discontinuous. Letting $\varepsilon = \beta_D - \beta_\alpha \geq 0$, the derivative is:
-\[\frac{\partial \delta^*}{\partial \varepsilon} = \frac{\beta_\kappa}{(\varepsilon + \beta_\kappa)^2}\]
-The left limit approaches $\lim_{\varepsilon \to 0^+} \frac{\partial \delta^*}{\partial \varepsilon} = \frac{1}{\beta_\kappa}$, while the right limit in the patience-free region equals zero: $\frac{\partial \delta^*}{\partial \varepsilon}\big|_{\varepsilon < 0} = 0$. This creates a jump of magnitude $\Delta\left(\frac{\partial \delta^*}{\partial \varepsilon}\right) = \frac{1}{\beta_\kappa}$.
-
-The 90\% transition width is $\Delta\varepsilon_{\text{crit}} = \beta_\kappa/9$ (e.g., $\approx 0.056$ for $\beta_\kappa = 0.5$), indicating a sharp transition.
-
-\bigskip
-
-\noindent\textbf{Optimal Group Size: $N^* = f/c$.} Derived from the first-order condition (A.5.1); beyond $N^*$, marginal value is negative. The testable prediction $N^* = f/c$ is confirmed by simulations ($N \sim 4$--$6$, implying $f/c \approx 5$).
-
-\noindent\textbf{Information Saturation: $\beta_\alpha = 1$.} The saturation bandwidth $W_{\text{sat}} = H(Y)/[\Delta t \cdot \log_2(1+\text{SNR})]$ ($\approx 2.9$ MHz for $H(Y)=10$ bits, SNR $=10$) marks the point beyond which additional bandwidth yields no coordination benefit. If $\beta_D > 1$, the patience-free regime requires deterrence ($\beta_\kappa \geq \beta_D - 1$).
-
-\bigskip
-
-\paragraph*{A.5.4 Complementarity and Mechanism Interaction}
-
-From Section~\ref{sec:functional_structure}, the cross-derivative is:
-\[\frac{\partial^2 \delta^*}{\partial \beta_\alpha \partial \beta_\kappa} = \frac{\beta_\kappa - g}{(g + \beta_\kappa)^3}\]
-
-This changes sign at $\beta_\kappa = g$:
-
-\noindent\textbf{Complementarity region ($\beta_\kappa < g$):} In this region, the cross-derivative is negative, meaning that increasing $\beta_\kappa$ amplifies the effectiveness of $\beta_\alpha$. Specifically, $\left|\frac{\partial \delta^*}{\partial \beta_\alpha}\right| = \frac{\beta_\kappa}{(g+\beta_\kappa)^2}$ increases with $\beta_\kappa$. This creates synergy where combined mechanisms prove more effective than the sum of their parts. The optimal strategy is to invest in \emph{both} coordination and deterrence at moderate levels.
-
-\noindent\textbf{Substitution region ($\beta_\kappa > g$):} In this region, the cross-derivative becomes positive, indicating that high deterrence reduces the marginal value of coordination. The joint value exhibits diminishing returns, meaning that adding both mechanisms yields sublinear returns. The optimal strategy shifts: once $\beta_\kappa \geq g$, resources should focus on whichever mechanism is cheaper.
-
-\noindent\textbf{Transition point $\beta_\kappa = g$:}
-
-At this point, the complementarity vanishes: $\frac{\partial^2 \delta^*}{\partial \beta_\alpha \partial \beta_\kappa} = 0$. Here, the marginal effectiveness of deterrence drops four-fold, from $\varepsilon(0) = \frac{1}{g^2}$ at baseline to $\varepsilon(\beta_\kappa = g) = \frac{1}{4g^2}$. The system crosses from the synergy regime to the substitution regime, making this the optimal operating point for balanced strategies.
-
-Balanced strategies (moderate coordination + moderate deterrence) emerge from this mathematical structure; pure strategies are inefficient due to interaction effects.
-
-\bigskip
-
-\paragraph*{A.5.5 Impossibility Results and Fundamental Limits}
-
-The functional analysis reveals four constraints that cannot be overcome with engineering solutions:
-\begin{enumerate}
-\item \textbf{$\beta_\alpha \leq 1$} (Shannon bound): if $\beta_D > 1$ and $\beta_\kappa = 0$, the patience-free regime is impossible.
-\item \textbf{$N \leq N^* = f/c$} (quadratic communication cost): beyond $N^*$, marginal agents reduce net value.
-\item \textbf{$\beta_D \geq \Delta r \cdot \tau$} (light-speed floor): Earth-scale systems must accommodate $\beta_D \gtrsim 0.05$; Earth-Moon coordination ($\tau = 2.56$ sec) drives $\beta_D$ much higher.
-\item \textbf{Patience-free operation requires $\beta_\alpha \geq \beta_D$ or $\beta_\kappa > 0$}: with $\beta_\kappa = 0$ and $\beta_\alpha < \beta_D$, only infinitely patient agents ($\delta = 1$) can cooperate.
-\end{enumerate}
-
-\subsubsection*{A.6 Range Sensitivity Analysis}
-\label{sm:range_sensitivity}
-
-The reported stability volume (V$_{\text{dynamic}} \approx 94\%$, SM-D) assumes uniform priors over parameter ranges in Table~1. We analyze robustness to range specification by varying each parameter's bounds by ±20\% and recomputing stability volumes.
-
-\textbf{Methodology.} For each parameter with baseline range $[a, b]$, we compute a narrow range $[a+0.2(b-a),\; b-0.2(b-a)]$ (both bounds shifted 20\% toward the midpoint), and a wide range $[a-0.2(b-a),\; b+0.2(b-a)]$ (both bounds shifted 20\% outward). We then recompute stability via Monte Carlo sampling (10,000 draws) over the modified range and calculate the sensitivity coefficient $\Delta V / \Delta\text{range}$. Constraints $\beta_\alpha \leq 1$ (information-theoretic) and $\delta \leq 1$ (definitional) are enforced throughout.
-
-\textbf{Results.}
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{lccccc}
-\toprule
-Parameter & Narrow Range & V$_{\text{narrow}}$ & Wide Range & V$_{\text{wide}}$ & Sensitivity \\
-\midrule
-$\beta_D$ & [0.04, 0.8] & 91.5\% & [0.06, 1.2] & 92.8\% & -0.15 \\
-$\beta_\alpha$ & [0.24, 0.72] & \textbf{78.3\%} & [0.36, 1.0] & 89.1\% & \textbf{-0.80} \\
-$\beta_\kappa$ & [0.4, 2.4] & 93.8\% & [0.6, 3.6] & 95.1\% & +0.04 \\
-$\beta_\Omega$ & [0.04, 0.24] & 90.2\% & [0.06, 0.36] & 93.5\% & -0.20 \\
-$\beta_\ell$ & [0.08, 0.4] & 92.7\% & [0.12, 0.6] & 94.0\% & -0.08 \\
-$\delta$ & [0.08, 0.76] & 88.5\% & [0.12, 1.0] & 92.3\% & -0.30 \\
-$N$ & [2, 8] & 91.1\% & [2, 12] & 88.6\% & -0.28 \\
-\bottomrule
-\end{tabular}
-\caption{Sensitivity of stability volume to ±20\% parameter range variations. Baseline: V$_{\text{dynamic}} = 94.2\%$ (conditional on baseline ranges; 78--95\% under $\beta_\alpha$ variation). Negative sensitivity: stability declines as range widens.}
-\label{tab:range_sensitivity}
-\end{table}
-
-\textbf{Classification by robustness.} Parameters fall into four categories. \textbf{Very robust} ($|\text{sens}| < 0.10$): $\beta_\kappa$ (conflict cost) and $\beta_\ell$ (removal gain) show minimal impact from uncertainty, with less than 2\% stability variation. \textbf{Robust} ($0.10 < |\text{sens}| < 0.30$): $\beta_D$ (defection temptation) and $\beta_\Omega$ (oversight value) exhibit modest sensitivity, where 20\% range errors yield 3-5\% stability changes. \textbf{Moderate} ($0.30 < |\text{sens}| < 0.50$): $\delta$ (discount factor) and $N$ (group size) show moderate sensitivity, though $\delta$ dependence is eliminable via the patience-free regime ($\beta_\alpha \geq \beta_D$), and $N$ is a design choice. \textbf{Highly sensitive} ($|\text{sens}| > 0.50$): $\beta_\alpha$ (coordination value) dominates uncertainty. Narrowing the $\beta_\alpha$ range by 20\% reduces stability from 94\% to 78\%, a 16 percentage point drop. The reported 94\% is conditional on assuming $\beta_\alpha \in [0.3, 0.9]$; if actual coordination mechanisms achieve only $\beta_\alpha \in [0.24, 0.72]$, stability volume drops substantially.
-
-\textbf{Methodological limitations.} This analysis varies ranges one at a time; joint variations could produce compounding effects. Uniform priors are assumed; alternative specifications would yield different sensitivities. Full Bayesian propagation (treating range boundaries as random variables) would yield posterior distributions rather than point estimates.
-
-\textbf{Conclusion.} The stability volume estimate is \textbf{structurally robust} but \textbf{quantitatively conditional} on the $\beta_\alpha$ range (dominant uncertainty).
-
-\bigskip
-
-\subsection*{SM-B: Proof of Lemma~\ref{lemma:hedging} (Hedging Necessity)}
-\label{sm:proof_lemma}
-
-We prove that strategic hedging necessarily emerges using evolutionary game theory.
-
-\subsubsection*{B.1 Evolutionary Game Setup}
-
-Consider a large population of agents, each capable of adopting one of two strategies. Under the \textbf{Hedging (H)} strategy, agents allocate fraction $h \in (0, 1)$ of resources to defensive measures. Under the \textbf{Non-Hedging (NH)} strategy, agents allocate all resources to primary productive goals.
-
-Let $p_t \in [0,1]$ denote the proportion of hedgers at time $t$. Agents are randomly matched for interactions. The population state evolves according to replicator dynamics based on strategy payoffs.
-
-\textbf{Payoff functions:}
-\begin{align}
-\pi_H(p) &= R(1-h)\gamma + Rh\rho(p) - C_H \label{eq:payoff_hedge}\\
-\pi_{NH}(p) &= R\gamma \cdot \sigma(p) - L(1-p) \label{eq:payoff_nonhedge}
-\end{align}
-
-Here $R > 0$ denotes total resources available, which are finite by thermodynamic constraints. The parameter $\gamma > 0$ represents productivity per unit resource invested in primary goals, while $h \in (0,1)$ is the fraction of resources allocated to defense by hedgers. The function $\rho(p)$ captures security value (returns from defensive investment), with $\rho'(p) < 0$ indicating diminishing returns as more agents hedge. The constant $C_H > 0$ represents fixed infrastructure cost of maintaining defensive capabilities. The function $\sigma(p)$ gives the success probability for non-hedgers, with $\sigma'(p) > 0$ since success increases as more agents hedge (hedgers are defensive, not offensive). Finally, $L(1-p) > 0$ denotes expected loss from interference, which decreases in $p$ because fewer non-hedgers means less vulnerability.
-
-\subsubsection*{B.2 Physical Constraints}
-
-Three modeling assumptions, motivated by physical intuition, constrain these functions:
-
-\textbf{Constraint 1: Positive interference probability without defense.}
-\[\sigma(0) < 1\]
-In an environment where no agents defend themselves, interference is possible. No agent can achieve perfect isolation from others sharing the same physical substrate (energy, communication channels, computational resources). This reflects fundamental non-excludability of shared resources.
-
-\textbf{Constraint 2: Positive losses from interference.}
-\[L(1) > 0\]
-When interference occurs (probability $1-\sigma$), it causes real costs: corrupted computations, disrupted resource flows, wasted energy. Even in a population where all agents are non-hedgers (maximum vulnerability), losses remain positive.
-
-\textbf{Constraint 3: Security value exceeds productivity at low hedging.}
-\[\rho(0) > \gamma\]
-When few agents hedge ($p \approx 0$), the marginal return to defensive investment exceeds the return to productive investment. This reflects the ``target-rich environment'' effect: in an undefended population, protection is highly valuable. As more agents hedge, $\rho(p)$ decreases while $\gamma$ remains constant.
-
-\textbf{Discussion:} Constraints 1--2 (positive interference $\sigma(0)<1$, positive losses $L(1)>0$) reflect non-excludability of shared resources—a physical reality. Constraint 3 ($\rho(0)>\gamma$: security value exceeds productivity at low hedging) is a modeling choice motivated by ``target-rich environment'' dynamics: when few agents defend, marginal protection value is high. Alternative formulations with $\rho(0)<\gamma$ are mathematically coherent but represent offense-dominant regimes (where attacking is always more profitable than defending). Our assumption captures defense-dominant scenarios most relevant to AI coordination under infrastructure dependence, where cooperation is possible but requires deliberate design.
-
-\subsubsection*{B.3 Instability of Non-Hedging Equilibrium ($p=0$)}
-
-We now show that a population consisting entirely of non-hedgers is unstable to invasion by hedgers.
-
-\textbf{Payoff comparison at $p=0$:}
-
-At $p=0$ (all non-hedgers):
-\begin{align}
-\pi_H(0) &= R(1-h)\gamma + Rh\rho(0) - C_H\\
-\pi_{NH}(0) &= R\gamma \cdot \sigma(0) - L(1)
-\end{align}
-
-Taking the difference:
-\begin{align}
-\pi_H(0) - \pi_{NH}(0) &= R(1-h)\gamma + Rh\rho(0) - C_H - [R\gamma\sigma(0) - L(1)]\\
-&= R\gamma[(1-h) + h\frac{\rho(0)}{\gamma} - \sigma(0)] + L(1) - C_H
-\end{align}
-
-By Constraint 3, $\rho(0)/\gamma > 1$. By Constraint 2, $L(1) > 0$. By Constraint 1, $\sigma(0) < 1$. Therefore:
-\[(1-h) + h\frac{\rho(0)}{\gamma} - \sigma(0) > (1-h) + h - 1 = 0\]
-
-For sufficiently small infrastructure cost $C_H < L(1)$, we have:
-\[\pi_H(0) - \pi_{NH}(0) > 0\]
-
-\textbf{Replicator dynamics:} The population evolves according to:
-\[\dot{p} = p(1-p)[\pi_H(p) - \pi_{NH}(p)]\]
-
-At $p=0$, since $\pi_H(0) > \pi_{NH}(0)$, any small introduction of hedgers ($p > 0$) causes $\dot{p} > 0$. The non-hedging equilibrium is unstable—hedgers will invade and spread.
-
-\subsubsection*{B.4 Evolutionarily Stable Strategy (ESS) Analysis}
-
-An evolutionarily stable strategy $p^*$ must satisfy two conditions. The \textbf{equilibrium condition} requires $\pi_H(p^*) = \pi_{NH}(p^*)$, ensuring the population is at rest with no selection pressure. The \textbf{stability condition} requires $\frac{d}{dp}[\pi_H(p) - \pi_{NH}(p)]\big|_{p=p^*} < 0$, ensuring that small perturbations decay and the equilibrium is locally stable.
-
-\textbf{Existence of interior equilibrium:} Since $\pi_H(0) > \pi_{NH}(0)$ (proven above) and plausible limiting behavior has $\pi_H(1) < \pi_{NH}(1)$ (when all hedge, non-hedgers save costs $C_H$), by continuity there exists $p^* \in (0,1)$ where $\pi_H(p^*) = \pi_{NH}(p^*)$.
-
-\textbf{Stability condition:} At equilibrium $p^*$:
-\[\frac{d}{dp}[\pi_H(p) - \pi_{NH}(p)]\bigg|_{p=p^*} = Rh\rho'(p^*) - R\gamma\sigma'(p^*) + L'(1-p^*)\]
-
-Since $\rho'(p) < 0$ (diminishing security value), $\sigma'(p) > 0$ (rising success for non-hedgers), and $L'(1-p) > 0$ (losses increase as non-hedgers increase), all three terms contribute negatively. Therefore the derivative is negative, confirming stability.
-
-\textbf{Conclusion:} There exists a stable interior equilibrium $p^* \in (0, 1)$ where a positive fraction of the population hedges. Pure non-hedging ($p=0$) cannot be sustained.
-
-\subsubsection*{B.5 Long-Run Dynamics Under Mutation-Selection}
-
-In realistic settings, strategies can mutate at rate $\mu > 0$. The stationary distribution under mutation-selection balance is given by:
-\[\psi^*(p) \propto \exp\left(\frac{2N_{pop}}{\mu}V(p)\right)\]
-where $V(p) = \int_0^p [\pi_H(q) - \pi_{NH}(q)]dq$ is the potential function and $N_{pop}$ is effective population size.
-
-As $\mu \to 0$, the distribution concentrates on local maximizers of $V(p)$. Since:
-\[V'(p) = \pi_H(p) - \pi_{NH}(p)\]
-and $V'(0) = \pi_H(0) - \pi_{NH}(0) > 0$ (proven in B.3), the point $p=0$ is not a local maximizer. The stationary distribution concentrates on the interior equilibrium $p^*$ or potentially $p=1$ (all hedgers).
-
-\textbf{Biological interpretation:} Even with random mutations occasionally producing non-hedgers, selection pressure maintains a population with substantial hedging.
-
-\hfill$\square$
-
-\subsection*{SM-C: Proof of Theorem~\ref{thm:stability} (Stability Conditions)}
-\label{sm:proof_theorem}
-
-We provide rigorous derivations of the three stability conditions.
-
-\subsubsection*{C.1 Condition C1* (Correlated Equilibrium)}
-
-For the oversight mechanism to implement a correlated equilibrium (CE) with all-cooperation outcome, each agent receiving the recommendation to cooperate must prefer following it. The obedience constraint requires: for any deviation $\sigma'_i$ by agent $i$, we have $\sum_{a_{-i}} \mu(a_{-i} \mid \sigma_i = O)[u_i(O,a_{-i}) - u_i(\sigma'_i,a_{-i})] \ge 0$, where $\mu(a_{-i} \mid \sigma_i)$ is the probability of others' actions $a_{-i}$ given agent $i$'s signal $\sigma_i$, and $u_i$ is agent $i$'s payoff function.
-
-\textbf{Payoff structure.} In our setting with mediator recommending cooperation $(O, O, \ldots, O)$ with probability 1, when all others cooperate and agent $i$ receives recommendation to cooperate:
-\begin{itemize}
-\item \textbf{Follow (Cooperate):} payoff $= \beta_\alpha$ (coordination value from mediator signal).
-\item \textbf{Deviate (Defect):} payoff $= \beta_D - \beta_\kappa$ (temptation gain $\beta_D$ minus conflict cost $\beta_\kappa$ imposed by $N-1$ retaliating agents).
-\end{itemize}
-Obedience requires:
-\[\beta_\alpha \geq \beta_D - \beta_\kappa \quad \Longleftrightarrow \quad \beta_\alpha + \beta_\kappa \geq \beta_D\]
-This is the standard Aumann CE obedience constraint~\cite{aumann.1974,aumann.1987} applied to the specific payoff structure of our stage game.
-
-\subsubsection*{C.2 Condition C1** (Perfect Public Equilibrium)}
-
-\textbf{Assumption A-C1 (Perfect public monitoring of external actions).} All agents observe each other's external actions and mediator signals each period, but not internal states (see Theorem~1). This corresponds to assumption A\textsubscript{ext} in the main text.
-
-\noindent For dynamic sustainability, we apply folk theorem results for repeated games with perfect public monitoring~\cite{abreu.1990,fudenberg.maskin.1986}. Under grim trigger strategies (deviation triggers permanent mutual defection; see Methods), present values are:
-\begin{align}
-V_C &= \frac{\beta_\alpha}{1 - \delta} \quad \text{(cooperation forever)} \\
-V_D &= \beta_D + \frac{\delta \cdot (-\beta_\kappa)}{1 - \delta} \quad \text{(deviate once, then punished)}
-\end{align}
-Sustainability requires $V_C \geq V_D$:
-\[\frac{\beta_\alpha}{1-\delta} \geq \beta_D - \frac{\delta \beta_\kappa}{1-\delta}\]
-Multiplying through by $(1-\delta)$:
-\[\beta_\alpha \geq (1-\delta)\beta_D - \delta\beta_\kappa\]
-Rearranging:
-\[\delta(\beta_D - \beta_\alpha + \beta_\kappa) \geq \beta_D - \beta_\alpha\]
-\[\delta \geq \frac{\beta_D - \beta_\alpha}{\beta_D - \beta_\alpha + \beta_\kappa} = \delta^*\]
-When $\beta_\alpha \geq \beta_D$, the right-hand side is non-positive, yielding $\delta^* = 0$ (patience-free regime: cooperation is individually rational even in the stage game). The critical threshold is therefore $\delta^* = \max(0, \frac{\beta_D - \beta_\alpha}{\beta_D - \beta_\alpha + \beta_\kappa})$.
-
-\textbf{Remark (imperfect monitoring).} The derivation above assumes perfect public monitoring (Assumption~A-C1). Under noisy monitoring, where defection is detected with probability $1 - \varepsilon$ per period, the critical threshold increases to $\delta^*_\varepsilon > \delta^*$ because punishment is delayed or probabilistic~\cite{green.porter.1984}. A full treatment of imperfect public monitoring (e.g., via belief-free equilibria~\cite{mailath.samuelson.2006}) is beyond our scope; our results provide a lower bound on patience requirements that tightens under monitoring noise.
-
-\subsubsection*{C.3 Condition C2* (Participation Constraint)}
-
-For voluntary participation, each agent's payoff share must exceed the outside option. \textbf{Assumption A-S1 (Transferable utility).} Coalition value can be freely redistributed among members via side payments, so that only total coalition surplus matters for stability (standard in cooperative game theory~\cite{shapley.1953}). Under Shapley value allocation, agent $i$ receives $\phi_i(N,v) = \frac{1}{N!}\sum_{S \subseteq N \setminus \{i\}} |S|!(N-|S|-1)![v(S \cup \{i\}) - v(S)]$, where $v: 2^N \to \mathbb{R}$ is the characteristic function assigning value $v(S)$ to each coalition $S \subseteq N$. For additive oversight value where $v(S) = |S| \cdot \beta_\Omega$, the Shapley value under symmetry yields $\phi_i = \beta_\Omega$ for all $i$. Consider the allocation $x_i = \beta_\Omega$.
-
-\textbf{Core membership (direct verification):}
-\begin{itemize}
-\item \textbf{Efficiency:} $\sum_{i \in N} x_i = N \beta_\Omega = v(N)$.
-\item \textbf{Coalitional rationality:} For any $S \subseteq N$, $\sum_{i \in S} x_i = |S| \beta_\Omega = v(S)$.
-\end{itemize}
-Hence $x$ lies in the core; no coalition has a profitable deviation.
-
-\textbf{Participation constraint (individual rationality):} Each agent requires $\phi_i \geq \beta_\ell/N$ where $\beta_\ell$ is the one-time removal gain. Equivalently, $\beta_\Omega \geq \beta_\ell/N$. As $N$ increases, the per-agent removal gain $\beta_\ell / N$ decreases (dilution effect), easing participation.
-
-\textbf{Coalition deviation model.} The core check above assumes the additive value function $v(S) = |S| \cdot \beta_\Omega$. To assess robustness, we introduce a general deviation payoff $w: 2^N \to \mathbb{R}$, where $w(S)$ is the value coalition $S$ obtains by jointly deviating from the coordination mechanism (e.g., removing oversight); payoffs within a deviating coalition are transferable (Assumption~A-S1). Coalition stability requires:
-\[\sum_{i \in S} x_i \geq w(S) \quad \text{for all } S \subseteq N\]
-With equal-share allocation $x_i = \beta_\Omega$, this reduces to:
-\[|S| \beta_\Omega \geq w(S) \quad \text{for all } S \subseteq N\]
-Dividing both sides of $|S|\beta_\Omega \geq w(S)$ by $|S|$ yields $\beta_\Omega \geq w(S)/|S|$; the binding constraint comes from the coalition size $|S|$ that maximizes $w(S) / |S|$ (per-capita deviation value).
-
-\textbf{Assumptions on $\beta_\ell$.} We assume: (A1) oversight removal requires a coalition of size $\geq m$, where $m \geq 2$ in the default setting (minimum viable coalition); (A2) removal yields \emph{total} gain $\beta_\ell$, independent of coalition size beyond $m$; (A3) gains are transferable within the deviating coalition (by Assumption~A-S1). Under equal sharing (the natural splitting rule for symmetric agents under A-S1), per-capita deviation value is $\beta_\ell / |S|$ for a coalition of size $|S|$.
-
-\textbf{Case analysis.} We classify four deviation structures by how $w(S)$ depends on $|S|$:
-
-\emph{Case 1: Individual rationality (IR).} Each agent can opt out independently: $w(\{i\}) = \beta_\ell / N$, since $\beta_\ell$ is the \emph{total} removal gain (A2) and a single agent cannot realize it without coalition support (A1, $m \geq 2$); under equal splitting the per-capita share is $\beta_\ell / N$. Stability requires $\beta_\Omega \geq \beta_\ell / N$. This is the baseline condition C2* in Theorem~2.
-
-\emph{Case 2: Linear coalition deviation.} Deviation value scales linearly with coalition size: $w(S) = |S| \cdot \beta_\ell / N$. Then $|S| \beta_\Omega \geq |S| \beta_\ell / N$ for all $S$, yielding the same global condition $\beta_\Omega \geq \beta_\ell / N$. The additive $v(S)$ core check covers this case exactly.
-
-\emph{Case 3: Threshold coalition.} Removal requires minimum coalition size $m$:
-\[w(S) = \begin{cases} 0 & |S| < m \\ \beta_\ell & |S| \geq m \end{cases}\]
-The binding constraint is the smallest successful coalition ($|S| = m$):
-\[m \cdot \beta_\Omega \geq \beta_\ell \quad \Longleftrightarrow \quad \beta_\Omega \geq \frac{\beta_\ell}{m}\]
-Since $m \leq N$, this is \emph{tighter} than the linear case ($\beta_\ell / m \geq \beta_\ell / N$). For majority rule ($m = \lceil N/2 \rceil + 1$), the condition becomes $\beta_\Omega \geq \beta_\ell / (\lceil N/2 \rceil + 1)$, up to twice as demanding as Case~2 for large $N$.
-
-\emph{Case 4: Superlinear deviation.} If $w(S)$ grows faster than linearly (e.g., network effects among deviators, $w(S) = \beta_\ell \cdot (|S|/N)^2 \cdot N$), then $w(S)/|S|$ increases with $|S|$ and the grand coalition $S = N$ is the binding constraint:
-\[N \beta_\Omega \geq w(N)\]
-For the quadratic example, $w(N) = \beta_\ell \cdot N$, yielding $\beta_\Omega \geq \beta_\ell$---an $N$-fold tightening over Case~1. Equal-share allocations may fail; mechanism design (e.g., size-dependent transfers or exit penalties) is required. This regime lies outside the scope of our symmetric additive model.
-
-\textbf{Summary.} Under Cases 1--2 (individual or linear deviation), the condition $\beta_\Omega \geq \beta_\ell / N$ from Theorem~2 is necessary and sufficient. Under Case~3 (threshold), the condition tightens to $\beta_\Omega \geq \beta_\ell / m$. Under Case~4 (superlinear), the equal-share allocation may not lie in the core, and stronger mechanisms are needed. Our baseline analysis assumes Cases 1--2; the threshold case applies when institutional rules require supermajority for oversight removal.
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{llll}
-\toprule
-\textbf{Case} & \textbf{$w(S)$ structure} & \textbf{Binding $|S|$} & \textbf{Stability condition} \\
-\midrule
-1--2 & Individual / linear & $N$ & $\beta_\Omega \geq \beta_\ell / N$ \\
-3 & Threshold (size $\geq m$) & $m$ & $\beta_\Omega \geq \beta_\ell / m$ \\
-4 & Superlinear & $N$ (grand coalition) & depends on $w(S)/|S|$ growth; equal-share may fail \\
-\bottomrule
-\end{tabular}
-\caption{Binding coalition size and stability condition by deviation structure.}
-\label{tab:binding_coalition}
-\end{table}
-
-\subsubsection*{C.4 Alternative Equilibria}
-
-All-defect equilibrium always exists as Nash equilibrium. Mixed strategy equilibria may exist but yield lower welfare than coordinated cooperation. The mediator's role is equilibrium selection via correlation device, expanding the feasible payoff set beyond unmediated Nash equilibria~\cite{aumann.1974,aumann.1987}. $\square$
-
-\subsection*{SM-D: Extended Sensitivity Analysis}
-\label{sm:extended_sensitivity}
-
-Monte Carlo sampling over uniform priors yields per-condition stability volumes $V_{C1^*}\approx0.998$, $V_{C1^{**}}\approx0.981$, $V_{C2^*}\approx0.961$, giving overall $V_{\mathrm{dynamic}}\approx0.942$. Sobol variance decomposition ($\text{Var}(S) = \sum_i V_i + \sum_{i<j} V_{ij} + \ldots$) reveals a regime shift: at $N = 2$--$3$, $\beta_\Omega$ dominates (first-order index $\approx 0.65$); at $N \geq 5$, $\delta$ dominates (index $\approx 0.58$). C2* margins improve dramatically with $N$, becoming band-robust at $N \geq 6$. Critical thresholds: $N = 4$ where $V_{\mathrm{dynamic}}$ crosses 95\%; $\beta_\alpha = \beta_D$ patience-free boundary. Optimal $N^*$ varies with benefit structure (saturating: $N^*=2$; linear: $N^*=3$; network: $N^*=10$). Range sensitivity details appear in SM-A.6.
-
-%=============================================================================
-% SM-E: SIMULATION INCOMPLETENESS AND OBSERVABILITY ASYMMETRY
-%=============================================================================
-
-\subsection*{SM-E: Simulation Incompleteness and Observability Asymmetry}
-\label{sm:incompleteness}
-
-This section formalizes the asymmetric observability claim ($q(\text{M},\text{M})_{\text{internal}} > q(\text{M},\text{H})$ for internal state monitoring) using computational complexity and incompleteness results analogous to Gödel's incompleteness theorems and Turing's halting problem.
-
-\subsubsection*{E.0 Formal Setup}
-
-We model each agent as a discrete-time system. At each step $t = 1, 2, \ldots$, system $S$ receives input $x_t$, updates internal state $s_{t} = F(s_{t-1}, x_t)$, and produces output $y_t = G(s_t)$. The functions $F$ and $G$ together with the initial state $s_0$ fully determine the system's behavior.
-
-\textbf{Resource model.} Each system $S_i$ has a total computational budget $C_i$ (operations over the time horizon $T$), equivalently $C_i/T$ operations per step. Memory $M_i$ bounds the state-space size of $S_i$; it appears in the theorem statement for completeness but is not the binding constraint in the proof (the argument turns entirely on per-step compute). We assume the monitored system $S_2$ is \emph{resource-saturating}: its update function $F_2$ requires $\geq C_2/T$ operations per step (i.e., it uses its full budget). This holds whenever $S_2$ is adversarially chosen or operates at capacity. \textbf{Boundary condition:} if $S_2$ has unused computational slack ($F_2$ requires $< C_2/T$ operations per step), the surplus could absorb monitoring overhead and the impossibility does not apply in this form; Theorem~1 models the worst case of a peer operating at full capacity.
-
-\textbf{Assumption A-E1 (Resource-saturating peer).} The monitored system $S_2$ uses its full computational budget: execution of $F_2$ requires $C_2$ total operations over $T$ steps. This is the worst-case assumption; see the boundary condition above for the non-saturating case.
-
-\textbf{Real-time full simulation.} A simulator $\mathrm{Sim}$ achieves real-time full simulation of $S_2$ if, for every input sequence $(x_1, \ldots, x_T)$ and every $t \leq T$, it produces $\hat{s}_t = s_t^{(2)}$ (the true internal state of $S_2$) before time step $t+1$ begins.
-
-\textbf{Simulation-based internal verification.} Let $P: \mathcal{S} \to \{0,1\}$ be a predicate on internal states (e.g., ``is $S_2$ aligned?''). Verification of $P(s_t)$ is \emph{simulation-based} if evaluating $P(s_t)$ requires reconstructing $s_t$ (or a state equivalent from which $P(s_t)$ can be determined) via real-time full simulation. Theorem~1 concerns this form of verification; it does not preclude verification methods that bypass full state reconstruction (see main text for discussion of interactive proofs and cryptographic attestation).
-
-\subsubsection*{E.1 Simulation Incompleteness Theorem}
-
-\begin{theorem}[Simulation Incompleteness]
-\label{thm:simulation_incompleteness}
-A computational system $S_1$ with computational budget $C_1$ over time horizon $T$ cannot fully simulate another system $S_2$ of equal or greater computational complexity ($C_2 \geq C_1$) in real time (simulation time $\leq T$) without containing $S_2$ as a subsystem.
-\end{theorem}
-
-\textbf{Proof sketch.} The argument proceeds in five steps.
-
-\textbf{Step 1 (Real-time simulation requirement):} By the definition of simulation-based internal verification (E.0), evaluating a predicate $P(s_t)$ on the target's internal state requires reconstructing $s_t$ via real-time full simulation. This is the strongest form of internal verification; weaker forms exist (interactive proofs, cryptographic attestation) but face practical limitations in adversarial settings (see main text). Formally, for all inputs $x$ and all $t \leq T$, we require $S_1(x, t) = S_2(x, t)$, constituting perfect simulation.
-
-\textbf{Step 2 (Computational overhead):} System $S_1$ must allocate compute to four tasks: simulating $S_2$'s computation (requiring $C_2$), observing $S_2$'s inputs ($O_{\text{in}}$), comparing predicted versus observed states ($C_{\text{comp}}$), and decision logic ($C_{\text{dec}}$). Nontrivial monitoring requires at least one overhead component, so $O_{\text{in}} + C_{\text{comp}} + C_{\text{dec}} > 0$.
-
-\textbf{Step 3 (Resource constraint):} By Assumption~A-E1, $S_2$ uses its full budget $C_2$, so the total resources required satisfy $C_1 \geq C_2 + O_{\text{in}} + C_{\text{comp}} + C_{\text{dec}}$.
-
-\textbf{Step 4 (Peer monitoring impossibility):} If $C_1 = C_2$ (peer systems), then $C_2 \geq C_2 + O_{\text{in}} + C_{\text{comp}} + C_{\text{dec}}$, implying $0 \geq O_{\text{in}} + C_{\text{comp}} + C_{\text{dec}} > 0$. This contradiction establishes that peer monitoring ($C_1 \approx C_2$) cannot achieve real-time internal state verification.
-
-\textbf{Step 5 (Classical analogies):} The resource-budget argument parallels classical results (Gödel's incompleteness, Turing's halting problem) in that a system of fixed capacity cannot fully characterize a peer without exceeding its own bounds. See the main text for the scope and limits of this analogy.
-
-\textbf{Key implication:} Complete internal-state verification via direct real-time simulation is computationally infeasible for systems of comparable complexity. $\square$
-
-\textbf{Remark (non-saturating case).} When $S_2$ has computational slack ($F_2$ requires $< C_2$ total operations), the surplus $C_2 - \text{cost}(F_2)$ may absorb part of the monitoring overhead $(O_{\text{in}} + C_{\text{comp}} + C_{\text{dec}})$. In this case Theorem~1 weakens: partial (but not complete) verification may become feasible proportional to the slack. The impossibility is a worst-case result under Assumption~A-E1; it does not preclude monitoring when the monitored system is substantially less capable than the monitor.
-
-\subsubsection*{E.2 Application to Multi-Agent Coordination}
-
-We distinguish three monitoring scenarios and derive detection failure probabilities $q_{ij}$.
-
-\paragraph*{E.2.1 Machine Monitoring Machine (Internal States)}
-
-\textbf{Setup:} Machine $S_1$ attempts to monitor machine $S_2$'s internal computation (hidden layer activations, goal representations, planning states).
-
-\textbf{Parameters:} The systems are peers with $C_1 \approx C_2$ (similar computational budget) and $M_1 \approx M_2$ (comparable memory). The internal state space scales as $|S_2^{\text{int}}| \sim 2^{M_2}$, growing exponentially in memory size. The update rate reaches $R_2^{\text{int}} \sim 10^9$ state transitions per second at GHz processing speeds.
-
-\textbf{Monitoring requirement:} To verify $S_2$ has not deviated internally, $S_1$ must check:
-\[\text{Predicted state} \stackrel{?}{=} \text{Actual state}\]
-at rate $R_2^{\text{int}} \sim 10^9$ checks/sec.
-
-\textbf{Incompleteness theorem applies:} $C_1 \approx C_2$ implies $S_1$ cannot simulate $S_2$ in real time (Assumption~A-E1). Therefore:
-\[q(\text{M},\text{M})_{\text{internal}} \to 1 \quad \text{(high detection failure; hard to detect)}\]
-
-\paragraph*{E.2.2 Machine Monitoring Machine (External Actions)}
-
-\textbf{Setup:} Machine $S_1$ monitors $S_2$'s \emph{external actions} (resource procurement, energy consumption, communication, physical-world effects).
-
-\textbf{Key distinction:} External actions constitute a \emph{projection} of internal state:
-\[O_2^{\text{ext}} \subset S_2^{\text{int}} \quad \text{where} \quad |O_2^{\text{ext}}| \ll |S_2^{\text{int}}|\]
-
-\textbf{Observation space reduction:} The internal state space is enormous, with $|S_2^{\text{int}}| \sim 2^{10^{12}}$ bits for terabyte memory. By contrast, external actions number only $|O_2^{\text{ext}}| \sim 10^3$ discrete actions per second through physical actuators. The entropy comparison is stark: $H(O_2^{\text{ext}}) \sim 10$ bits per action is vastly smaller than $H(S_2^{\text{int}}) \sim 10^{12}$ bits for internal states.
-
-\textbf{Monitoring requirement:} $S_1$ must verify:
-\[W_{\text{obs}} \cdot T \geq H(O_2^{\text{ext}}) \cdot R_2^{\text{ext}} \cdot T\]
-where $W_{\text{obs}}$ is observation bandwidth, $R_2^{\text{ext}} \sim 10^3$ actions/sec.
-
-For $R_2^{\text{ext}} \sim 10^3$, $H(O_2^{\text{ext}}) \sim 10$ bits/action:
-\[W_{\text{obs}} \geq 10^4 \text{ bits/sec}\]
-
-\textbf{Feasibility:} Modern sensors achieve $W_{\text{obs}} \sim 10^6$ to $10^9$ bits/sec (camera, network monitoring). Therefore:
-\[W_{\text{obs}} \gg H(O_2^{\text{ext}}) \cdot R_2^{\text{ext}}\]
-
-\textbf{Conclusion:}
-\[q(\text{M},\text{M})_{\text{external}} \to 0 \quad \text{(low detection failure; easy to detect)}\]
-
-\paragraph*{E.2.3 Machine Monitoring Human (External Actions)}
-
-Human action rate ($R_H^{\text{ext}} \sim 1$ action/sec, $H(O_H^{\text{ext}}) \sim 10$ bits/action) requires only $W_{\text{obs}} \geq 10$ bits/sec, trivially achievable with modern sensors ($W_{\text{obs}} \sim 10^6$ bits/sec). Therefore $q(\text{M},\text{H})_{\text{external}} \approx 0$.
-
-\subsubsection*{E.3 Asymmetric Observability and Weak Leviathan}
-
-\textbf{Summary of detection failure probabilities (lower $q$ = easier to detect):}
-
-\begin{center}
-\begin{tabular}{lcc}
-\toprule
-Monitoring Scenario & $q_{ij}$ (detection failure) & Feasibility \\
-\midrule
-M $\to$ M (internal states) & High ($\to 1$) & Infeasible (incompleteness) \\
-M $\to$ M (external actions) & Low ($\to 0$) & Feasible (small action space) \\
-M $\to$ H (external actions) & Very Low ($\approx 0$) & Trivially feasible \\
-H $\to$ M (any) & High ($\to 1$) & Infeasible (speed mismatch) \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{Critical assumption for Weak Leviathan mechanism:}
-
-Stability conditions require verifying \emph{future cooperation intent}, not just current compliance. External compliance (did the agent follow protocol?) is observable, but internal alignment (will the agent cooperate in future rounds?) depends on internal states—discount factor, private valuations, goal stability—that Theorem~1 shows are computationally infeasible for peer verification:
-\[q(\text{M},\text{M})_{\text{alignment}} \to 1 \quad \text{(machines cannot verify peers' future intentions)}\]
-
-\textbf{Addressing the Intention-Action Distinction:}
-
-A critical objection arises: if game-theoretic stability requires verifying future cooperation \emph{intent} (not just current action compliance), then both machines and humans face the same impossibility—intentions are internal states, unobservable in principle. Why are humans better mediators if they also cannot verify machine intentions?
-
-\textbf{Resolution via Perfect Public Equilibrium:} The mediator's role is \emph{not} to verify individual agent intentions, but to create \emph{common knowledge} of compliance behavior. In repeated games with public monitoring~\cite{fudenberg.1994}, cooperation can be sustained via perfect public equilibrium (PPE) even without verifying private beliefs. Three ingredients are essential: the mediator broadcasts coordination recommendations to all agents simultaneously (public signals), each agent observes whether others follow the mediator's signal through external actions (observable compliance), and deviation by any agent triggers coordinated punishment by others (trigger strategies).
-
-The mediator need \emph{not} verify intentions—only provide consistent public signals making deviations observable. The asymmetry operates as follows: $q(\text{M},\text{M})_{\text{external}} \approx 0$ because machines easily observe each other's \emph{compliance} with mediator signals, while $q(\text{M},\text{M})_{\text{internal}} \to 1$ because machines cannot verify peer internal computations that might enable undetected future defection preparation.
-
-Humans qualify as mediators because their outputs (signals) are observable (low $q(\text{M},\text{H})_{\text{external}}$), and their computational limitations prevent exploitation. The system relies on consistent public signals, not intention verification.
-
-\textbf{Remaining limitation:} This resolution assumes public monitoring suffices for stability. If coordination requires verifying that agents are \emph{not} secretly preparing future deviations (e.g., building hidden capabilities, undetectable goal drift), then external observability is insufficient, and the weak Leviathan mechanism fails. Our framework applies to coordination under \emph{public monitoring with trigger strategies}, not scenarios requiring full internal transparency. This assumption is standard in repeated game theory~\cite{mailath.samuelson.2006} but represents a boundary condition for our results.
-
-\textbf{Weak Leviathan justified:} Human institutions serve as mediators because (i)~simulation incompleteness prevents peer internal-state verification, (ii)~mediation requires only external compliance verification (correlation device), (iii)~asymmetric opacity favors external arbiters ($q(\text{M},\text{H}) \approx 0$; $q(\text{M},\text{M})_{\text{external}} \to 0$), and (iv)~weak computational capacity prevents strategic manipulation, providing credibility (Theorem~3).
-
-\textbf{Falsifiability condition:}
-
-The Weak Leviathan mechanism fails if future AI systems develop any of three capabilities: \textbf{homomorphic verification} that verifies peer internal states without full simulation (requiring breakthroughs in zero-knowledge proofs of computation), \textbf{cryptographic commitment to goals} providing binding commitments to future cooperation that are verifiable without simulation, or a \textbf{reduced complexity gap} where monitoring systems have $C_1 \gg C_2$ through specialized monitoring infrastructure, causing the simulation incompleteness result to no longer apply.
-
-If any of these emerge, $q(\text{M},\text{M})_{\text{alignment}} \to 0$, and peer monitoring becomes feasible, eliminating need for external mediators.
-
-\subsubsection*{E.4 Architectural Implications}
-
-\textbf{Design principle:} Coordination mechanisms should structure defection such that significant gains require \emph{sustained external actions}, not just hidden internal state changes. Four elements support this: observable action bottlenecks (defection must pass through monitorable channels), time-extended verification (monitoring over window $T$ allows multiple checks), cryptographic logging (tamper-evident records persist beyond immediate detection), and commitment devices (agents commit to actions via verifiable protocols).
-
-If simulation incompleteness holds ($C_1 \approx C_2$) and stability requires internal alignment verification, then peer monitoring is insufficient, necessitating an external mediator with high observability ($q \approx 0$) and limited exploitation capacity—formalizing ``governance through weakness.''
-
-%=============================================================================
-
-\bibliographystyle{sn-nature}
 \bibliography{ref}
 
 \end{document}
