@@ -89,7 +89,9 @@ Full proof in SI, Section~S6.1--S6.2.
 This result concerns simulation-based verification specifically. Alternative approaches---cryptographic attestation, interactive proofs, zero-knowledge protocols---can certify specified computations under structural assumptions, but face three obstacles in adversarial multi-agent coordination: (i)~a \emph{specification gap}, since formalizing ``aligned internal state'' as a verifiable predicate remains an open problem; (ii)~a \emph{binding gap}, since proving a property of current computation does not constrain future behavior without immutability assumptions; and (iii)~\emph{adversarial incentives}, since a strategically defecting agent can choose which computation to attest while running unverifiable processes in parallel.
 
 \begin{table}[h]
+
 \centering
+\caption{Detection failure probabilities by monitoring scenario. Lower $q$ indicates easier detection. Derivations in SI, Section S6.3.}
 \small
 \begin{tabular}{lcc}
 \toprule
@@ -100,7 +102,7 @@ Machine $\to$ Machine (external) & $\to 0$ (low)  & Feasible (small action space
 Machine $\to$ Human (external)   & $\approx 0$    & Trivial ($10^6$ speed gap) \\
 \bottomrule
 \end{tabular}
-\caption{Detection failure probabilities by monitoring scenario. Lower $q$ indicates easier detection. Derivations in SI, Section S6.3.}
+
 \label{tab:monitoring}
 \end{table}
 
@@ -240,6 +242,7 @@ $N$ agents simultaneously choose Cooperate or Defect each period. Mutual coopera
 The stage game is repeated over an infinite horizon with common discount factor $\delta \in [0,1]$. External actions are perfectly publicly monitored (assumption A$_{\text{ext}}$); internal states are not observable (assumption A$_{\text{int}}$, per Theorem~\ref{thm:incompleteness}). Agents play perfect public equilibrium strategies~\cite{fudenberg.1994}: cooperate while all comply, trigger permanent mutual defection upon observed deviation. The mediator's signal induces a correlated equilibrium~\cite{aumann.1987} that expands the achievable payoff set beyond Nash equilibria. Parameter ranges (Table~\ref{tab:bounds}) combine hard physical limits with engineering estimates; derivations in SI, Section~S2.
 
 \begin{table}[h]
+\caption{Parameter constraints. Hard limits derive from physics; engineering estimates reflect plausible ranges with significant uncertainty. Derivations in SI, Section S2.}
 \centering
 \small
 \begin{tabular}{ll}
@@ -254,7 +257,6 @@ $\delta \leq 1$ (definitional) & $\beta_\Omega \in [0.05,\;0.3]$ (oversight valu
  & $\delta \in [0.1,\;0.95]$; \; $N \in \{2,\ldots,10\}$ \\
 \bottomrule
 \end{tabular}
-\caption{Parameter constraints. Hard limits derive from physics; engineering estimates reflect plausible ranges with significant uncertainty. Derivations in SI, Section S2.}
 \label{tab:bounds}
 \end{table}
 
