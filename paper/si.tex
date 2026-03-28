@@ -41,6 +41,8 @@ Game-Theoretic Stability Conditions for Multi-Agent AI Coordination Under Physic
 Table~\ref{tab:symbols} collects the key symbols used throughout the main text and this supplement.
 
 \begin{table}[h]
+\caption{Key symbols used throughout the paper and supplementary materials.}
+\label{tab:symbols}
 \centering
 \small
 \begin{tabular}{llll}
@@ -64,8 +66,6 @@ $c$ & Per-channel communication cost & cost param.\ & $>0$ \\
 $\tau$ & Round-trip communication delay & physical & $\tau = 2d/c_{\text{light}}$; $\geq 0.067$ s \\
 \bottomrule
 \end{tabular}
-\caption{Key symbols used throughout the paper and supplementary materials.}
-\label{tab:symbols}
 \end{table}
 
 %=============================================================================
@@ -106,6 +106,8 @@ Classical results---G\"odel incompleteness~\cite{godel.1931} and the halting pro
 \label{sec:S2.4}
 
 \begin{table}[h]
+\caption{Mapping from physical constraints to game-theoretic parameters.}
+\label{tab:physical_mapping}
 \centering
 \small
 \begin{tabular}{lp{3.5cm}p{3cm}p{4cm}}
@@ -118,8 +120,6 @@ $\beta_\kappa$ & Landauer energy $E_{\text{min}}$ & Adversarial computation cost
 $C_{\text{comm}}(N)$ & Latency + bandwidth & Coordination overhead & $O(N^2)$ channels $\times$ $C$ bits/sec \\
 \bottomrule
 \end{tabular}
-\caption{Mapping from physical constraints to game-theoretic parameters.}
-\label{tab:physical_mapping}
 \end{table}
 
 \subsection{Functional Forms and Physical Derivations}
@@ -402,6 +402,8 @@ Binding constraint at $|S| = m$: $\beta_\Omega \geq \beta_\ell/m$. Since $m \leq
 \emph{Case 4: Superlinear deviation.} If $w(S)$ grows faster than linearly (e.g., $w(S) = \beta_\ell \cdot (|S|/N)^2 \cdot N$), the grand coalition is the binding constraint: $N \beta_\Omega \geq w(N)$, yielding $\beta_\Omega \geq \beta_\ell$ for the quadratic example---an $N$-fold tightening. Equal-share allocations may fail; stronger mechanism design is required.
 
 \begin{table}[h]
+\caption{Binding coalition size and stability condition by deviation structure.}
+\label{tab:binding_coalition}
 \centering
 \small
 \begin{tabular}{llll}
@@ -413,8 +415,6 @@ Binding constraint at $|S| = m$: $\beta_\Omega \geq \beta_\ell/m$. Since $m \leq
 4 & Superlinear & $N$ (grand coalition) & depends on $w(S)/|S|$ growth \\
 \bottomrule
 \end{tabular}
-\caption{Binding coalition size and stability condition by deviation structure.}
-\label{tab:binding_coalition}
 \end{table}
 
 \textbf{Summary.} Under Cases~1--2, $\beta_\Omega \geq \beta_\ell / N$ is necessary and sufficient. Under Case~3, the condition tightens to $\beta_\Omega \geq \beta_\ell / m$. Under Case~4, stronger mechanisms are needed.
@@ -567,6 +567,8 @@ The Weak Leviathan mechanism fails if future AI systems develop any of three cap
 The stability volume ($V_{\text{dynamic}} \approx 94\%$) assumes uniform priors over baseline parameter ranges. We assess robustness by varying each parameter's bounds by $\pm 20\%$ and recomputing stability volumes via Monte Carlo sampling ($10{,}000$ draws). Constraints $\beta_\alpha \leq 1$ and $\delta \leq 1$ are enforced throughout.
 
 \begin{table}[h]
+\caption{Sensitivity of stability volume to $\pm 20\%$ parameter range variations. Baseline: $V_{\text{dynamic}} = 94.2\%$. Negative sensitivity: stability declines as range widens.}
+\label{tab:range_sensitivity}
 \centering
 \small
 \begin{tabular}{lccccc}
@@ -582,8 +584,6 @@ $\delta$ & $[0.08, 0.76]$ & 88.5\% & $[0.12, 1.0]$ & 92.3\% & $-0.30$ \\
 $N$ & $[2, 8]$ & 91.1\% & $[2, 12]$ & 88.6\% & $-0.28$ \\
 \bottomrule
 \end{tabular}
-\caption{Sensitivity of stability volume to $\pm 20\%$ parameter range variations. Baseline: $V_{\text{dynamic}} = 94.2\%$. Negative sensitivity: stability declines as range widens.}
-\label{tab:range_sensitivity}
 \end{table}
 
 \textbf{Classification.} Parameters fall into four categories:
