@@ -1,0 +1,20 @@
+# Reproduction Package Dependencies
+# Python >=3.8 required
+
+# Core numerical computing
+#
+# NumPy 1.x does not provide wheels for Python 3.13+, so we allow 2.x there.
+# The code uses stable NumPy APIs and is compatible with both major lines.
+numpy>=1.20.0,<2.0.0; python_version<'3.13'
+numpy>=2.0.0,<3.0.0; python_version>='3.13'
+
+# Plotting
+matplotlib>=3.3.0,<4.0.0
+
+# Optional: For faster Monte Carlo in run_revision_experiments.py
+# scipy>=1.7.0,<2.0.0
+
+# Development/Testing (optional)
+# pytest>=7.0.0
+# black>=22.0.0
+# mypy>=0.950

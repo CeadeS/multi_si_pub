@@ -1,0 +1,33 @@
+# OS / NAS artifacts
+.DS_Store
+@eaDir/
+.fuse_hidden*
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+*.fls
+*.fdb_latexmk
+wordcount.txt
+
+# Python
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+
+# Archived / old material (local only)
+old/
+_former_submissions/
+
+# Compiled PDFs (main.pdf and si.pdf) are committed for this submission.
+*.bcf
+*.run.xml
+*.cut
+jair/submission_package/
