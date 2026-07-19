@@ -1,7 +1,3 @@
-@file{ref.bib}
-@preamble{
-"This BibTeX file contains references for the multi-agent superintelligence paper."
-}
 
 % ===================================================================
 % --- Game Theory and Mechanism Design ---
@@ -59,7 +55,6 @@
   publisher = {Oxford University Press},
   year      = {2006},
   address   = {Oxford, UK},
-  isbn      = {978-0195300796}
 }
 
 @article{abreu.milgrom.pearce.1991,
@@ -82,7 +77,6 @@
   pages     = {691--729},
   year      = {2017},
   doi       = {10.3982/TE2213},
-  note      = {Establishes anti-folk theorem: cooperation fails when detection probability falls below critical threshold}
 }
 
 % --- Cartel Stability and Collusion ---
@@ -96,7 +90,6 @@
   pages     = {1--12},
   year      = {1971},
   doi       = {10.2307/2296617},
-  note      = {Establishes cartel stability condition: critical discount factor $\delta^* = 1 - 1/N$}
 }
 
 @article{levenstein.suslow.2006,
@@ -108,7 +101,6 @@
   pages     = {43--95},
   year      = {2006},
   doi       = {10.1257/002205106776162681},
-  note      = {Empirical cartel analysis: 13-17\% annual collapse rate, average duration 5-7 years}
 }
 
 @article{fonseca.normann.2012,
@@ -120,7 +112,6 @@
   pages     = {1759--1772},
   year      = {2012},
   doi       = {10.1016/j.euroecorev.2012.09.002},
-  note      = {Experimental evidence: two-firm cartels require $\delta^* > 0.5$ for stability}
 }
 
 % --- Evolutionary and Network Cooperation ---
@@ -134,7 +125,6 @@
   pages     = {011909},
   year      = {2006},
   doi       = {10.1103/PhysRevE.74.011909},
-  note      = {Evolutionary stability: basin of attraction < 1/3 implies defection evolutionarily advantaged}
 }
 
 @article{ohtsuki.2006,
@@ -146,20 +136,18 @@
   pages     = {502--505},
   year      = {2006},
   doi       = {10.1038/nature04605},
-  note      = {Network cooperation threshold: cooperation favored when $b/c > k$ for degree-$k$ graphs}
 }
 
 % --- Empirical Monitoring and Detection Benchmarks ---
 
-@article{iaea.2002,
-  author    = {{International Atomic Energy Agency}},
-  title     = {IAEA Safeguards Glossary},
-  journal   = {IAEA International Nuclear Verification Series},
-  number    = {3},
-  year      = {2002},
-  publisher = {International Atomic Energy Agency},
-  address   = {Vienna},
-  note      = {Detection probability formula: $1 - \beta^* = \Phi(\mu/\sqrt{1^T\Sigma 1} - q_{1-\alpha})$ where $\mu$ is diversion amount}
+@report{iaea.2002,
+  author      = {{International Atomic Energy Agency}},
+  title       = {IAEA Safeguards Glossary},
+  type        = {International Nuclear Verification Series},
+  number      = {3},
+  institution = {International Atomic Energy Agency},
+  year        = {2002},
+  address     = {Vienna},
 }
 
 @article{ctbt.2012,
@@ -168,9 +156,6 @@
   journal   = {CTBTO Spectrum},
   volume    = {18},
   year      = {2012},
-  publisher = {CTBTO Preparatory Commission},
-  address   = {Vienna},
-  note      = {Seismic monitoring detects explosions $\leq 0.01$ kilotons; North Korea's 0.6 kt test (2006) triggered 31 stations}
 }
 
 @incollection{avenhaus.2002,
@@ -183,7 +168,6 @@
   publisher = {Elsevier},
   editor    = {Aumann, Robert J. and Hart, Sergiu},
   doi       = {10.1016/S1574-0005(02)03025-X},
-  note      = {Dresher-Maschler inspection game: value approaches $1/e \approx 0.368$ for unobservable inspections}
 }
 
 % --- Coordination and Information References Used in Main Text ---
@@ -236,30 +220,26 @@
 }
 
 @article{bergemann.morris.2016,
-  author = {Bergemann, Dirk and Morris, Stephen},
-  title = {Bayes Correlated Equilibrium and the Combinatorics of Information},
-  journal = {Econometrica},
-  volume = {84},
-  number = {2},
-  pages = {845--876},
-  year = {2016}
+  author  = {Bergemann, Dirk and Morris, Stephen},
+  title   = {Bayes Correlated Equilibrium and the Comparison of Information Structures in Games},
+  journal = {Theoretical Economics},
+  volume  = {11},
+  number  = {2},
+  pages   = {487--522},
+  year    = {2016},
+  doi     = {10.3982/TE1808}
 }
 
-@misc{dafoe.2021.coopai,
-  author = {Dafoe, Allan and Russell, Stuart and others},
-  title = {Open Problems in Cooperative AI},
-  howpublished = {arXiv:2012.08630},
-  year = {2021}
-}
+
 
 @article{ashlagi.monderer.tennenholtz.2008,
-  author = {Ashlagi, Itai and Monderer, Dov and Tennenholtz, Moshe},
-  title = {On the Value of Correlation},
-  journal = {Games and Economic Behavior},
-  volume = {64},
-  number = {1},
-  pages = {91--113},
-  year = {2008}
+  author  = {Ashlagi, Itai and Monderer, Dov and Tennenholtz, Moshe},
+  title   = {On the Value of Correlation},
+  journal = {Journal of Artificial Intelligence Research},
+  volume  = {33},
+  pages   = {575--613},
+  year    = {2008},
+  doi     = {10.1613/jair.2637}
 }
 
 @article{bernheim.peleg.whinston.1987,
@@ -321,7 +301,6 @@
   pages     = {9--49},
   year      = {2017},
   doi       = {10.1162/ISEC_a_00273},
-  note      = {Nuclear deterrence thresholds: 60-70\% survivability required for credible second-strike (up from 30-40\% in 1990)}
 }
 
 % --- Coalition Formation and Core Theory ---
@@ -333,7 +312,6 @@
   volume    = {10},
   pages     = {119--139},
   year      = {1963},
-  note      = {Bondareva-Shapley theorem: core non-empty iff balanced game; empty core when coalition asymmetry $> 2/3$}
 }
 
 % --- Information Structure and Asymmetric Monitoring ---
@@ -347,7 +325,6 @@
   pages     = {499--519},
   year      = {2006},
   doi       = {10.1111/j.1468-0262.2006.00670.x},
-  note      = {Demonstrates that improved monitoring can harm cooperation through coordination failures}
 }
 
 @article{ely.horner.olszewski.2005,
@@ -359,7 +336,6 @@
   pages     = {377--415},
   year      = {2005},
   doi       = {10.1111/j.1468-0262.2005.00583.x},
-  note      = {Characterizes equilibria robust to information asymmetries}
 }
 
 @article{fudenberg.levine.1994,
@@ -371,7 +347,6 @@
   pages     = {103--135},
   year      = {1994},
   doi       = {10.1006/jeth.1994.1007},
-  note      = {Full-support condition for repeated game folk theorems}
 }
 
 
@@ -392,7 +367,6 @@
   publisher = {MIT Press},
   year      = {1991},
   address   = {Cambridge, MA},
-  isbn      = {978-0262061414}
 }
 
 @incollection{shapley.1953,
@@ -463,19 +437,18 @@
   pages     = {173--198},
   year      = {1931},
   doi       = {10.1007/BF01700692},
-  note      = {English translation: ``On Formally Undecidable Propositions of Principia Mathematica and Related Systems I''}
 }
 
 @article{turing.1936,
   author    = {Turing, Alan M.},
   title     = {On Computable Numbers, with an Application to the Entscheidungsproblem},
   journal   = {Proceedings of the London Mathematical Society},
-  volume    = {s2-42},
+  volume    = {42},
+  series    = {2},
   number    = {1},
   pages     = {230--265},
   year      = {1936},
   doi       = {10.1112/plms/s2-42.1.230},
-  note      = {Introduces the Turing machine and proves the undecidability of the halting problem}
 }
 
 % ===================================================================
@@ -488,7 +461,6 @@
   publisher = {MIT Press},
   year      = {1995},
   address   = {Cambridge, MA},
-  isbn      = {978-0262731218}
 }
 
 @book{nowak.2006,
@@ -497,7 +469,6 @@
   publisher = {Harvard University Press},
   year      = {2006},
   address   = {Cambridge, MA},
-  isbn      = {978-0674023383}
 }
 
 @book{sandholm.2010,
@@ -506,7 +477,6 @@
   publisher = {MIT Press},
   year      = {2010},
   address   = {Cambridge, MA},
-  isbn      = {978-0262195874}
 }
 
 % ===================================================================
@@ -519,7 +489,6 @@
   publisher = {Oxford University Press},
   year      = {2014},
   address   = {Oxford, UK},
-  isbn      = {978-0199678112}
 }
 
 @book{russell.2019,
@@ -528,7 +497,6 @@
   publisher = {Viking},
   year      = {2019},
   address   = {New York},
-  isbn      = {978-0525558613}
 }
 
 @incollection{omohundro.2008,
@@ -607,14 +575,7 @@
   doi       = {10.1073/pnas.36.1.48}
 }
 
-@book{fudenberg.1991,
-  author    = {Fudenberg, Drew and Tirole, Jean},
-  title     = {Game Theory},
-  publisher = {MIT Press},
-  year      = {1991},
-  address   = {Cambridge, MA},
-  isbn      = {978-0262061414}
-}
+
 
 @book{myerson.1991,
   author    = {Myerson, Roger B.},
@@ -622,7 +583,6 @@
   publisher = {Harvard University Press},
   year      = {1991},
   address   = {Cambridge, MA},
-  isbn      = {978-0674341166}
 }
 
 @book{osborne.1994,
@@ -631,7 +591,6 @@
   year      = {1994},
   publisher = {MIT Press},
   address   = {Cambridge, MA},
-  isbn      = {978-0262650403}
 }
 
 @book{basar.1999,
@@ -641,7 +600,6 @@
   edition   = {2nd},
   publisher = {SIAM},
   address   = {Philadelphia, PA},
-  isbn      = {978-0898714296}
 }
 
 @article{north.1968,
@@ -653,7 +611,6 @@
   pages   = {200--210},
   year    = {1968},
   doi     = {10.1109/TSSC.1968.300114},
-  note    = {The text refers to a 2007 publication year, likely referencing a reprint or re-publication of this original 1968 article.}
 }
 
 @article{kahneman.1979,
@@ -671,7 +628,7 @@
   title   = {Models of Man: Social and Rational},
   author  = {Simon, Herbert A.},
   year    = {1957},
-  publisher = {John Wiley & Sons},
+  publisher = {John Wiley \& Sons},
   address   = {New York}
 }
 
@@ -679,13 +636,12 @@
 % --- Multi-Agent Systems & Cooperative AI ---
 % ===================================================================
 
-@article{leibo.2017,
+@inproceedings{leibo.2017,
   author    = {Leibo, Joel Z. and Zambaldi, Vinicius and Lanctot, Marc and Marecki, Janusz and Graepel, Thore},
   title     = {Multi-agent Reinforcement Learning in Sequential Social Dilemmas},
-  journal   = {Proceedings of the 16th Conference on Autonomous Agents and MultiAgent Systems (AAMAS 2017)},
+  booktitle = {Proceedings of the 16th Conference on Autonomous Agents and MultiAgent Systems (AAMAS)},
   pages     = {464--473},
   year      = {2017},
-  url       = {http://dl.acm.org/citation.cfm?id=3091172}
 }
 
 @techreport{dafoe.2020,
@@ -714,8 +670,6 @@
   publisher = {Cambridge University Press},
   year      = {2009},
   address   = {Cambridge},
-  isbn      = {978-0521899437},
-  note      = {Representative reference for a survey on MAS coordination, fulfilling placeholder `Hammond et al., 2025`.}
 }
 
 @techreport{cooperative_ai.2021,
@@ -732,7 +686,6 @@
   year      = {2007},
   publisher = {Oxford University Press},
   address   = {Oxford, UK},
-  isbn      = {978-0199207954}
 }
 
 % ===================================================================
@@ -781,7 +734,6 @@
   publisher = {Oxford University Press},
   year      = {2017},
   address   = {New York},
-  isbn      = {978-0190665017}
 }
 
 @article{ciorciari.2019,
@@ -801,7 +753,6 @@
   year      = {1651},
   publisher = {Andrew Crooke},
   address   = {London},
-  note      = {Citation refers to the original work. Numerous modern editions exist.}
 }
 
 @article{kuik.2008,
@@ -831,7 +782,6 @@
   publisher = {Harvard University Press},
   year      = {1960},
   address   = {Cambridge, MA},
-  isbn      = {978-0674840317}
 }
 
 @article{fearon.1995,
@@ -851,7 +801,6 @@
   publisher = {McGraw-Hill},
   year      = {1979},
   address   = {New York},
-  isbn      = {978-0075548522}
 }
 
 @article{jervis.1978,
@@ -871,7 +820,6 @@
   year      = {1976},
   publisher = {Princeton University Press},
   address   = {Princeton, NJ},
-  isbn      = {978-0691100494}
 }
 
 @book{keohane.1984,
@@ -880,7 +828,6 @@
   year      = {1984},
   publisher = {Princeton University Press},
   address   = {Princeton, NJ},
-  isbn      = {978-0691002292}
 }
 
 @article{goh.2005,
@@ -890,7 +837,6 @@
   volume    = {16},
   year      = {2005},
   publisher = {East-West Center},
-  note      = {Fulfills placeholder for `Strategic Hedging Literature`}
 }
 
 @book{raz.1986,
@@ -899,8 +845,6 @@
   year      = {1986},
   publisher = {Clarendon Press},
   address   = {Oxford, UK},
-  isbn      = {978-0198248071},
-  note      = {Fulfills placeholder for `Political Philosophy on Neutrality`}
 }
 
 @book{raiffa.1968,
@@ -909,7 +853,6 @@
   year      = {1968},
   publisher = {Addison-Wesley},
   address   = {Reading, MA},
-  isbn      = {978-0201062723}
 }
 
 @book{krasner.1983,
@@ -918,7 +861,6 @@
   publisher = {Cornell University Press},
   year      = {1983},
   address   = {Ithaca, NY},
-  isbn      = {978-0801492509}
 }
 
 @book{halpern.2017,
@@ -928,8 +870,6 @@
   publisher = {The MIT Press},
   year      = {2017},
   address   = {Cambridge, MA},
-  isbn      = {978-0262035955},
-  note      = {This is the most likely reference for the 'halpern.2018' placeholder, representing a comprehensive work on the topic.}
 }
 
 @book{rawls.1971,
@@ -938,7 +878,6 @@
   publisher = {Harvard University Press},
   year      = {1971},
   address   = {Cambridge, MA},
-  isbn      = {978-0674000780}
 }
 
 
@@ -955,23 +894,21 @@
 
 @book{hendrycks.2024,
   author    = {Hendrycks, Dan},
-  title     = {An Introduction to AI Safety, Ethics, and Society},
+  title     = {Introduction to AI Safety, Ethics, and Society},
+  publisher = {CRC Press},
   year      = {2024},
   url       = {https://www.aisafetybook.com/},
-  note      = {This is the most stable, citable version for the placeholder 'hendrycks.2021', addressing the same topics.}
 }
 
 % ===================================================================
 % --- AI Governance, Policy, and Safety ---
 % ===================================================================
 
-@techreport{dafoe.2018,
+@misc{dafoe.2018,
   author    = {Dafoe, Allan},
   title     = {AI Governance: A Research Agenda},
-  year      = {2018},
-  institution = {GovAI Research Report},
-  url       = {https://www.governance.ai/paper/ai-governance-a-research-agenda},
-  note      = {Published by the Future of Humanity Institute, University of Oxford}
+  howpublished = {GovAI Research Report, Future of Humanity Institute, University of Oxford},
+  year      = {2018}
 }
 
 @article{lazar.2023,
@@ -1000,30 +937,78 @@
   year        = {2020},
   doi         = {10.7249/RR2361.2},
   url         = {https://www.rand.org/pubs/research_reports/RR2361z2.html},
-  note        = {Fulfills placeholder for `Flash War discussion`.}
 }
 
-@article{critch.2023a,
+@article{critch.russell.2023,
   author    = {Critch, Andrew and Russell, Stuart},
-  title     = {Negotiable Reinforcement Learning for Human-AI Teaming},
-  journal   = {arXiv preprint arXiv:2312.02804},
+  title     = {{TASRA}: A Taxonomy and Analysis of Societal-Scale Risks from {AI}},
+  journal   = {arXiv preprint arXiv:2306.06924},
   year      = {2023},
-  eprint    = {2312.02804},
+  eprint    = {2306.06924},
   archivePrefix = {arXiv},
   primaryClass = {cs.AI}
 }
 
-@article{critch.2023b,
-  title     = {AI Research Considerations for Human Existential Safety (ARCHES)},
-  author    = {Critch, Andrew and Russell, Stuart},
-  journal   = {arXiv preprint arXiv:2305.16548},
-  year      = {2023},
-  eprint    = {2305.16548},
+@article{critch.krueger.2020,
+  author    = {Critch, Andrew and Krueger, David},
+  title     = {{AI} Research Considerations for Human Existential Safety ({ARCHES})},
+  journal   = {arXiv preprint arXiv:2006.04948},
+  year      = {2020},
+  eprint    = {2006.04948},
   archivePrefix = {arXiv},
   primaryClass = {cs.CY}
 }
 
 % --- Multi-Agent AI Safety (2020-2026) ---
+
+@article{halpern.moses.1990,
+  author  = {Halpern, Joseph Y. and Moses, Yoram},
+  title   = {Knowledge and Common Knowledge in a Distributed Environment},
+  journal = {Journal of the ACM},
+  volume  = {37},
+  number  = {3},
+  pages   = {549--587},
+  year    = {1990},
+  doi     = {10.1145/79147.79161}
+}
+
+@book{harari.2024,
+  author    = {Harari, Yuval Noah},
+  title     = {Nexus: A Brief History of Information Networks from the Stone Age to AI},
+  publisher = {Random House},
+  address   = {New York},
+  year      = {2024}
+}
+
+@article{han.2020,
+  author  = {Han, The Anh and Pereira, Lu{\'i}s Moniz and Santos, Francisco C. and Lenaerts, Tom},
+  title   = {To Regulate or Not: A Social Dynamics Analysis of an Idealised {AI} Race},
+  journal = {Journal of Artificial Intelligence Research},
+  volume  = {69},
+  pages   = {881--921},
+  year    = {2020},
+  doi     = {10.1613/jair.1.12225}
+}
+
+@article{merhej.2022,
+  author  = {Merhej, Ramona and Santos, Fernando P. and Melo, Francisco S. and Santos, Francisco C.},
+  title   = {Cooperation and Learning Dynamics under Wealth Inequality and Diversity in Individual Risk},
+  journal = {Journal of Artificial Intelligence Research},
+  volume  = {74},
+  pages   = {733--764},
+  year    = {2022},
+  doi     = {10.1613/jair.1.13519}
+}
+
+@article{cigler.2013,
+  author  = {Cigler, Lud{\v{e}}k and Faltings, Boi},
+  title   = {Decentralized Anti-Coordination Through Multi-Agent Learning},
+  journal = {Journal of Artificial Intelligence Research},
+  volume  = {47},
+  pages   = {441--473},
+  year    = {2013},
+  doi     = {10.1613/jair.3904}
+}
 
 @techreport{hammond.2025,
   author      = {Hammond, Lewis and Chan, Alan and Clifton, Jesse and Hoelscher-Obermaier, Jason and Khan, Akbir and others},
@@ -1032,64 +1017,58 @@
   year        = {2025},
   number      = {Technical Report \#1},
   url         = {https://www.cooperativeai.com/post/new-report-multi-agent-risks-from-advanced-ai},
-  note        = {Taxonomy of multi-agent risks: miscoordination, conflict, collusion}
 }
 
 @article{tomasev.2025,
-  author        = {Tomasev, Nenad and others},
-  title         = {Distributional AGI Safety},
+  author        = {Toma{\v s}ev, Nenad and Franklin, Matija and Jacobs, Julian and Krier, S{\'e}bastien and Osindero, Simon},
+  title         = {Distributional {AGI} Safety},
   journal       = {arXiv preprint arXiv:2512.16856},
   year          = {2025},
   eprint        = {2512.16856},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.AI},
-  note          = {Proposes patchwork AGI hypothesis where AGI emerges through coordination of sub-AGI agents}
+  primaryClass  = {cs.AI}
 }
 
-@article{stastny.2021,
+@inproceedings{stastny.2021,
   author        = {Stastny, Julian and Riché, Maxime and Lyzhov, Alexander and Treutlein, Johannes and Dafoe, Allan and Clifton, Jesse},
   title         = {Normative Disagreement as a Challenge for Cooperative AI},
-  journal       = {NeurIPS 2021 Workshop on Cooperative AI},
+  booktitle     = {NeurIPS 2021 Workshop on Cooperative AI},
   year          = {2021},
   eprint        = {2111.13872},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.AI},
-  note          = {Cooperation in mixed-motive environments with competing cooperative equilibria}
+  primaryClass  = {cs.AI}
 }
 
 % --- AI Oversight & Monitoring ---
 
 @article{greenblatt.2023,
-  author        = {Greenblatt, Ryan and others},
+  author        = {Greenblatt, Ryan and Shlegeris, Buck and Sachan, Kshitij and Roger, Fabien},
   title         = {AI Control: Improving Safety Despite Intentional Subversion},
   journal       = {arXiv preprint arXiv:2312.06942},
   year          = {2023},
   eprint        = {2312.06942},
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
-  note          = {Trusted monitoring framework with game-theoretic red-teaming}
 }
 
-@article{oversight.game.2024,
-  author        = {{Anonymous}},
+@article{oversight.game.2025,
+  author        = {Overman, William and Bayati, Mohsen},
   title         = {The Oversight Game: Learning to Cooperatively Balance an AI Agent's Safety and Autonomy},
   journal       = {arXiv preprint arXiv:2510.26752},
-  year          = {2024},
+  year          = {2025},
   eprint        = {2510.26752},
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
-  note          = {Game-theoretic framework for post-hoc AI control}
 }
 
 @article{debate.doubleefficient.2023,
-  author        = {Brown-Cohen, Jonah and others},
+  author        = {Brown-Cohen, Jonah and Irving, Geoffrey and Piliouras, Georgios},
   title         = {Scalable AI Safety via Doubly-Efficient Debate},
   journal       = {arXiv preprint arXiv:2311.14125},
   year          = {2023},
   eprint        = {2311.14125},
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
-  note          = {Advances debate-based scalable oversight}
 }
 
 @article{irving.2018,
@@ -1100,7 +1079,6 @@
   eprint        = {1805.00899},
   archivePrefix = {arXiv},
   primaryClass  = {cs.AI},
-  note          = {Foundational debate framework for scalable oversight}
 }
 
 @article{christiano.2018,
@@ -1111,7 +1089,6 @@
   eprint        = {1810.08575},
   archivePrefix = {arXiv},
   primaryClass  = {cs.LG},
-  note          = {Iterated amplification framework}
 }
 
 % --- Verification & International AI Governance ---
@@ -1123,30 +1100,29 @@
   year        = {2025},
   month       = jul,
   url         = {https://aigi.ox.ac.uk/publications/verification-for-international-ai-governance/},
-  note        = {Six layers of verification for large-scale AI development rules}
 }
 
 @article{verification.methods.2024,
-  author        = {{Anonymous}},
+  author        = {Wasil, Akash R. and Reed, Tom and Miller, Jack William and Barnett, Peter},
   title         = {Verification Methods for International AI Agreements},
   journal       = {arXiv preprint arXiv:2408.16074},
   year          = {2024},
   eprint        = {2408.16074},
   archivePrefix = {arXiv},
   primaryClass  = {cs.CY},
-  note          = {Hardware monitoring, infrared detection, tamper-evident seals}
 }
 
 % --- Coordination Transparency & Governance ---
 
 @article{coordination.transparency.2026,
-  author    = {{Anonymous}},
+  author    = {Bohr, Jeremiah},
   title     = {Coordination Transparency: Governing Distributed Agency in AI Systems},
   journal   = {AI \& Society},
-  publisher = {Springer},
+  volume    = {41},
+  number    = {5},
+  pages     = {4767--4777},
   year      = {2026},
   doi       = {10.1007/s00146-026-02853-w},
-  note      = {Governance mechanism for distributed agency: interaction logging, live monitoring, intervention hooks}
 }
 
 @book{nisan.2007,
@@ -1155,8 +1131,6 @@
   year      = {2007},
   publisher = {Cambridge University Press},
   address   = {Cambridge, UK},
-  isbn      = {978-0521872829},
-  note      = {Fulfills placeholder for `Mechanism Design literature`.}
 }
 
 @techreport{thierer.2023,
@@ -1167,7 +1141,6 @@
   number       = {284},
   type         = {Policy Study},
   url          = {https://www.rstreet.org/research/getting-ai-policy-right-a-guide-for-congress/},
-  note         = {Fulfills placeholder `McBride & Thierer, 2025`.}
 }
 
 
@@ -1192,7 +1165,6 @@
   title     = {Viability Theory},
   publisher = {Birkhäuser},
   year      = {1991},
-  isbn      = {9780817635718}
 }
 
 @article{iyengar.2005,
@@ -1217,33 +1189,28 @@
   publisher = {INFORMS}
 }
 
-@book{cover.2006,
-  author    = {Cover, Thomas M. and Thomas, Joy A.},
-  title     = {Elements of Information Theory},
-  edition   = {2nd},
-  publisher = {Wiley-Interscience},
-  year      = {2006},
-  isbn      = {0471241954}
-}
+
 
 % ===================================================================
 % --- Distributed Systems and Consensus Algorithms ---
 % ===================================================================
 
-@misc{castro.liskov.1999,
-  author       = {Castro, Miguel and Liskov, Barbara},
-  title        = {Practical Byzantine Fault Tolerance},
-  howpublished = {Proceedings of the Third Symposium on Operating Systems Design and Implementation (OSDI), USENIX Association},
-  year         = {1999},
-  note         = {pp. 173--186}
+@inproceedings{castro.liskov.1999,
+  author    = {Castro, Miguel and Liskov, Barbara},
+  title     = {Practical Byzantine Fault Tolerance},
+  booktitle = {Proceedings of the Third Symposium on Operating Systems Design and Implementation (OSDI)},
+  publisher = {USENIX Association},
+  pages     = {173--186},
+  year      = {1999},
 }
 
-@misc{ongaro.ousterhout.2014,
-  author       = {Ongaro, Diego and Ousterhout, John},
-  title        = {In Search of an Understandable Consensus Algorithm},
-  howpublished = {Proceedings of the 2014 USENIX Annual Technical Conference (USENIX ATC), USENIX Association},
-  year         = {2014},
-  note         = {pp. 305--319}
+@inproceedings{ongaro.ousterhout.2014,
+  author    = {Ongaro, Diego and Ousterhout, John},
+  title     = {In Search of an Understandable Consensus Algorithm},
+  booktitle = {Proceedings of the 2014 USENIX Annual Technical Conference (USENIX ATC)},
+  publisher = {USENIX Association},
+  pages     = {305--319},
+  year      = {2014},
 }
 
 @article{lamport.paxos.2001,

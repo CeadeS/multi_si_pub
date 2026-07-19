@@ -49,6 +49,9 @@ def _prior_markdown(prior: PriorSpec) -> str:
         f"| N | [{ranges.n_agents[0]}, {ranges.n_agents[1]}] | uniform | sampled as discrete-uniform over integers (rounded after sampling on [{ranges.n_agents[0]-0.5}, {ranges.n_agents[1]+0.5}]) |"
     )
     lines.append(f"| δ | [{prior.delta_range[0]}, {prior.delta_range[1]}] | uniform | discount factor prior |")
+    lines.append(
+        f"| q | [{ranges.q_detect[0]}, {ranges.q_detect[1]}] | {family_for('q_detect')} | detection-failure probability (external-action monitoring) |"
+    )
     lines.append("")
     lines.append("Uniform priors are the maximum-entropy choice given bounds; log-uniform priors stress-test order-of-magnitude uncertainty.")
     return "\n".join(lines) + "\n"
@@ -73,8 +76,12 @@ def _write_md(path: Path, payload: dict) -> None:
     lines.append(f"- V_C1: `{volume['V_C1']:.6f}`")
     lines.append(f"- V_C1_dynamic: `{volume['V_C1_dynamic']:.6f}` (δ ≥ δ*)")
     lines.append(f"- V_C2: `{volume['V_C2']:.6f}`")
-    lines.append(f"- V_static: `{volume['V_static']:.6f}` (C1* & C2*)")
-    lines.append(f"- V_dynamic: `{volume['V_dynamic']:.6f}` (C1* & C2* & C1** under δ prior)")
+    lines.append(f"- V_myopic: `{volume.get('V_myopic', volume['V_static']):.6f}` (myopic benchmark: C1* & C2*)")
+    lines.append(f"- V_dynamic: `{volume['V_dynamic']:.6f}` (continuation equilibrium: C1** & C2*)")
+    if "V_immediate" in volume:
+        lines.append(f"- V_immediate: `{volume['V_immediate']:.6f}` (immediate enforcement: δ ≥ δ*(q,s) & C2*)")
+    if "V_cross" in volume:
+        lines.append(f"- V_cross: `{volume['V_cross']:.6f}` (three-way cross-regime intersection, conservative)")
     lines.append("")
     lines.append("## Margin Quantiles (q05 / q50 / q95)")
     lines.append("")
@@ -208,6 +215,7 @@ def main() -> None:
                     beta_Omega=ranges.beta_Omega,
                     beta_ell=ranges.beta_ell,
                     n_agents=(n_val, n_val),
+                    q_detect=ranges.q_detect,
                 )
                 prior_n = PriorSpec(
                     name=f"{prior.name}_N{n_val}",

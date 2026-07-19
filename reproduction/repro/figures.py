@@ -25,6 +25,8 @@ from .cost_model import (
 )
 from .model import (
     anchor_params,
+    c1_margin,
+    c2_margin,
     coalition_value_by_size,
     delta_crit,
     expected_welfare,
@@ -33,6 +35,7 @@ from .model import (
     stability_margin,
     symmetric_shapley_per_agent,
 )
+from .robustness_metrics import _delta_crit_vector
 from .plot_style import apply_style
 
 
@@ -82,7 +85,11 @@ def _sample_param_range(
 
 
 def figure_stability_regions(path: str) -> None:
-    """Stability region for C1* (beta_alpha + beta_kappa >= beta_D)."""
+    """Stability region for C1*(q): beta_alpha + (1-q)*beta_kappa >= beta_D.
+
+    Shading and panels (b)-(c) use perfect monitoring (q=0); panel (a) adds the
+    q=0.3 boundary to show the monitoring-degradation band.
+    """
 
     apply_style()
     params = anchor_params()
@@ -98,14 +105,12 @@ def figure_stability_regions(path: str) -> None:
     beta_kappa = np.logspace(np.log10(kappa_min), np.log10(kappa_max), 240)
     beta_D = np.logspace(np.log10(d_min), np.log10(d_max), 240)
 
-    margin_value = params.beta_alpha + params.beta_kappa - params.beta_D
-    margin_top = params.beta_D + margin_value
-
     cmap = LinearSegmentedColormap.from_list("stability", ["#f4b6b6", "#b7e3b3"])
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
     # Panel (a): stability region in (beta_kappa, beta_D) for anchored beta_alpha.
+    # Shading shows the C1*(q=0) margin: beta_alpha + (1-q)*beta_kappa - beta_D at q=0.
     ax = axes[0]
     grid_kappa, grid_D = np.meshgrid(beta_kappa, beta_D)
     margin = params.beta_alpha + grid_kappa - grid_D
@@ -124,13 +129,32 @@ def figure_stability_regions(path: str) -> None:
     )
     ax.contour(grid_kappa, grid_D, margin, levels=[0.0], colors="black", linewidths=1.2)
 
-    boundary = params.beta_alpha + beta_kappa
+    # C1*(q) boundary: beta_D = beta_alpha + (1-q)*beta_kappa.
+    boundary = params.beta_alpha + beta_kappa  # perfect monitoring (q=0)
+    boundary_q03 = params.beta_alpha + 0.7 * beta_kappa  # imperfect monitoring (q=0.3)
     ax.plot(
         beta_kappa,
         boundary,
         color="black",
         linewidth=1.4,
-        label=r"C1* indifference ($\beta_D = \beta_\alpha + \beta_\kappa$)",
+        label=r"C1* boundary, $q=0$: $\beta_D = \beta_\alpha + \beta_\kappa$",
+    )
+    ax.plot(
+        beta_kappa,
+        boundary_q03,
+        color="black",
+        linewidth=1.4,
+        linestyle="--",
+        label=r"C1* boundary, $q=0.3$: $\beta_D = \beta_\alpha + 0.7\,\beta_\kappa$",
+    )
+    ax.fill_between(
+        beta_kappa,
+        boundary_q03,
+        boundary,
+        color="#64748b",
+        alpha=0.25,
+        zorder=4,
+        label=r"Monitoring-degradation band ($0 \leq q \leq 0.3$)",
     )
 
     # Patience-free boundary: where β_α ≥ β_D (δ*=0)
@@ -209,7 +233,7 @@ def figure_stability_regions(path: str) -> None:
 
     ax.set_xlabel(r"$\beta_\kappa$ (deterrence strength)")
     ax.set_ylabel(r"$\beta_D$ (defection temptation)")
-    ax.set_title("(a) C1* Region (Rationality)")
+    ax.set_title("(a) C1* Region (Rationality; shading at $q=0$)")
     handles, labels = ax.get_legend_handles_labels()
     handles.extend(
         [
@@ -261,7 +285,7 @@ def figure_stability_regions(path: str) -> None:
     ax.axhspan(d_plaus_min, d_plaus_max, color="#fde68a", alpha=0.12, label="_nolegend_")
     ax.set_xlabel(r"$\beta_\kappa$ (deterrence strength)")
     ax.set_ylabel(r"Max $\beta_D$ with C1* holding")
-    ax.set_title("(b) Boundary Shifts with $\\beta_\\alpha$")
+    ax.set_title("(b) Boundary Shifts with $\\beta_\\alpha$ (perfect monitoring, $q=0$)")
     ax.legend(loc="upper left", fontsize=8)
     ax.grid(True, alpha=0.25)
     ax.set_xscale("log")
@@ -367,7 +391,7 @@ def figure_stability_regions(path: str) -> None:
     )
     ax.set_xlabel(r"$\beta_\alpha$ (coordination value)")
     ax.set_ylabel("Fraction where C1* holds")
-    ax.set_title("(c) Distribution-Sensitive C1* Hold Fraction")
+    ax.set_title("(c) Distribution-Sensitive C1* Hold Fraction ($q=0$)")
     ax.set_ylim([0.5, 1.1])
     ax.set_xlim([alpha_low, alpha_high])
     ax.legend(loc="lower right", fontsize=8)
@@ -381,7 +405,7 @@ def figure_stability_regions(path: str) -> None:
         bbox=dict(boxstyle="round,pad=0.25", facecolor="white", alpha=0.7, edgecolor="none"),
     )
 
-    fig.suptitle("Equilibrium Stability Analysis - C1* (Correlated Equilibrium)", fontsize=12)
+    fig.suptitle("Equilibrium Stability Analysis - C1* (Immediate-Sanction Deterrence)", fontsize=12)
     fig.tight_layout(rect=[0, 0, 1, 0.95])
     _save(fig, path)
 
@@ -434,13 +458,18 @@ def _sensitivity_panel(
 
 
 def figure_sensitivity_analysis(path: str) -> None:
-    """Single-parameter sensitivity of stability margin S with joint robustness map."""
+    """Single-parameter sensitivity of stability margin S with joint robustness map.
+
+    Margins in panels (a)-(f) and the joint map are evaluated at perfect
+    monitoring (q=0), stated explicitly via c1_margin(..., q=0.0); panel (g)
+    sweeps the detection-failure probability q at the anchor parameters.
+    """
 
     apply_style()
     params = anchor_params()
     ranges = plausible_ranges()
     n_agents = 5
-    margin_value = params.beta_alpha + params.beta_kappa - params.beta_D
+    q0 = 0.0  # perfect monitoring for the anchor-parameter sweeps
 
     old_params = plt.rcParams.copy()
     plt.rcParams.update(
@@ -454,20 +483,23 @@ def figure_sensitivity_analysis(path: str) -> None:
         }
     )
 
-    fig = plt.figure(figsize=(8.25, 10.2))
-    gs = gridspec.GridSpec(4, 2, figure=fig, height_ratios=[1.1, 1.1, 1.1, 1.6], hspace=0.38, wspace=0.2)
+    fig = plt.figure(figsize=(8.25, 12.4))
+    gs = gridspec.GridSpec(
+        5, 2, figure=fig, height_ratios=[1.1, 1.1, 1.1, 1.0, 1.6], hspace=0.44, wspace=0.2
+    )
     ax_kappa = fig.add_subplot(gs[0, 0])
     ax_alpha = fig.add_subplot(gs[0, 1])
     ax_D = fig.add_subplot(gs[1, 0])
     ax_Omega = fig.add_subplot(gs[1, 1])
     ax_ell = fig.add_subplot(gs[2, 0])
     ax_N = fig.add_subplot(gs[2, 1])
-    ax_joint = fig.add_subplot(gs[3, :])
+    ax_q = fig.add_subplot(gs[3, :])
+    ax_joint = fig.add_subplot(gs[4, :])
 
     beta_kappa_vals = np.logspace(
         np.log10(ranges.beta_kappa[0]), np.log10(ranges.beta_kappa[1]), 120
     )
-    beta_kappa_c1 = [replace_param(params, beta_kappa=v).beta_alpha + v - params.beta_D for v in beta_kappa_vals]
+    beta_kappa_c1 = [c1_margin(replace_param(params, beta_kappa=v), q=q0) for v in beta_kappa_vals]
     beta_kappa_c2 = [params.beta_Omega - params.beta_ell / n_agents for _ in beta_kappa_vals]
     beta_kappa_margins = [min(c1, c2) for c1, c2 in zip(beta_kappa_c1, beta_kappa_c2)]
     _sensitivity_panel(
@@ -488,7 +520,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     beta_alpha_vals = np.logspace(
         np.log10(ranges.beta_alpha[0]), np.log10(ranges.beta_alpha[1]), 120
     )
-    beta_alpha_c1 = [v + params.beta_kappa - params.beta_D for v in beta_alpha_vals]
+    beta_alpha_c1 = [c1_margin(replace_param(params, beta_alpha=v), q=q0) for v in beta_alpha_vals]
     beta_alpha_c2 = [params.beta_Omega - params.beta_ell / n_agents for _ in beta_alpha_vals]
     beta_alpha_margins = [min(c1, c2) for c1, c2 in zip(beta_alpha_c1, beta_alpha_c2)]
     _sensitivity_panel(
@@ -511,7 +543,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     beta_D_vals = np.logspace(
         np.log10(ranges.beta_D[0]), np.log10(ranges.beta_D[1]), 120
     )
-    beta_D_c1 = [params.beta_alpha + params.beta_kappa - v for v in beta_D_vals]
+    beta_D_c1 = [c1_margin(replace_param(params, beta_D=v), q=q0) for v in beta_D_vals]
     beta_D_c2 = [params.beta_Omega - params.beta_ell / n_agents for _ in beta_D_vals]
     beta_D_margins = [min(c1, c2) for c1, c2 in zip(beta_D_c1, beta_D_c2)]
     _sensitivity_panel(
@@ -535,7 +567,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     beta_Omega_vals = np.logspace(
         np.log10(ranges.beta_Omega[0]), np.log10(ranges.beta_Omega[1]), 120
     )
-    beta_Omega_c1 = [params.beta_alpha + params.beta_kappa - params.beta_D for _ in beta_Omega_vals]
+    beta_Omega_c1 = [c1_margin(params, q=q0) for _ in beta_Omega_vals]
     beta_Omega_c2 = [v - params.beta_ell / n_agents for v in beta_Omega_vals]
     beta_Omega_margins = [min(c1, c2) for c1, c2 in zip(beta_Omega_c1, beta_Omega_c2)]
     _sensitivity_panel(
@@ -556,7 +588,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     beta_ell_vals = np.logspace(
         np.log10(ranges.beta_ell[0]), np.log10(ranges.beta_ell[1]), 120
     )
-    beta_ell_c1 = [params.beta_alpha + params.beta_kappa - params.beta_D for _ in beta_ell_vals]
+    beta_ell_c1 = [c1_margin(params, q=q0) for _ in beta_ell_vals]
     beta_ell_c2 = [params.beta_Omega - v / n_agents for v in beta_ell_vals]
     beta_ell_margins = [min(c1, c2) for c1, c2 in zip(beta_ell_c1, beta_ell_c2)]
     _sensitivity_panel(
@@ -575,7 +607,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     ax_ell.legend(loc="lower right", fontsize=8)
 
     n_vals = np.arange(ranges.n_agents[0], ranges.n_agents[1] + 1)
-    n_c1 = [params.beta_alpha + params.beta_kappa - params.beta_D for _ in n_vals]
+    n_c1 = [c1_margin(params, q=q0) for _ in n_vals]
     n_c2 = [params.beta_Omega - params.beta_ell / int(n) for n in n_vals]
     n_margins = [min(c1, c2) for c1, c2 in zip(n_c1, n_c2)]
     ax_N.plot(n_vals, n_margins, color="#1f5a99", linewidth=2, label="S = min(C1*, C2*)")
@@ -611,20 +643,47 @@ def figure_sensitivity_analysis(path: str) -> None:
     for ax in [ax_kappa, ax_alpha, ax_D, ax_Omega, ax_ell, ax_N]:
         ax.set_ylabel("Stability Margin S")
 
-    # Joint robustness map (C1* relative margin).
+    # Panel (g): margins vs detection-failure probability q at anchor params.
+    q_vals = np.linspace(ranges.q_detect[0], ranges.q_detect[1], 121)
+    c1_q = np.array([c1_margin(params, q=q) for q in q_vals])
+    ax_q.plot(q_vals, c1_q, color="#1f5a99", linewidth=2, label="C1* margin")
+    ax_q.text(
+        0.05, 0.15,
+        "At the anchor $\\beta_\\alpha > \\beta_D$:\n$\\delta^*(q) = 0$ for all $q$ (patience-free)",
+        transform=ax_q.transAxes, fontsize=9, color="#334155",
+    )
+    ax_q.axhline(0.0, color="gray", linestyle="--", linewidth=1)
+    ax_q.axvspan(ranges.q_detect[0], ranges.q_detect[1], color="#fef3c7", alpha=0.18, label="Plausible range")
+    ax_q.set_xlabel(r"$q$ (detection-failure probability)")
+    ax_q.set_ylabel("Margin")
+    ax_q.set_title("(g) Detection Failure $q$ (anchor params)")
+    ax_q.grid(True, alpha=0.25)
+    ax_q.legend(loc="lower left", fontsize=8)
+    ax_q.text(
+        0.98,
+        0.08,
+        r"Anchor is patience-free ($\beta_\alpha \geq \beta_D$): $\delta^*(q)=0$ for all $q$",
+        transform=ax_q.transAxes,
+        ha="right",
+        fontsize=8,
+        bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.7, edgecolor="none"),
+    )
+    _set_margin_ylim(ax_q, c1_q)
+
+    # Joint robustness map (C1* relative margin at q=0).
     kappa_2d_min, kappa_2d_max = _log_pad(ranges.beta_kappa[0], ranges.beta_kappa[1], factor=1.5)
     d_2d_min, d_2d_max = _log_pad(ranges.beta_D[0], ranges.beta_D[1], factor=1.5)
     kappa_2d = np.logspace(np.log10(kappa_2d_min), np.log10(kappa_2d_max), 90)
     d_2d = np.linspace(d_2d_min, d_2d_max, 90)
     K2D, D2D = np.meshgrid(kappa_2d, d_2d)
-    c1_margin = params.beta_alpha + K2D - D2D
-    relative_margin = np.clip(c1_margin / (params.beta_alpha + K2D), 0.0, 1.0)
+    c1_margin_grid = params.beta_alpha + K2D - D2D  # C1*(q=0) margin
+    relative_margin = np.clip(c1_margin_grid / (params.beta_alpha + K2D), 0.0, 1.0)
 
     im = ax_joint.contourf(K2D, D2D, relative_margin, levels=20, cmap="RdYlGn")
     contours = ax_joint.contour(K2D, D2D, relative_margin, levels=[0.1, 0.5, 0.9], colors="black", linewidths=1, alpha=0.6)
     ax_joint.clabel(contours, inline=True, fontsize=8, fmt="%.1f")
     boundary_line = params.beta_alpha + kappa_2d
-    ax_joint.plot(kappa_2d, boundary_line, color="black", linestyle="--", linewidth=1.2, label="C1* boundary")
+    ax_joint.plot(kappa_2d, boundary_line, color="black", linestyle="--", linewidth=1.2, label="C1* boundary ($q=0$)")
 
     # Patience-free boundary: β_D = 0.7
     ax_joint.axhline(0.7, color="#10b981", linestyle="--", linewidth=2.5, label="Patience-free (δ*=0)")
@@ -648,7 +707,7 @@ def figure_sensitivity_analysis(path: str) -> None:
     ax_joint.margins(x=0.0)
     ax_joint.set_xlabel(r"$\beta_\kappa$ (deterrence strength)", fontsize=11)
     ax_joint.set_ylabel(r"$\beta_D$ (defection temptation)", fontsize=11)
-    ax_joint.set_title("(g) Joint Robustness Map (Relative C1* Margin)", fontsize=10)
+    ax_joint.set_title("(h) Joint Robustness Map (Relative C1* Margin, $q=0$)", fontsize=10)
     ax_joint.tick_params(labelsize=9)
     ax_joint.legend(loc="upper left", fontsize=8)
     fig.colorbar(im, ax=ax_joint, label="Relative margin (0=fragile, 1=robust)", pad=0.01, fraction=0.035)
@@ -661,7 +720,7 @@ def figure_sensitivity_analysis(path: str) -> None:
         bbox=dict(boxstyle="round,pad=0.2", facecolor="white", alpha=0.7, edgecolor="none"),
     )
 
-    fig.suptitle("Sensitivity of Stability Margin", fontsize=10, y=0.97)
+    fig.suptitle("Sensitivity of Stability Margin (perfect monitoring $q=0$ unless noted)", fontsize=10, y=0.97)
     fig.subplots_adjust(left=0.08, right=0.98, top=0.93, bottom=0.07)
     _save(fig, path)
     plt.rcParams.update(old_params)
@@ -735,16 +794,20 @@ def figure_ce_convergence(path: str) -> None:
             u_defect = 1.0 + beta_D - beta_kappa * (1.0 + expected_defectors)
             welfare_random = p_rand * u_coop + (1.0 - p_rand) * u_defect
 
-            c1_holds = beta_alpha + beta_kappa >= beta_D
+            # Perfect monitoring (q=0) throughout this figure.
+            # C1*(q): beta_alpha + (1-q)*beta_kappa >= beta_D.
+            q0 = 0.0
+            c1_holds = beta_alpha + (1.0 - q0) * beta_kappa >= beta_D
             welfare_ce = np.where(c1_holds, welfare_coop, welfare_defect)
 
-            numerator = beta_D - beta_alpha
-            denominator = numerator + beta_kappa
-            delta_star = np.zeros_like(numerator, dtype=float)
-            mask = denominator > 0.0
-            delta_star[mask] = numerator[mask] / denominator[mask]
-            delta_star = np.clip(delta_star, 0.0, 1.0)
-            delta_star[numerator <= 0.0] = 0.0
+            # C1**(q): delta >= delta*(q) = g / (g + (1-q)*kappa_eff),
+            # g = beta_D - beta_alpha, kappa_eff = beta_alpha + beta_kappa.
+            delta_star = _delta_crit_vector(
+                beta_alpha=beta_alpha,
+                beta_kappa=beta_kappa,
+                beta_D=beta_D,
+                q_detect=q0,
+            )
             c1pp_holds = delta_assumed >= delta_star
             welfare_ppe = np.where(c1pp_holds, welfare_coop, welfare_defect)
 
@@ -953,7 +1016,7 @@ def figure_ce_convergence(path: str) -> None:
         ax.set_xticks(x_pos)
         ax.set_xticklabels(mechanisms_short)
         ax.set_ylabel("Selection probability / uncertainty (bits)", fontsize=12)
-        ax.set_title("(b) Cooperative Selection and Uncertainty", fontweight="bold")
+        ax.set_title("(b) Cooperative Selection and Uncertainty (C1*/C1** at $q=0$)", fontweight="bold")
         legend_handles = [
             Patch(facecolor="white", edgecolor="black", linewidth=1.8, label="P(cooperative)"),
             Patch(
@@ -1028,22 +1091,34 @@ def figure_ppe_sustainability(path: str) -> None:
     fig = plt.figure(figsize=(11, 7.6))
     gs = gridspec.GridSpec(2, 2, figure=fig, hspace=0.3, wspace=0.25)
 
-    # Panel (a): delta_crit vs beta_D at anchor beta_alpha, beta_kappa.
+    # Panel (a): delta*(q) vs beta_D at anchor beta_alpha, beta_kappa.
+    # delta*(q) = g / (g + (1-q)*kappa_eff), g = beta_D - beta_alpha,
+    # kappa_eff = beta_alpha + beta_kappa (via _delta_crit_vector).
     ax1 = fig.add_subplot(gs[0, 0])
     beta_d_min, beta_d_max = _log_pad(ranges.beta_D[0], ranges.beta_D[1], factor=3.0)
     beta_d_range = np.linspace(beta_d_min, beta_d_max, 240)
-    delta_vals = np.maximum(
-        0.0,
-        (beta_d_range - beta_alpha) / (beta_d_range - beta_alpha + beta_kappa),
-    )
-    delta_vals = np.clip(delta_vals, 0.0, 1.0)
+    alpha_anchor_grid = np.full_like(beta_d_range, beta_alpha)
+    kappa_anchor_grid = np.full_like(beta_d_range, beta_kappa)
+
+    def _delta_curve(q_value: float) -> np.ndarray:
+        return _delta_crit_vector(
+            beta_alpha=alpha_anchor_grid,
+            beta_kappa=kappa_anchor_grid,
+            beta_D=beta_d_range,
+            q_detect=q_value,
+        )
+
+    delta_vals = _delta_curve(0.0)
+    delta_vals_q15 = _delta_curve(0.15)
+    delta_vals_q30 = _delta_curve(0.30)
     alpha_samples = rng.uniform(ranges.beta_alpha[0], ranges.beta_alpha[1], n_samples)
     kappa_samples = rng.uniform(ranges.beta_kappa[0], ranges.beta_kappa[1], n_samples)
-    beta_d_grid = beta_d_range[None, :]
-    num = beta_d_grid - alpha_samples[:, None]
-    den = num + kappa_samples[:, None]
-    delta_samples = np.where(den <= 0.0, 0.0, num / den)
-    delta_samples = np.clip(delta_samples, 0.0, 1.0)
+    alpha_grid = np.broadcast_to(alpha_samples[:, None], (n_samples, beta_d_range.size))
+    kappa_grid = np.broadcast_to(kappa_samples[:, None], (n_samples, beta_d_range.size))
+    d_grid = np.broadcast_to(beta_d_range[None, :], (n_samples, beta_d_range.size))
+    delta_samples = _delta_crit_vector(
+        beta_alpha=alpha_grid, beta_kappa=kappa_grid, beta_D=d_grid, q_detect=0.0
+    )
     delta_p5 = np.percentile(delta_samples, 5.0, axis=0)
     delta_p95 = np.percentile(delta_samples, 95.0, axis=0)
     ax1.fill_between(
@@ -1052,7 +1127,7 @@ def figure_ppe_sustainability(path: str) -> None:
         1.0,
         color="#b7e3b3",
         alpha=0.18,
-        label="PPE sustainable (δ ≥ δ_crit)",
+        label="PPE sustainable at $q=0$ (δ ≥ δ*)",
     )
     ax1.fill_between(
         beta_d_range,
@@ -1060,16 +1135,38 @@ def figure_ppe_sustainability(path: str) -> None:
         delta_vals,
         color="#f4b6b6",
         alpha=0.18,
-        label="PPE fails (δ < δ_crit)",
+        label="PPE fails at $q=0$ (δ < δ*)",
     )
-    ax1.plot(beta_d_range, delta_vals, color="#1f5a99", linewidth=2, label=r"$\delta_{crit}$")
+    ax1.plot(
+        beta_d_range,
+        delta_vals,
+        color="#1f5a99",
+        linewidth=2,
+        label=r"$\delta^* = g/(g+(1-q)\kappa_{\mathrm{eff}})$, $\kappa_{\mathrm{eff}}=\beta_\alpha+\beta_\kappa$ ($q=0$)",
+    )
+    ax1.plot(
+        beta_d_range,
+        delta_vals_q15,
+        color="#1f5a99",
+        linewidth=1.6,
+        linestyle="--",
+        label=r"$\delta^*(q=0.15)$",
+    )
+    ax1.plot(
+        beta_d_range,
+        delta_vals_q30,
+        color="#7c3aed",
+        linewidth=1.6,
+        linestyle="--",
+        label=r"$\delta^*(q=0.3)$",
+    )
     ax1.fill_between(
         beta_d_range,
         delta_p5,
         delta_p95,
         color="#1f5a99",
         alpha=0.15,
-        label="Plausible range band",
+        label="Plausible range band ($q=0$)",
     )
     ax1.axvspan(ranges.beta_D[0], ranges.beta_D[1], color="#fef3c7", alpha=0.18, label="Plausible $\\beta_D$")
     # Patience-free boundary: where β_D = β_α (enhanced)
@@ -1083,8 +1180,8 @@ def figure_ppe_sustainability(path: str) -> None:
     )
     ax1.axhline(delta_assumed, color="#0f766e", linestyle=":", linewidth=1.5, label=r"$\delta=0.9$")
     ax1.set_xlabel(r"Defection temptation ($\beta_D$)")
-    ax1.set_ylabel(r"Critical discount factor ($\delta_{crit}$)")
-    ax1.set_title("(a) C1** Threshold vs $\\,\\beta_D$")
+    ax1.set_ylabel(r"Critical discount factor ($\delta^*$)")
+    ax1.set_title("(a) C1** Threshold vs $\\,\\beta_D$ under imperfect monitoring")
     ax1.set_xlim([beta_d_min, beta_d_max])
     ax1.set_ylim([0.0, 1.05])
     ax1.legend(loc="upper left", fontsize=8)
@@ -1095,11 +1192,13 @@ def figure_ppe_sustainability(path: str) -> None:
     delta_range = np.linspace(0.0, 1.0, 200)
     beta_d_grid = np.linspace(beta_d_min, beta_d_max, 240)
     grid_delta, grid_d = np.meshgrid(delta_range, beta_d_grid)
-    delta_crit_grid = np.maximum(
-        0.0,
-        (grid_d - beta_alpha) / (grid_d - beta_alpha + beta_kappa),
+    # Corrected C1** threshold at perfect monitoring (q=0).
+    delta_crit_grid = _delta_crit_vector(
+        beta_alpha=np.full_like(grid_d, beta_alpha),
+        beta_kappa=np.full_like(grid_d, beta_kappa),
+        beta_D=grid_d,
+        q_detect=0.0,
     )
-    delta_crit_grid = np.clip(delta_crit_grid, 0.0, 1.0)
     sustainable_grid = grid_delta >= delta_crit_grid
 
     ax2.contourf(
@@ -1153,7 +1252,7 @@ def figure_ppe_sustainability(path: str) -> None:
 
     ax2.set_xlabel(r"Discount factor ($\delta$)")
     ax2.set_ylabel(r"Defection temptation ($\beta_D$)")
-    ax2.set_title("(b) PPE Sustainability Region")
+    ax2.set_title("(b) PPE Sustainability Region ($q=0$)")
     ax2.legend(loc="upper left", fontsize=8)
     ax2.grid(True, alpha=0.25)
 
@@ -1518,19 +1617,21 @@ def figure_v_dynamic_by_n(path: str, results_path: str) -> None:
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-    # Panel (a): V_dynamic progression
+    # Panel (a): V_dynamic progression (thresholds derived from the data)
+    saturation_level = float(v_dynamic_values[-1])
+    cross_95 = next((int(n) for n, v in zip(n_values, v_dynamic_values) if v >= 0.95), None)
     ax1.plot(n_values, v_dynamic_values, marker='o', color='#1f5a99', linewidth=2, markersize=8, label=r'$V_{\mathrm{dynamic}}$ (all conditions)')
     ax1.plot(n_values, v_c2_values, marker='s', color='#15803d', linewidth=2, markersize=6, linestyle='--', label=r'$V_{C2^*}$ (participation only)')
     ax1.axhline(0.95, color='#dc2626', linestyle=':', linewidth=1.5, label='95% threshold')
-    ax1.axhline(0.979, color='#059669', linestyle=':', linewidth=1.5, label='Saturation (~98%)')
-    ax1.axvline(4, color='gray', linestyle='--', alpha=0.4, linewidth=1)
-    ax1.axvline(6, color='gray', linestyle='--', alpha=0.4, linewidth=1)
-    ax1.text(4, 0.77, 'N=4\n(95%)', ha='center', fontsize=9, color='#4b5563')
-    ax1.text(6, 0.77, 'N≥6\n(saturated)', ha='center', fontsize=9, color='#4b5563')
+    ax1.axhline(saturation_level, color='#059669', linestyle=':', linewidth=1.5, label=f'Saturation (~{saturation_level:.1%})')
+    y_min = min(0.7, float(np.min(v_dynamic_values)) - 0.05)
+    if cross_95 is not None:
+        ax1.axvline(cross_95, color='gray', linestyle='--', alpha=0.6, linewidth=1.2,
+                    label=f'N={cross_95} (95% crossing)')
     ax1.set_xlabel('Number of Agents (N)', fontsize=11)
     ax1.set_ylabel('Stability Volume (prior-conditional mass)', fontsize=11)
     ax1.set_title('(a) Dynamic Stability Volume vs Group Size', fontsize=12)
-    ax1.set_ylim([0.7, 1.02])
+    ax1.set_ylim([y_min, 1.02])
     ax1.legend(loc='lower right', fontsize=9)
     ax1.grid(True, alpha=0.3)
 
@@ -1569,7 +1670,7 @@ def figure_margin_distributions(path: str, results_path: str) -> None:
     margins = uniform_run['metrics']['quantiles']
 
     margin_names = ['c1_margin', 'c2_margin', 's_static', 'delta_margin', 's_dynamic']
-    labels = [r'$C1^*$ margin', r'$C2^*$ margin', r'$S_{\mathrm{static}}$', r'$\delta$ margin', r'$S_{\mathrm{dynamic}}$']
+    labels = [r'$C1^*$ margin', r'$C2^*$ margin', r'$S_{\mathrm{myopic}}$', r'$\delta$ margin', r'$S_{\mathrm{dynamic}}$']
     colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444']
 
     fig, axes = plt.subplots(2, 3, figsize=(15, 8))
@@ -1639,8 +1740,8 @@ def figure_sobol_by_n(path: str, results_path: str) -> None:
 
     # Parse data
     n_values = sorted([int(n) for n in sobol_by_n.keys()])
-    params = ['beta_alpha', 'beta_kappa', 'beta_D', 'beta_Omega', 'beta_ell', 'N', 'delta']
-    param_labels = [r'$\beta_\alpha$', r'$\beta_\kappa$', r'$\beta_D$', r'$\beta_\Omega$', r'$\beta_\ell$', r'$N$', r'$\delta$']
+    params = ['beta_alpha', 'beta_kappa', 'beta_D', 'beta_Omega', 'beta_ell', 'N', 'delta', 'q_detect']
+    param_labels = [r'$\beta_\alpha$', r'$\beta_\kappa$', r'$\beta_D$', r'$\beta_\Omega$', r'$\beta_\ell$', r'$N$', r'$\delta$', r'$q$']
 
     # Focus on key parameters
     key_params = ['beta_Omega', 'delta', 'beta_ell']
@@ -1666,7 +1767,7 @@ def figure_sobol_by_n(path: str, results_path: str) -> None:
     ax1.text(4, 0.05, 'N=4', ha='center', fontsize=9, color='#4b5563')
     ax1.set_xlabel('Group Size (N)', fontsize=11)
     ax1.set_ylabel('Total-Order Sobol Index (ST)', fontsize=11)
-    ax1.set_title(r'(a) Sensitivity Regime Shift: $\beta_\Omega$ → $\delta$', fontsize=12)
+    ax1.set_title(r'(a) Total-Order Sensitivity vs N ($\beta_\Omega$ leads, $\delta$ second throughout)', fontsize=12)
     ax1.set_ylim([0, 1])
     ax1.legend(loc='right', fontsize=10)
     ax1.grid(True, alpha=0.3)
@@ -1690,7 +1791,7 @@ def figure_sobol_by_n(path: str, results_path: str) -> None:
     normalized_st = {param: np.array(all_st[param]) / total_st for param in params}
 
     bottom = np.zeros(len(n_values))
-    param_colors_all = ['#93c5fd', '#a5b4fc', '#fca5a5', '#6ee7b7', '#fde047', '#d4d4d4', '#dc2626']
+    param_colors_all = ['#93c5fd', '#a5b4fc', '#fca5a5', '#6ee7b7', '#fde047', '#d4d4d4', '#dc2626', '#c084fc']
 
     for param, label, color in zip(params, param_labels, param_colors_all):
         values = normalized_st[param]
@@ -1706,7 +1807,7 @@ def figure_sobol_by_n(path: str, results_path: str) -> None:
     ax2.set_ylim([0, 1])
     ax2.grid(True, alpha=0.3, axis='y')
 
-    fig.suptitle(r'Global Sensitivity Analysis: Dominance Shift with Group Size', fontsize=14, fontweight='bold', y=0.98)
+    fig.suptitle(r'Global Sensitivity Analysis by Group Size', fontsize=14, fontweight='bold', y=0.98)
     fig.tight_layout(rect=[0, 0, 1, 0.96])
     _save(fig, path)
 
@@ -1742,8 +1843,9 @@ def figure_summary(path: str, results_path: str) -> None:
     # Panel 1: Parameter space with regime boundaries
     ax1 = fig.add_subplot(gs[0, 0])
     beta_kappa = np.linspace(0.3, 3.5, 100)
+    # C1*(q=0) boundary: beta_D = beta_alpha + beta_kappa (perfect monitoring).
     beta_D_boundary = params.beta_alpha + beta_kappa
-    ax1.plot(beta_kappa, beta_D_boundary, 'k-', linewidth=2, label=r'$C1^*$ boundary')
+    ax1.plot(beta_kappa, beta_D_boundary, 'k-', linewidth=2, label=r'$C1^*$ boundary ($q=0$)')
     ax1.fill_between(beta_kappa, 0, beta_D_boundary, color='#b7e3b3', alpha=0.3, label='Stable')
     ax1.fill_between(beta_kappa, beta_D_boundary, 3, color='#f4b6b6', alpha=0.3, label='Unstable')
 
@@ -1765,7 +1867,7 @@ def figure_summary(path: str, results_path: str) -> None:
 
     # Panel 2: Overall stability volumes
     ax2 = fig.add_subplot(gs[0, 1])
-    conditions = ['C1*', 'C1**', 'C2*', 'Static', 'Dynamic']
+    conditions = ['C1*', 'C1**', 'C2*', 'Myopic', 'Dynamic']
     volumes = [volume['V_C1'], volume['V_C1_dynamic'], volume['V_C2'], volume['V_static'], volume['V_dynamic']]
     colors_bar = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444']
     bars = ax2.barh(conditions, volumes, color=colors_bar, alpha=0.7, edgecolor='black', linewidth=1.2)
@@ -1779,31 +1881,31 @@ def figure_summary(path: str, results_path: str) -> None:
     ax2.legend(fontsize=8)
     ax2.grid(True, alpha=0.3, axis='x')
 
-    # Panel 3: V_dynamic by N with regime boundaries
+    # Panel 3: V_dynamic by N with regime boundaries (derived from data)
     ax3 = fig.add_subplot(gs[0, 2])
     n_vals = sorted([int(n) for n in by_n.keys()])
     v_dyn = [by_n[str(n)]['V_dynamic'] for n in n_vals]
+    cross_95 = next((n for n, v in zip(n_vals, v_dyn) if v >= 0.95), None)
     ax3.plot(n_vals, v_dyn, marker='o', color='#ef4444', linewidth=2.5, markersize=8)
     ax3.axhline(0.95, color='red', linestyle=':', linewidth=1.5, label='95% threshold')
 
-    # N=4 threshold: 95% crossing
-    ax3.axvline(4, color='#f59e0b', linestyle='--', linewidth=2.5, alpha=0.8, label='N=4 (95% crossing)')
-    ax3.axvspan(1, 4, color='#fef3c7', alpha=0.2)
-
-    # N≥6 band-robust regime
-    ax3.axvline(6, color='#10b981', linestyle='--', linewidth=2.5, alpha=0.8, label='N≥6 (band-robust)')
-    ax3.axvspan(6, max(n_vals), color='#10b981', alpha=0.15)
+    if cross_95 is not None:
+        ax3.axvline(cross_95, color='#f59e0b', linestyle='--', linewidth=2.5, alpha=0.8,
+                    label=f'N={cross_95} (95% crossing)')
+        ax3.axvspan(min(n_vals), cross_95, color='#fef3c7', alpha=0.2)
+        ax3.axvspan(cross_95, max(n_vals), color='#10b981', alpha=0.15)
     ax3.set_xlabel('Group Size (N)', fontsize=10)
     ax3.set_ylabel(r'$V_{\mathrm{dynamic}}$', fontsize=10)
-    ax3.set_title('(3) Thresholds: N=4 (95%), N≥6 (saturated)', fontsize=11, fontweight='bold')
-    ax3.set_ylim([0.7, 1.02])
+    title_cross = f'N={cross_95} (95%)' if cross_95 is not None else 'no 95% crossing'
+    ax3.set_title(f'(3) Thresholds: {title_cross}, N=10 ({v_dyn[-1]:.1%})', fontsize=11, fontweight='bold')
+    ax3.set_ylim([min(0.7, min(v_dyn) - 0.05), 1.02])
     ax3.legend(fontsize=8)
     ax3.grid(True, alpha=0.3)
 
     # Panel 4: Margin distributions (compact)
     ax4 = fig.add_subplot(gs[1, 0])
     margin_types = ['s_dynamic', 's_static', 'c1_margin', 'c2_margin']
-    margin_labels_short = [r'$S_{dyn}$', r'$S_{stat}$', r'$M_{C1}$', r'$M_{C2}$']
+    margin_labels_short = [r'$S_{dyn}$', r'$S_{myo}$', r'$M_{C1}$', r'$M_{C2}$']
     for i, (mtype, mlabel) in enumerate(zip(margin_types, margin_labels_short)):
         q50 = margins[mtype]['q50']
         q05 = margins[mtype]['q05']
@@ -1835,33 +1937,150 @@ def figure_summary(path: str, results_path: str) -> None:
         ax5.axhline(0.5, color='gray', linestyle=':', alpha=0.7)
         ax5.set_xlabel('Group Size (N)', fontsize=10)
         ax5.set_ylabel('Total Sobol Index (ST)', fontsize=10)
-        ax5.set_title(r'(5) Sensitivity Shift: $\beta_\Omega$ → $\delta$', fontsize=11, fontweight='bold')
+        ax5.set_title(r'(5) Sensitivity vs N: $\beta_\Omega$ and $\delta$', fontsize=11, fontweight='bold')
         ax5.legend(fontsize=9)
         ax5.grid(True, alpha=0.3)
 
-    # Panel 6: Key takeaways (text)
-    ax6 = fig.add_subplot(gs[1, 2])
-    ax6.axis('off')
-    takeaway_text = [
-        'KEY FINDINGS:',
-        '',
-        '• N=1-3: Risky (<95% stable)',
-        '• N=4: Crosses 95% threshold',
-        '• N≥6: Saturated (~98%)',
-        '',
-        '• Small N: β_Ω dominates',
-        '• Large N: δ dominates',
-        '',
-        '• δ* = 0 achievable',
-        '  (when β_α ≥ β_D)',
-        '',
-        '• V_dynamic = 94.2%',
-        '  (under uniform prior)',
-    ]
-    ax6.text(0.1, 0.9, '\n'.join(takeaway_text), transform=ax6.transAxes,
-            fontsize=10, verticalalignment='top', fontfamily='monospace',
-            bbox=dict(boxstyle='round', facecolor='#f0f9ff', edgecolor='#3b82f6', linewidth=2))
+    # Panel 6: Key takeaways (text, derived from loaded results)
+    # Panel 6 (former 'KEY FINDINGS' text box) removed: it duplicated
+    # results shown in the other panels and in Figs. 3-4.
+
 
     fig.suptitle('Summary: Coordination Stability Analysis', fontsize=16, fontweight='bold', y=0.98)
     fig.tight_layout(rect=[0, 0, 1, 0.96])
+    _save(fig, path)
+
+
+def figure_delta_star_vs_q(path: str) -> None:
+    """Effect of imperfect monitoring: delta*(q) curves and stability volume vs fixed q.
+
+    Panel (a): delta*(q) = g/(g + (1-q)*kappa_eff) for fixed g=0.3 and
+    kappa_eff/g in {1, 2, 5, 10}, with the maximum tolerable detection-failure
+    probability q_bar at delta = 0.95 marked/annotated per curve.
+    Panel (b): Monte Carlo V_dynamic and V_C1_dynamic as functions of a FIXED q
+    (all other inputs drawn from the default uniform prior; 100,000 samples,
+    seed 0, q overridden to each grid value).
+    """
+
+    from .robustness_metrics import (
+        PriorSpec,
+        _sample_prior,
+        margins_from_samples,
+        volume_metrics,
+    )
+
+    apply_style()
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+    # Panel (a): delta*(q) for fixed g, varying kappa_eff/g.
+    g = 0.3
+    delta_ref = 0.95
+    q_grid = np.linspace(0.0, 0.5, 251)
+    ratios = [1, 2, 5, 10]
+    curve_colors = ["#1f5a99", "#15803d", "#d97706", "#7c3aed"]
+    for ratio, color in zip(ratios, curve_colors):
+        keff = ratio * g
+        delta_star_curve = g / (g + (1.0 - q_grid) * keff)
+        # Max tolerable q at delta_ref: delta_ref = g/(g+(1-q)keff)
+        # => q_bar = 1 - (1-delta_ref)*g / (delta_ref*keff).
+        q_bar = 1.0 - (1.0 - delta_ref) * g / (delta_ref * keff)
+        ax1.plot(
+            q_grid,
+            delta_star_curve,
+            color=color,
+            linewidth=2,
+            label=rf"$\kappa_{{\mathrm{{eff}}}}/g={ratio}$ ($\bar{{q}}={q_bar:.3f}$)",
+        )
+        if q_grid[0] <= q_bar <= q_grid[-1]:
+            ax1.plot(
+                q_bar,
+                delta_ref,
+                marker="o",
+                markersize=8,
+                color=color,
+                markeredgecolor="black",
+                markeredgewidth=0.8,
+                zorder=10,
+            )
+    ax1.axhline(
+        delta_ref,
+        color="#dc2626",
+        linestyle=":",
+        linewidth=1.5,
+        label=rf"$\delta = {delta_ref}$ (assumed patience)",
+    )
+    ax1.text(
+        0.02,
+        0.9,
+        rf"$\delta^*(q) = g/(g+(1-q)\kappa_{{\mathrm{{eff}}}})$, $g={g}$"
+        "\n"
+        r"$\bar{q}$: max tolerable $q$ at $\delta=0.95$ (beyond axis range)",
+        transform=ax1.transAxes,
+        fontsize=8,
+        va="top",
+        bbox=dict(boxstyle="round,pad=0.25", facecolor="white", alpha=0.8, edgecolor="none"),
+    )
+    ax1.set_xlabel(r"$q$ (detection-failure probability)")
+    ax1.set_ylabel(r"Critical discount factor ($\delta^*$)")
+    ax1.set_title(r"(a) Required Patience $\delta^*(q)$ vs Monitoring Quality")
+    ax1.set_xlim([0.0, 0.5])
+    ax1.set_ylim([0.0, 1.02])
+    ax1.legend(loc="center left", fontsize=8)
+    ax1.grid(True, alpha=0.25)
+
+    # Panel (b): Monte Carlo stability volume with q pinned to fixed values.
+    prior = PriorSpec(
+        name="uniform_fixed_q",
+        ranges=plausible_ranges(),
+        delta_range=(0.1, 0.95),
+        seed=0,
+    )
+    n_samples = 100_000
+    rng = np.random.default_rng(prior.seed)
+    base_samples = _sample_prior(rng=rng, prior=prior, n_samples=n_samples)
+    q_values = np.round(np.arange(0.0, 0.5001, 0.05), 2)
+    v_dynamic = []
+    v_c1_dynamic = []
+    for q_fixed in q_values:
+        samples = dict(base_samples)
+        samples["q_detect"] = np.full(n_samples, float(q_fixed))
+        vols = volume_metrics(margins_from_samples(samples))
+        v_dynamic.append(vols["V_dynamic"])
+        v_c1_dynamic.append(vols["V_C1_dynamic"])
+
+    ax2.plot(
+        q_values,
+        v_dynamic,
+        marker="o",
+        color="#1f5a99",
+        linewidth=2,
+        markersize=6,
+        label=r"$V_{\mathrm{dynamic}}$ (C1* & C2* & C1**)",
+    )
+    ax2.plot(
+        q_values,
+        v_c1_dynamic,
+        marker="s",
+        color="#d97706",
+        linewidth=2,
+        markersize=5,
+        linestyle="--",
+        label=r"$V_{C1^{**}}$ ($\delta \geq \delta^*(q)$ only)",
+    )
+    ax2.axvspan(
+        prior.ranges.q_detect[0],
+        prior.ranges.q_detect[1],
+        color="#fef3c7",
+        alpha=0.25,
+        label=r"Declared prior range $q \in [0, 0.3]$",
+    )
+    ax2.set_xlabel(r"$q$ (fixed detection-failure probability)")
+    ax2.set_ylabel("Stability volume (prior mass)")
+    ax2.set_title("(b) Stability Volume vs Fixed $q$ (Monte Carlo)")
+    ax2.set_xlim([-0.01, 0.51])
+    ax2.legend(loc="lower left", fontsize=8)
+    ax2.grid(True, alpha=0.25)
+
+    fig.suptitle("Imperfect Monitoring: Patience Requirement and Stability Mass", fontsize=12)
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
     _save(fig, path)

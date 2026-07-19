@@ -10,6 +10,7 @@ matplotlib.use("Agg")
 
 from repro.figures import (
     figure_ce_convergence,
+    figure_delta_star_vs_q,
     figure_ppe_sustainability,
     figure_scaling_cost_model,
     figure_sensitivity_analysis,
@@ -31,15 +32,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate reproduction figures.")
     parser.add_argument(
         "--out-dir",
-        default=os.path.join("paper", "figures"),
-        help="Output directory for PDF figures (default: paper/figures)",
+        default=os.path.join(script_dir, "..", "paper", "figures"),
+        help="Output directory for PDF figures (default: <repo>/paper/figures, resolved relative to this script)",
     )
     parser.add_argument(
         "--results",
         default=os.path.join(
             script_dir,
             "documentation",
-            "revision_experiments_final",
+            "revision_experiments_jair",
             "RESULTS.json",
         ),
         help="Path to revision experiments results JSON",
@@ -58,6 +59,7 @@ def main() -> None:
     figure_ppe_sustainability(os.path.join(out_dir, "ppe_sustainability_validation.pdf"))
     figure_shapley_participation(os.path.join(out_dir, "shapley_participation_validation.pdf"))
     figure_scaling_cost_model(os.path.join(out_dir, "scaling_cost_model.pdf"))
+    figure_delta_star_vs_q(os.path.join(out_dir, "delta_star_vs_q.pdf"))
 
     print("Generating robustness analysis figures...")
     figure_v_dynamic_by_n(os.path.join(out_dir, "v_dynamic_by_n.pdf"), results_path)
@@ -73,10 +75,10 @@ def main() -> None:
 
     print(f"\nAll figures saved to {out_dir}/")
     print("\nFigures generated:")
-    print("  Core validation (6 figures)")
+    print("  Core validation (7 figures)")
     print("  Robustness analysis (4 figures)")
     print("  Functional structure (2 figures)")
-    print("  Total: 12 figures")
+    print("  Total: 13 figures")
 
 
 if __name__ == "__main__":

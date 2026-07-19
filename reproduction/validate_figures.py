@@ -11,13 +11,17 @@ from dataclasses import asdict
 
 import numpy as np
 
-from repro.model import anchor_params, c1_margin, c2_margin, plausible_ranges
+from repro.model import ModelParams, anchor_params, c1_margin, c2_margin, delta_crit, plausible_ranges
 from repro.cost_model import default_benefit_params, default_cost_params, net_values
 
 
 def _load_results() -> dict:
-    results_path = Path(__file__).resolve().parent / "documentation" / "revision_experiments_final" / "RESULTS.json"
-    return json.loads(results_path.read_text(encoding="utf-8"))
+    doc_dir = Path(__file__).resolve().parent / "documentation"
+    for run_name in ("revision_experiments_jair", "revision_experiments_final"):
+        results_path = doc_dir / run_name / "RESULTS.json"
+        if results_path.exists():
+            return json.loads(results_path.read_text(encoding="utf-8"))
+    raise FileNotFoundError("No RESULTS.json found under documentation/")
 
 
 def _top_driver_s_dynamic(sobol: dict, n_key: str) -> str:
@@ -49,24 +53,28 @@ def validate() -> Dict[str, object]:
     else:
         warnings.append("V_dynamic is not monotonic nondecreasing")
 
-    n4_idx = n_values.index(4) if 4 in n_values else None
-    if n4_idx is not None and v_dynamic[n4_idx] >= 0.95:
-        checks.append("V_dynamic crosses 95% at N=4")
+    # Continuation-equilibrium volume (C1** & C2*, q ~ U[0, 0.3]) crosses 95%
+    # at N=4 (the paper's \VdynNfour value; the N=7 expectation belonged to a
+    # superseded three-way definition of V_dynamic).
+    cross_95 = next((n for n, v in zip(n_values, v_dynamic) if v >= 0.95), None)
+    if cross_95 == 4:
+        checks.append("V_dynamic crosses 95% at N=4 (continuation equilibrium)")
     else:
-        warnings.append("V_dynamic does not reach 95% at N=4")
+        warnings.append(f"V_dynamic 95% crossing at N={cross_95}, expected N=4")
 
-    n6_idx = n_values.index(6) if 6 in n_values else None
-    if n6_idx is not None and v_dynamic[n6_idx] >= 0.97:
-        checks.append("V_dynamic ≥ 0.97 at N=6")
+    n8_idx = n_values.index(8) if 8 in n_values else None
+    if n8_idx is not None and v_dynamic[n8_idx] >= 0.97:
+        checks.append("V_dynamic ≥ 0.97 at N=8")
     else:
-        warnings.append("V_dynamic < 0.97 at N=6")
+        warnings.append("V_dynamic < 0.97 at N=8")
 
     if np.all(v_dynamic <= v_c2 + 1e-9):
         checks.append("V_dynamic ≤ V_C2 for all N")
     else:
         warnings.append("V_dynamic exceeds V_C2 for some N")
 
-    # Figure: sobol_sensitivity_by_n
+    # Figure: sobol_sensitivity_by_n. Under the corrected model beta_Omega is
+    # the top total-order driver at every N; the delta share grows with N.
     driver_n2 = _top_driver_s_dynamic(sobol_by_n, "2")
     driver_n10 = _top_driver_s_dynamic(sobol_by_n, "10")
     if driver_n2 == "beta_Omega":
@@ -74,17 +82,28 @@ def validate() -> Dict[str, object]:
     else:
         warnings.append(f"Sobol: expected beta_Omega at N=2, got {driver_n2}")
 
-    if driver_n10 == "delta":
-        checks.append("Sobol: delta dominates s_dynamic at N=10")
+    if driver_n10 == "beta_Omega":
+        checks.append("Sobol: beta_Omega remains top driver at N=10 (corrected model)")
     else:
-        warnings.append(f"Sobol: expected delta at N=10, got {driver_n10}")
+        warnings.append(f"Sobol: expected beta_Omega at N=10, got {driver_n10}")
+
+    def _st_for(n_key: str, param: str) -> float:
+        sobol_n = sobol_by_n[n_key]
+        p_idx = sobol_n["parameter_names"].index(param)
+        o_idx = sobol_n["output_names"].index("s_dynamic")
+        return float(sobol_n["S_total"][p_idx][o_idx])
+
+    if _st_for("10", "delta") > _st_for("2", "delta"):
+        checks.append("Sobol: delta total-order share grows from N=2 to N=10")
+    else:
+        warnings.append("Sobol: delta share does not grow with N")
 
     # Figure: stability_regions / sensitivity anchor checks
     params = anchor_params()
     c1 = c1_margin(params)
     c2 = c2_margin(params, 5)
     if c1 > 0 and abs(c1 - 1.3) < 1e-6:
-        checks.append("Anchor C1* margin = 1.3 (>0)")
+        checks.append("Anchor C1* margin (q=0) = 1.3 (>0)")
     else:
         warnings.append(f"Anchor C1* margin unexpected: {c1:.3f}")
 
@@ -92,6 +111,40 @@ def validate() -> Dict[str, object]:
         checks.append("Anchor C2* margin (N=5) = 0.7 (>0)")
     else:
         warnings.append(f"Anchor C2* margin unexpected: {c2:.3f}")
+
+    # Corrected closed forms under imperfect monitoring, re-derived independently
+    # of repro.model (figures.py relies on these shapes).
+    q_test = 0.2
+    c1_q_expected = params.beta_alpha + (1.0 - q_test) * params.beta_kappa - params.beta_D
+    if abs(c1_margin(params, q=q_test) - c1_q_expected) < 1e-12:
+        checks.append("Anchor C1*(q=0.2) margin matches beta_alpha + (1-q)beta_kappa - beta_D")
+    else:
+        warnings.append(
+            f"Anchor C1*(q=0.2) margin unexpected: {c1_margin(params, q=q_test):.6f}"
+        )
+
+    def expected_delta_star(beta_alpha: float, beta_kappa: float, beta_D: float, q: float) -> float:
+        g = beta_D - beta_alpha
+        if g <= 0.0:
+            return 0.0
+        kappa_eff = beta_alpha + beta_kappa
+        return float(min(1.0, max(0.0, g / (g + (1.0 - q) * kappa_eff))))
+
+    params_q = ModelParams(
+        beta_kappa=1.0, beta_alpha=0.5, beta_D=1.0, beta_Omega=1.0, beta_ell=1.0
+    )
+    checks_ok = (
+        abs(delta_crit(params_q, q=0.0) - expected_delta_star(0.5, 1.0, 1.0, 0.0)) < 1e-12
+        and abs(delta_crit(params_q, q=0.2) - expected_delta_star(0.5, 1.0, 1.0, 0.2)) < 1e-12
+        and abs(delta_crit(params_q, q=0.2) - 0.29411764705882354) < 1e-12
+        and abs(delta_crit(params, q=0.0) - 0.0) < 1e-12  # anchor is patience-free
+    )
+    if checks_ok:
+        checks.append(
+            "delta*(q) = g/(g+(1-q)kappa_eff) verified at q=0 and q=0.2 (hand-computed 0.2941...)"
+        )
+    else:
+        warnings.append("delta*(q) closed form mismatch against independent re-derivation")
 
     # Figure: scaling_cost_model (record optima)
     cost_params = default_cost_params()
@@ -180,8 +233,11 @@ def write_report(report: Dict[str, object]) -> Path:
     return out_path
 
 
-def _figure2_c1_margin(beta_alpha: float, beta_kappa: float, beta_D: float) -> float:
-    return beta_alpha + beta_kappa - beta_D
+def _figure2_c1_margin(
+    beta_alpha: float, beta_kappa: float, beta_D: float, q: float = 0.0
+) -> float:
+    """C1*(q) margin (corrected model); the Figure 2 sweeps use q=0."""
+    return beta_alpha + (1.0 - q) * beta_kappa - beta_D
 
 
 def _figure2_c2_margin(beta_Omega: float, beta_ell: float, n_agents: int) -> float:

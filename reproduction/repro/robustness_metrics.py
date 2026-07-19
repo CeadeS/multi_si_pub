@@ -1,10 +1,14 @@
 """Robustness metrics and Sobol sensitivity for mediator stability conditions.
 
-This module intentionally stays close to the paper's closed-form inequalities:
+This module intentionally stays close to the paper's closed-form inequalities
+(all stated under imperfect public monitoring with detection-failure
+probability q; q=0 recovers perfect monitoring):
 
-- C1*: beta_alpha + beta_kappa >= beta_D
-- C1**: delta >= delta_crit(beta_alpha, beta_kappa, beta_D)
-- C2*: beta_Omega >= beta_ell / N
+- C1*: beta_alpha + (1-q)*beta_kappa >= beta_D
+- C1**: delta >= delta_crit(beta_alpha, beta_kappa, beta_D, q)
+        = g / (g + (1-q)*(beta_alpha + beta_kappa)), g = beta_D - beta_alpha
+- C2*: beta_Omega / (1 - delta) >= beta_ell / N   (present value of membership
+        vs one-time removal gain; delta=0 recovers the conservative flow bound)
 
 It provides:
 - "volume" (uniform prior mass) estimates for stability regions
@@ -165,6 +169,19 @@ def _sample_prior(
         n_samples=n_samples,
     )
 
+    q_lo, q_hi = ranges.q_detect
+    if q_hi > q_lo:
+        q_detect = _sample_param_vector(
+            rng,
+            q_lo,
+            q_hi,
+            mean=0.5 * (q_lo + q_hi),
+            family=_family_for(prior, "q_detect"),
+            n_samples=n_samples,
+        )
+    else:
+        q_detect = np.full(n_samples, q_lo, dtype=float)
+
     return {
         "beta_alpha": beta_alpha,
         "beta_kappa": beta_kappa,
@@ -173,15 +190,24 @@ def _sample_prior(
         "beta_ell": beta_ell,
         "n_agents": n_agents,
         "delta": delta,
+        "q_detect": q_detect,
     }
 
 
-def _delta_crit_vector(beta_alpha: np.ndarray, beta_kappa: np.ndarray, beta_D: np.ndarray) -> np.ndarray:
-    """Vectorized C1** threshold."""
+def _delta_crit_vector(
+    beta_alpha: np.ndarray,
+    beta_kappa: np.ndarray,
+    beta_D: np.ndarray,
+    q_detect: np.ndarray | float = 0.0,
+) -> np.ndarray:
+    """Vectorized C1** threshold under imperfect public monitoring.
+
+    delta*(q) = g / (g + (1-q) * (beta_alpha + beta_kappa)), g = beta_D - beta_alpha.
+    """
 
     numerator = beta_D - beta_alpha
-    denominator = beta_D - beta_alpha + beta_kappa
-    value = np.zeros_like(numerator, dtype=float)
+    denominator = numerator + (1.0 - np.asarray(q_detect, dtype=float)) * (beta_alpha + beta_kappa)
+    value = np.ones_like(numerator, dtype=float)
     mask = denominator > 0
     value[mask] = numerator[mask] / denominator[mask]
     value = np.clip(value, 0.0, 1.0)
@@ -199,14 +225,36 @@ def margins_from_samples(samples: Mapping[str, np.ndarray]) -> Dict[str, np.ndar
     beta_ell = np.asarray(samples["beta_ell"], dtype=float)
     n_agents = np.asarray(samples["n_agents"], dtype=float)
     delta = np.asarray(samples["delta"], dtype=float)
+    if "q_detect" in samples:
+        q_detect = np.asarray(samples["q_detect"], dtype=float)
+    else:
+        q_detect = np.zeros_like(delta)
 
-    c1_margin = beta_alpha + beta_kappa - beta_D
-    c2_margin = beta_Omega - beta_ell / n_agents
+    c1_margin = beta_alpha + (1.0 - q_detect) * beta_kappa - beta_D
+    # Present-value participation constraint in flow-equivalent form:
+    # beta_Omega/(1-delta) >= beta_ell/N  <=>  beta_Omega - (1-delta)*beta_ell/N >= 0.
+    c2_margin = beta_Omega - (1.0 - delta) * beta_ell / n_agents
+    # Immediate-enforcement object: C1*(rho=1) AND C2*.
     s_static = np.minimum(c1_margin, c2_margin)
 
-    delta_crit = _delta_crit_vector(beta_alpha=beta_alpha, beta_kappa=beta_kappa, beta_D=beta_D)
+    delta_crit = _delta_crit_vector(
+        beta_alpha=beta_alpha, beta_kappa=beta_kappa, beta_D=beta_D, q_detect=q_detect
+    )
     delta_margin = delta - delta_crit
-    s_dynamic = np.minimum(s_static, delta_margin)
+    # Continuation-enforcement equilibrium object of the main theorem:
+    # C1**(q) AND C2*. (The former cross-regime min(s_static, delta_margin)
+    # mixed rho=1 and rho=0 conditions; it is retained only as V_cross.)
+    s_dynamic = np.minimum(c2_margin, delta_margin)
+    s_cross = np.minimum(s_static, delta_margin)
+
+    # Full immediate-enforcement equilibrium: delta >= delta*(q, s) with
+    # s = rho*beta_kappa at rho = 1, residual gain g_s = max(0, beta_D -
+    # beta_alpha - (1-q)*beta_kappa). P[C1* & C2*] (s_static) is the myopic
+    # subset of this regime; the paper reports both.
+    g_s = np.maximum(0.0, beta_D - beta_alpha - (1.0 - q_detect) * beta_kappa)
+    kappa_eff = beta_alpha + beta_kappa
+    delta_crit_s = np.where(g_s <= 0.0, 0.0, g_s / (g_s + (1.0 - q_detect) * kappa_eff))
+    s_immediate_eq = np.minimum(delta - delta_crit_s, c2_margin)
 
     return {
         "c1_margin": c1_margin,
@@ -215,6 +263,9 @@ def margins_from_samples(samples: Mapping[str, np.ndarray]) -> Dict[str, np.ndar
         "delta_crit": delta_crit,
         "delta_margin": delta_margin,
         "s_dynamic": s_dynamic,
+        "s_cross": s_cross,
+        "delta_crit_s": delta_crit_s,
+        "s_immediate_eq": s_immediate_eq,
     }
 
 
@@ -243,13 +294,21 @@ def volume_metrics(margins: Mapping[str, np.ndarray]) -> Dict[str, float]:
     static_ok = margins["s_static"] >= 0.0
     dynamic_ok = margins["s_dynamic"] >= 0.0
 
-    return {
+    out = {
         "V_C1": float(np.mean(c1_ok)),
         "V_C1_dynamic": float(np.mean(c1_dynamic_ok)),
         "V_C2": float(np.mean(c2_ok)),
-        "V_static": float(np.mean(static_ok)),
+        "V_myopic": float(np.mean(static_ok)),
+        "V_static": float(np.mean(static_ok)),  # legacy alias for V_myopic
         "V_dynamic": float(np.mean(dynamic_ok)),
     }
+    if "s_cross" in margins:
+        out["V_cross"] = float(np.mean(margins["s_cross"] >= 0.0))
+    if "s_immediate_eq" in margins:
+        # Full immediate-regime equilibrium volume P[delta >= delta*(q,s) & C2*];
+        # V_myopic above is its myopic (discount-free) subset.
+        out["V_immediate"] = float(np.mean(margins["s_immediate_eq"] >= 0.0))
+    return out
 
 
 def volume_metrics_by_fixed_N(
@@ -292,10 +351,19 @@ def worst_case_beta_alpha_required(
     include_c1: bool = True,
     include_c1_dynamic: bool = True,
 ) -> Dict[float, float]:
-    """Worst-case beta_alpha needed to satisfy C1* and/or C1** over declared ranges."""
+    """Worst-case beta_alpha needed to satisfy C1* and/or C1** over declared ranges.
+
+    Worst case over the declared ranges: beta_D at its maximum, beta_kappa at
+    its minimum, and detection failure q at its maximum.
+
+    C1*(q):  beta_alpha >= beta_D - (1-q)*beta_kappa.
+    C1**(q): delta >= g/(g + (1-q)(beta_alpha+beta_kappa)) inverts to
+             beta_alpha >= [(1-delta)*beta_D - delta*(1-q)*beta_kappa] / (1 - delta*q).
+    """
 
     beta_D_max = ranges.beta_D[1]
     beta_kappa_min = ranges.beta_kappa[0]
+    q_max = ranges.q_detect[1]
 
     requirements: Dict[float, float] = {}
     for delta in deltas:
@@ -304,22 +372,31 @@ def worst_case_beta_alpha_required(
 
         bounds = []
         if include_c1:
-            bounds.append(beta_D_max - beta_kappa_min)
+            bounds.append(beta_D_max - (1.0 - q_max) * beta_kappa_min)
         if include_c1_dynamic:
-            bounds.append(beta_D_max - (delta * beta_kappa_min) / (1.0 - delta))
+            bounds.append(
+                ((1.0 - delta) * beta_D_max - delta * (1.0 - q_max) * beta_kappa_min)
+                / (1.0 - delta * q_max)
+            )
         requirements[float(delta)] = float(max(bounds))
     return requirements
 
 
-def worst_case_beta_omega_required(ranges: ParamRanges, n_agents_values: Iterable[int]) -> Dict[int, float]:
-    """Worst-case beta_Omega needed to satisfy C2* over declared beta_ell range."""
+def worst_case_beta_omega_required(
+    ranges: ParamRanges, n_agents_values: Iterable[int], delta_min: float = 0.1
+) -> Dict[int, float]:
+    """Worst-case beta_Omega needed to satisfy the PV form of C2*.
+
+    beta_Omega >= (1 - delta) * beta_ell / N is hardest at beta_ell max and
+    delta min (delta_min defaults to the lower end of the declared delta range).
+    """
 
     beta_ell_max = ranges.beta_ell[1]
     requirements: Dict[int, float] = {}
     for n_agents in n_agents_values:
         if n_agents <= 0:
             raise ValueError("n_agents must be positive")
-        requirements[int(n_agents)] = float(beta_ell_max / float(n_agents))
+        requirements[int(n_agents)] = float((1.0 - delta_min) * beta_ell_max / float(n_agents))
     return requirements
 
 
@@ -334,10 +411,10 @@ def _evaluate_outputs_from_unit_inputs(
 
     if unit_inputs.ndim != 2:
         raise ValueError("unit_inputs must be a 2D array")
-    if unit_inputs.shape[1] != 7:
-        raise ValueError("Expected 7 inputs: alpha,kappa,D,Omega,ell,N,delta")
+    if unit_inputs.shape[1] != 8:
+        raise ValueError("Expected 8 inputs: alpha,kappa,D,Omega,ell,N,delta,q")
 
-    u_alpha, u_kappa, u_D, u_Omega, u_ell, u_N, u_delta = unit_inputs.T
+    u_alpha, u_kappa, u_D, u_Omega, u_ell, u_N, u_delta, u_q = unit_inputs.T
 
     def map_unit(u: np.ndarray, lo: float, hi: float, family: PriorFamily) -> np.ndarray:
         if family == PriorFamily.UNIFORM:
@@ -374,11 +451,17 @@ def _evaluate_outputs_from_unit_inputs(
         raise ValueError("Sobol mapping currently assumes δ ~ uniform on [delta_min, delta_max]")
     delta = delta_min + u_delta * (delta_max - delta_min)
 
-    c1_margin = beta_alpha + beta_kappa - beta_D
-    c2_margin = beta_Omega - beta_ell / n_agents.astype(float)
+    q_lo, q_hi = ranges.q_detect
+    q_detect = q_lo + u_q * (q_hi - q_lo)
+
+    c1_margin = beta_alpha + (1.0 - q_detect) * beta_kappa - beta_D
+    # Present-value participation constraint, flow-equivalent form (see margins_from_samples).
+    c2_margin = beta_Omega - (1.0 - delta) * beta_ell / n_agents.astype(float)
     s_static = np.minimum(c1_margin, c2_margin)
-    delta_margin = delta - _delta_crit_vector(beta_alpha=beta_alpha, beta_kappa=beta_kappa, beta_D=beta_D)
-    s_dynamic = np.minimum(s_static, delta_margin)
+    delta_margin = delta - _delta_crit_vector(
+        beta_alpha=beta_alpha, beta_kappa=beta_kappa, beta_D=beta_D, q_detect=q_detect
+    )
+    s_dynamic = np.minimum(c2_margin, delta_margin)  # continuation object (C1** AND C2*)
 
     return {
         "c1_margin": c1_margin,
@@ -397,14 +480,14 @@ def sobol_indices(
 ) -> Dict[str, Any]:
     """Compute Sobol first/total-order indices using Saltelli-style estimators.
 
-    Inputs (d=7): beta_alpha, beta_kappa, beta_D, beta_Omega, beta_ell, N, delta.
+    Inputs (d=8): beta_alpha, beta_kappa, beta_D, beta_Omega, beta_ell, N, delta, q_detect.
     Outputs: c1_margin, c2_margin, s_static, delta_margin, s_dynamic.
     """
 
     if n_base <= 0:
         raise ValueError("n_base must be positive")
     rng = np.random.default_rng(prior.seed if seed is None else seed)
-    n_dim = 7
+    n_dim = 8
 
     A = rng.random((n_base, n_dim))
     B = rng.random((n_base, n_dim))
@@ -413,7 +496,7 @@ def sobol_indices(
     fB = _evaluate_outputs_from_unit_inputs(B, prior)
 
     output_names = ["c1_margin", "c2_margin", "s_static", "delta_margin", "s_dynamic"]
-    parameter_names = ["beta_alpha", "beta_kappa", "beta_D", "beta_Omega", "beta_ell", "N", "delta"]
+    parameter_names = ["beta_alpha", "beta_kappa", "beta_D", "beta_Omega", "beta_ell", "N", "delta", "q_detect"]
 
     fA_stack = np.column_stack([fA[name] for name in output_names])
     fB_stack = np.column_stack([fB[name] for name in output_names])
@@ -467,6 +550,7 @@ def run_metrics(
                 "beta_ell": list(prior.ranges.beta_ell),
                 "N": list(prior.ranges.n_agents),
                 "delta": list(prior.delta_range),
+                "q_detect": list(prior.ranges.q_detect),
             },
             "families": {k: v.value for k, v in sorted(prior.families.items())},
             "seed": int(prior.seed),

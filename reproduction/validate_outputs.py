@@ -34,6 +34,7 @@ def check_files_exist(fig_dir: str) -> List[str]:
         "ppe_sustainability_validation.pdf",
         "shapley_participation_validation.pdf",
         "scaling_cost_model.pdf",
+        "delta_star_vs_q.pdf",
         "v_dynamic_by_n.pdf",
         "margin_distributions.pdf",
         "sobol_sensitivity_by_n.pdf",
@@ -91,6 +92,7 @@ def check_plausible_ranges() -> None:
         "beta_Omega": (0.05, 0.3),  # Conservative oversight value
         "beta_ell": (0.1, 0.5),     # Conservative removal benefit
         "n_agents": (2, 10),
+        "q_detect": (0.0, 0.3),     # Detection-failure probability range
     }
 
     for param_name, (expected_min, expected_max) in expected.items():
@@ -115,7 +117,7 @@ def check_stability_conditions() -> None:
     """Verify stability condition calculations are correct."""
     params = anchor_params()
 
-    # C1* margin: beta_alpha + beta_kappa - beta_D
+    # C1* margin at q=0 (perfect monitoring): beta_alpha + beta_kappa - beta_D
     c1 = c1_margin(params)
     expected_c1 = params.beta_alpha + params.beta_kappa - params.beta_D
     if abs(c1 - expected_c1) > 1e-6:
@@ -137,28 +139,62 @@ def check_stability_conditions() -> None:
     if abs(c2_n5 - 0.7) > 1e-6:
         raise ValidationError(f"C2* margin (N=5) at anchor should be 0.7, got {c2_n5}")
 
-    # Delta critical: max(0, (beta_D - beta_alpha) / (beta_D - beta_alpha + beta_kappa))
+    # C1*(q) margin under imperfect monitoring: beta_alpha + (1-q)*beta_kappa - beta_D.
+    q_test = 0.2
+    c1_q = c1_margin(params, q=q_test)
+    expected_c1_q = params.beta_alpha + (1.0 - q_test) * params.beta_kappa - params.beta_D
+    if abs(c1_q - expected_c1_q) > 1e-6:
+        raise ValidationError(f"C1*(q=0.2) margin mismatch: {c1_q} != {expected_c1_q}")
+    # At anchor: 0.7 + 0.8*1.0 - 0.4 = 1.1
+    if abs(c1_q - 1.1) > 1e-6:
+        raise ValidationError(f"C1*(q=0.2) margin at anchor should be 1.1, got {c1_q}")
+
+    # Delta critical (corrected, imperfect monitoring):
+    # delta*(q) = max(0, g / (g + (1-q)*kappa_eff)), clipped to [0, 1],
+    # with g = beta_D - beta_alpha and kappa_eff = beta_alpha + beta_kappa.
     delta_c = delta_crit(params)
     numerator = params.beta_D - params.beta_alpha
-    denominator = params.beta_D - params.beta_alpha + params.beta_kappa
+    kappa_eff = params.beta_alpha + params.beta_kappa
+    denominator = numerator + kappa_eff  # q=0
 
     # At anchor: beta_D=0.4, beta_alpha=0.7
     # numerator = 0.4 - 0.7 = -0.3 (negative!)
-    # So delta_crit should be 0.0 (patience-free regime)
+    # So delta_crit should be 0.0 (patience-free regime, robust to any q)
     if numerator < 0:
         if delta_c != 0.0:
             raise ValidationError(
                 f"Delta_crit should be 0 when beta_D < beta_alpha, got {delta_c}"
             )
+        if delta_crit(params, q=0.3) != 0.0:
+            raise ValidationError("Patience-free delta_crit should be 0 for any q")
     else:
         expected_delta_c = numerator / denominator
         if abs(delta_c - expected_delta_c) > 1e-6:
             raise ValidationError(f"Delta_crit mismatch: {delta_c} != {expected_delta_c}")
 
+    # Hand-computed q>0 example: beta_D=1.0, beta_alpha=0.5, beta_kappa=1.0
+    # => g=0.5, kappa_eff=1.5, delta*(0.2) = 0.5/(0.5 + 0.8*1.5) = 0.29411764705882354
+    from repro.model import ModelParams
+
+    params_q = ModelParams(
+        beta_kappa=1.0, beta_alpha=0.5, beta_D=1.0, beta_Omega=1.0, beta_ell=1.0
+    )
+    g_q = 1.0 - 0.5
+    kappa_eff_q = 0.5 + 1.0
+    expected_delta_q = g_q / (g_q + (1.0 - 0.2) * kappa_eff_q)
+    delta_q = delta_crit(params_q, q=0.2)
+    if abs(delta_q - expected_delta_q) > 1e-12 or abs(delta_q - 0.29411764705882354) > 1e-12:
+        raise ValidationError(
+            f"Delta_crit(q=0.2) mismatch: {delta_q} != {expected_delta_q} "
+            "(hand-computed 0.29411764705882354)"
+        )
+
     print("✓ Stability condition calculations are correct")
-    print(f"  - C1* margin at anchor: {c1:.3f} (>0 ✓ cooperation rational)")
+    print(f"  - C1* margin at anchor (q=0): {c1:.3f} (>0 ✓ cooperation rational)")
+    print(f"  - C1* margin at anchor (q=0.2): {c1_q:.3f} (>0 ✓ robust to imperfect monitoring)")
     print(f"  - C2* margin at N=5: {c2_n5:.3f} (>0 ✓ participation rational)")
-    print(f"  - δ* at anchor: {delta_c:.3f} (=0 ✓ patience-free regime)")
+    print(f"  - δ* at anchor: {delta_c:.3f} (=0 ✓ patience-free regime, any q)")
+    print(f"  - δ*(q=0.2) hand-computed example: {delta_q:.6f} ✓")
 
 
 def check_critical_thresholds() -> None:
@@ -206,10 +242,10 @@ def check_functional_analysis() -> None:
     if not patience_free:
         raise ValidationError("Anchor should be in patience-free regime")
 
-    # Test optimal group size calculation
+    # Test optimal group size calculation (exact pairwise costs: N* = f/c + 1/2)
     N_star = optimal_group_size(f=5.0, c=1.0)
-    if abs(N_star - 5.0) > 1e-6:
-        raise ValidationError(f"Optimal N* = f/c should be 5.0, got {N_star}")
+    if abs(N_star - 5.5) > 1e-6:
+        raise ValidationError(f"Optimal N* = f/c + 1/2 should be 5.5, got {N_star}")
 
     # Test parameter validation
     try:
@@ -226,10 +262,11 @@ def check_functional_analysis() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate reproduction package outputs.")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     parser.add_argument(
         "--fig-dir",
-        default=os.path.join("paper", "figures"),
-        help="Directory containing generated figure PDFs",
+        default=os.path.join(script_dir, "..", "paper", "figures"),
+        help="Directory containing generated figure PDFs (default: <repo>/paper/figures, resolved relative to this script)",
     )
     parser.add_argument(
         "--verbose",

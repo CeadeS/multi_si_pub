@@ -26,6 +26,7 @@ class ParamRanges:
     beta_Omega: Tuple[float, float]
     beta_ell: Tuple[float, float]
     n_agents: Tuple[int, int]
+    q_detect: Tuple[float, float] = (0.0, 0.3)
 
 
 def anchor_params() -> ModelParams:
@@ -59,6 +60,11 @@ def plausible_ranges() -> ParamRanges:
         beta_Omega=(0.05, 0.3),  # Conservative oversight value range
         beta_ell=(0.1, 0.5),     # Conservative removal benefit range
         n_agents=(2, 10),
+        # Detection-failure probability for external-action monitoring.
+        # q -> 0 is the sensor-bandwidth ideal (Appendix on observability);
+        # the upper bound allows attribution ambiguity and adversarial
+        # obfuscation in realistic deployments.
+        q_detect=(0.0, 0.3),
     )
 
 
@@ -68,31 +74,68 @@ def replace_param(params: ModelParams, **updates: float) -> ModelParams:
     return replace(params, **updates)
 
 
-def c1_margin(params: ModelParams) -> float:
-    """C1* margin: beta_alpha + beta_kappa - beta_D."""
+def c1_margin(params: ModelParams, q: float = 0.0) -> float:
+    """C1* margin: beta_alpha + (1-q)*beta_kappa - beta_D.
 
-    return params.beta_alpha + params.beta_kappa - params.beta_D
+    Under imperfect public monitoring a deviation escapes retaliation with
+    probability q, so expected deterrence is discounted by (1-q). q=0
+    recovers the perfect-monitoring obedience constraint.
+    """
+
+    return params.beta_alpha + (1.0 - q) * params.beta_kappa - params.beta_D
 
 
-def c2_margin(params: ModelParams, n_agents: int) -> float:
-    """C2* margin: beta_Omega - beta_ell / N."""
+def c2_margin(params: ModelParams, n_agents: int, delta: float = 0.0) -> float:
+    """C2* margin in flow-equivalent form: beta_Omega - (1-delta) * beta_ell / N.
 
-    return params.beta_Omega - params.beta_ell / float(n_agents)
+    Present-value comparison of staying (flow beta_Omega forever, PV
+    beta_Omega/(1-delta)) against the one-time removal gain beta_ell/N,
+    multiplied through by (1-delta). delta=0 recovers the conservative
+    flow-vs-stock bound that treats the removal gain as if it recurred
+    every period.
+    """
+
+    return params.beta_Omega - (1.0 - delta) * params.beta_ell / float(n_agents)
 
 
-def stability_margin(params: ModelParams, n_agents: int) -> float:
+def stability_margin(params: ModelParams, n_agents: int, delta: float = 0.0) -> float:
     """Stability margin S = min(C1*, C2*)."""
 
-    return min(c1_margin(params), c2_margin(params, n_agents))
+    return min(c1_margin(params), c2_margin(params, n_agents, delta))
 
 
-def delta_crit(params: ModelParams) -> float:
-    """C1** threshold for PPE sustainability."""
+def kappa_eff(params: ModelParams) -> float:
+    """Effective per-period punishment swing: kappa_eff = beta_alpha + beta_kappa.
 
+    A punished deviator both forgoes the coordination value beta_alpha and
+    bears the conflict cost beta_kappa, so the per-period loss relative to
+    the cooperative path is their sum.
+    """
+
+    return params.beta_alpha + params.beta_kappa
+
+
+def delta_crit(params: ModelParams, q: float = 0.0) -> float:
+    """C1** threshold for PPE sustainability under imperfect public monitoring.
+
+    delta*(q) = g / (g + (1-q) * kappa_eff),  g = beta_D - beta_alpha,
+    kappa_eff = beta_alpha + beta_kappa.
+
+    Derived from grim-trigger present values with per-period detection
+    failure probability q (deviations escape punishment with probability q
+    each period; an undetected deviator optimally continues deviating).
+    q=0 gives the perfect-monitoring threshold g/(beta_D + beta_kappa);
+    q->1 drives the threshold to 1 (cooperation unsustainable).
+    """
+
+    if not (0.0 <= q <= 1.0):
+        raise ValueError(f"q must be in [0, 1], got {q}")
     numerator = params.beta_D - params.beta_alpha
-    denominator = params.beta_D - params.beta_alpha + params.beta_kappa
-    if denominator <= 0:
+    if numerator <= 0:
         return 0.0
+    denominator = numerator + (1.0 - q) * kappa_eff(params)
+    if denominator <= 0:
+        return 1.0
     value = numerator / denominator
     if value < 0:
         return 0.0
@@ -192,83 +235,134 @@ def gap_from_patience_free(params: ModelParams) -> float:
     return params.beta_D - params.beta_alpha
 
 
-def patience_effectiveness(params: ModelParams) -> float:
-    """Effectiveness of deterrence: ε(β_κ) = g/(g+β_κ)².
+def patience_effectiveness(params: ModelParams, q: float = 0.0) -> float:
+    """Effectiveness of deterrence: |∂δ*/∂β_κ| = g(1-q)/(g+(1-q)κ_eff)².
 
-    Measures how much additional deterrence β_κ reduces patience requirement.
-    Diminishes as β_κ increases (convex function).
+    Measures how much additional deterrence β_κ reduces the patience
+    requirement. Diminishes hyperbolically in κ_eff (convex function) and
+    is discounted by the detection probability (1-q).
     """
     g = gap_from_patience_free(params)
     if g <= 0:
         return 0.0  # Already patience-free
-    return g / (g + params.beta_kappa) ** 2
+    denom = (g + (1.0 - q) * kappa_eff(params)) ** 2
+    return g * (1.0 - q) / denom
 
 
-def complementarity_cross_derivative(params: ModelParams) -> float:
-    """Cross-derivative ∂²δ*/∂β_α∂β_κ = (β_κ - g)/(g+β_κ)³.
+def alpha_effectiveness(params: ModelParams, q: float = 0.0) -> float:
+    """Effectiveness of coordination quality: |∂δ*/∂β_α|.
 
-    Negative (β_κ < g): mechanisms complement (synergy)
-    Positive (β_κ > g): mechanisms substitute
-    Zero (β_κ = g): transition point (effectiveness drops 4×)
+    β_α enters δ*(q) twice: it narrows the gap g = β_D - β_α and enlarges
+    the effective punishment swing κ_eff = β_α + β_κ. Hence
+    |∂δ*/∂β_α| = (1-q)(g + κ_eff)/(g + (1-q)κ_eff)², which exceeds
+    |∂δ*/∂β_κ| by the factor (g + κ_eff)/g > 1 for all parameter values:
+    signal quality is always the more effective lever.
     """
     g = gap_from_patience_free(params)
     if g <= 0:
         return 0.0
-    numerator = params.beta_kappa - g
-    denominator = (g + params.beta_kappa) ** 3
-    return numerator / denominator
+    k = kappa_eff(params)
+    denom = (g + (1.0 - q) * k) ** 2
+    return (1.0 - q) * (g + k) / denom
+
+
+def lever_effectiveness_ratio(params: ModelParams) -> float:
+    """|∂δ*/∂β_α| / |∂δ*/∂β_κ| = (g + κ_eff)/g > 1 (independent of q)."""
+    g = gap_from_patience_free(params)
+    if g <= 0:
+        return float("inf")
+    return (g + kappa_eff(params)) / g
+
+
+def substitution_cross_derivative(params: ModelParams, q: float = 0.0) -> float:
+    """Cross-derivative ∂²δ*/∂β_α∂β_κ = (1-q)(D - 2gq)/D³, D = g+(1-q)κ_eff.
+
+    Positive for all q < 1/2 (and for q up to 1 whenever D > 2gq):
+    coordination quality and deterrence are substitutes in relaxing the
+    patience requirement.
+    """
+    g = gap_from_patience_free(params)
+    if g <= 0:
+        return 0.0
+    D = g + (1.0 - q) * kappa_eff(params)
+    return (1.0 - q) * (D - 2.0 * g * q) / D**3
 
 
 def is_patience_free(params: ModelParams) -> bool:
-    """Check if in patience-free regime: β_α ≥ β_D."""
+    """Check if in patience-free regime: β_α ≥ β_D (robust to any q < 1)."""
     return params.beta_alpha >= params.beta_D
 
 
-def phase_transition_jump(params: ModelParams) -> float:
-    """Derivative jump magnitude at phase transition: 1/β_κ.
+def q_max_tolerable(params: ModelParams, delta: float) -> float:
+    """Maximum detection-failure probability compatible with δ ≥ δ*(q).
 
-    At β_α = β_D, ∂δ*/∂ε has discontinuous jump of magnitude 1/β_κ.
-    This is a first-order phase transition.
+    Solving δ = δ*(q̄) yields q̄(δ) = 1 - (1-δ)g / (δ κ_eff). Returns 1.0 in
+    the patience-free regime (any q tolerated) and NaN when the admissible
+    set is empty (q̄ < 0: δ lies below the perfect-monitoring threshold
+    δ*(0), so no monitoring quality rescues cooperation). Clipping the
+    negative case to 0.0 would falsely report that q = 0 suffices.
     """
-    return 1.0 / params.beta_kappa
+    if not (0.0 < delta < 1.0):
+        raise ValueError(f"delta must be in (0, 1), got {delta}")
+    g = gap_from_patience_free(params)
+    if g <= 0:
+        return 1.0
+    q_bar = 1.0 - (1.0 - delta) * g / (delta * kappa_eff(params))
+    if q_bar < 0.0:
+        return float("nan")
+    return float(min(1.0, q_bar))
 
 
-def critical_width_90_percent(params: ModelParams) -> float:
-    """Critical width for 90% of phase transition: Δε ≈ β_κ/9.
+def phase_transition_jump(params: ModelParams, q: float = 0.0) -> float:
+    """Derivative jump magnitude at phase transition: 1/((1-q)κ_eff).
 
-    Width of gap g over which δ* drops from 0.9 to 0.1.
-    Narrow transition indicates sharp regime change.
+    At β_α = β_D, ∂δ*/∂g has a discontinuous jump of magnitude
+    1/((1-q)κ_eff). Imperfect monitoring (q>0) sharpens the transition.
     """
-    return params.beta_kappa / 9.0
+    return 1.0 / ((1.0 - q) * kappa_eff(params))
+
+
+def critical_width_90_percent(params: ModelParams, q: float = 0.0) -> float:
+    """Onset width of the phase transition: Δg = (1-q)κ_eff/9.
+
+    Width of gap g over which δ* rises from 0 to 0.1 past the patience-free
+    boundary (δ*(Δg) = 0.1 exactly). Reaching δ* = 0.9 takes g = 9(1-q)κ_eff,
+    reflecting the hyperbolic flattening; the sharpness statement concerns
+    the onset, not the full 0.1-to-0.9 traversal.
+    """
+    return (1.0 - q) * kappa_eff(params) / 9.0
 
 
 def optimal_group_size(f: float, c: float) -> float:
-    """Optimal group size from parabolic value function: N* = f/c.
+    """Optimal group size from the exact pairwise-cost value function.
 
-    Derived from ∂V/∂N = 0 where V(N) = (N-1)f - cN²/2.
+    V(N) = (N-1)f - c*N(N-1)/2 = (N-1)(f - cN/2), so dV/dN = f + c/2 - cN
+    and the continuous optimum is N* = f/c + 1/2. The discrete optimum is
+    one of the two neighboring integers (they tie when f/c + 1/2 is an
+    integer plus 1/2).
 
     Args:
         f: Mobilization fraction per agent
-        c: Quadratic cost coefficient
+        c: Per-pair coordination cost coefficient
 
     Returns:
-        Optimal group size (real number, typically round to integer)
+        Continuous optimal group size (round/compare neighbors for integers)
     """
-    return f / c
+    return f / c + 0.5
 
 
 def group_value_parabolic(N: int, f: float, c: float) -> float:
-    """Parabolic group value function: V(N) = (N-1)f - cN²/2.
+    """Group value with exact pairwise costs: V(N) = (N-1)f - c*N(N-1)/2.
 
-    Has unique maximum at N* = f/c.
-    Becomes negative for N > 2f/c (too costly).
+    Equals (N-1)(f - cN/2); unique continuous maximum at N* = f/c + 1/2;
+    negative for N > 2f/c.
 
     Args:
         N: Group size
         f: Mobilization fraction per agent
-        c: Quadratic cost coefficient
+        c: Per-pair coordination cost coefficient
 
     Returns:
         Net value of coalition
     """
-    return (N - 1) * f - c * N**2 / 2.0
+    return (N - 1) * f - c * N * (N - 1) / 2.0

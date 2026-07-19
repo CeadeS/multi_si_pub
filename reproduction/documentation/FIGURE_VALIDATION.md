@@ -4,20 +4,25 @@ This report validates numeric invariants that underlie the main figures.
 
 ## Checks
 - ✓ V_dynamic nondecreasing with N
-- ✓ V_dynamic crosses 95% at N=4
-- ✓ V_dynamic ≥ 0.97 at N=6
+- ✓ V_dynamic crosses 95% at N=4 (continuation equilibrium)
+- ✓ V_dynamic ≥ 0.97 at N=8
 - ✓ V_dynamic ≤ V_C2 for all N
 - ✓ Sobol: beta_Omega dominates s_dynamic at N=2
-- ✓ Sobol: delta dominates s_dynamic at N=10
-- ✓ Anchor C1* margin = 1.3 (>0)
+- ✓ Sobol: beta_Omega remains top driver at N=10 (corrected model)
+- ✓ Anchor C1* margin (q=0) = 1.3 (>0)
 - ✓ Anchor C2* margin (N=5) = 0.7 (>0)
+- ✓ Anchor C1*(q=0.2) margin matches beta_alpha + (1-q)beta_kappa - beta_D
+- ✓ delta*(q) = g/(g+(1-q)kappa_eff) verified at q=0 and q=0.2 (hand-computed 0.2941...)
+
+## Warnings
+- ⚠ Sobol: delta share does not grow with N
 
 ## Summary
 - N grid: [2, 3, 4, 5, 6, 7, 8, 9, 10]
-- V_dynamic: ['0.758', '0.896', '0.951', '0.973', '0.979', '0.979', '0.979', '0.979', '0.979']
-- V_C2: ['0.775', '0.916', '0.971', '0.994', '1.000', '1.000', '1.000', '1.000', '1.000']
+- V_dynamic: ['0.863', '0.934', '0.961', '0.972', '0.977', '0.979', '0.979', '0.979', '0.979']
+- V_C2: ['0.878', '0.952', '0.980', '0.993', '0.998', '0.999', '1.000', '1.000', '1.000']
 - Sobol top driver at N=2: beta_Omega
-- Sobol top driver at N=10: delta
+- Sobol top driver at N=10: beta_Omega
 - Scaling optima (saturating / linear / network): 2 / 3 / 10
 
 ## Figure 2 Legacy Comparison

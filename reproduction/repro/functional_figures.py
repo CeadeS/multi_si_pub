@@ -107,10 +107,11 @@ def generate_functional_structure_main(out_dir: str = "figures") -> None:
     # X-axis: normalized control variable [0, 1]
     x_norm = np.linspace(0, 1, 300)
 
-    # Hyperbolic: δ* = g/(g+β_κ)
+    # Hyperbolic (corrected, q=0): δ* = g/(g+κ_eff), κ_eff = β_α + β_κ.
+    # The x-axis expresses κ_eff in multiples of g; shape is unchanged.
     g = 1.0
-    beta_kappa_norm = x_norm * 3 * g
-    delta_star_hyp = g / (g + beta_kappa_norm)
+    kappa_eff_norm = x_norm * 3 * g
+    delta_star_hyp = g / (g + kappa_eff_norm)
 
     # Logarithmic: β_α ~ log(1+SNR)
     SNR_max = 20
@@ -127,20 +128,20 @@ def generate_functional_structure_main(out_dir: str = "figures") -> None:
 
     # Plot curves
     ax2.plot(x_norm, delta_star_hyp, 'r-', linewidth=2.5,
-             label=r'Hyperbolic: $\delta^* = g/(g+\beta_\kappa)$ (deterrence)')
+             label=r'Hyperbolic: $\delta^* = g/(g+\kappa_{\mathrm{eff}})$ (deterrence)')
     ax2.plot(x_norm, beta_alpha_log, 'b--', linewidth=2.5,
              label=r'Logarithmic: $\beta_\alpha \sim \log(1+\mathrm{SNR})$ (coordination)')
     ax2.plot(x_norm, V_parab_norm, 'g:', linewidth=2.5,
-             label=r'Parabolic: $V(N) = fN - cN^2/2$ (group size)')
+             label=r'Parabolic: $V(N) = (N{-}1)(f - cN/2)$ (group size)')
 
     # Mark key points
     x_g = 1.0 / 3.0
     y_g = g / (g + g)
-    ax2.plot(x_g, y_g, 'ro', markersize=8, label=r'$\beta_\kappa = g$ (4× drop)')
+    ax2.plot(x_g, y_g, 'ro', markersize=8, label=r'$\kappa_{\mathrm{eff}} = g$ (4× drop)')
 
     # Parabolic optimum
-    x_opt = (f_over_c - 1) / 9.0
-    ax2.plot(x_opt, 1.0, 'go', markersize=8, label=r'$N^* = f/c$ (optimum)')
+    x_opt = (f_over_c + 0.5 - 1) / 9.0  # N* = f/c + 1/2 on the (N-1)/9 axis
+    ax2.plot(x_opt, 1.0, 'go', markersize=8, label=r'$N^* = f/c + 1/2$ (optimum)')
 
     # Saturation line
     ax2.axhline(y=1.0, color='blue', linestyle=':', linewidth=1, alpha=0.5)
@@ -191,7 +192,7 @@ def generate_functional_structure_main(out_dir: str = "figures") -> None:
 def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
     """Generate 4-panel figure showing detailed functional structure (appendix).
 
-    Panel A: Hyperbolic deterrence (δ* vs β_κ)
+    Panel A: Hyperbolic deterrence (δ* vs κ_eff = β_α + β_κ, at q=0)
     Panel B: Logarithmic coordination (β_α vs SNR)
     Panel C: Parabolic group value (V vs N)
     Panel D: Full phase diagram
@@ -215,7 +216,9 @@ def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
     # PANEL A: Hyperbolic Deterrence Effect
     # ========================================================================
 
-    beta_kappa_range = np.linspace(0, 3, 300)
+    # Corrected threshold (q=0): δ* = g/(g+κ_eff), κ_eff = β_α + β_κ.
+    # The x-axis is the effective punishment swing κ_eff (in the same units as g).
+    kappa_eff_range = np.linspace(0, 3, 300)
 
     # Different g values
     g_values = [0.1, 0.3, 0.5]
@@ -225,23 +228,23 @@ def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
                 r'$g = 0.5$ (large gap)']
 
     for g, color, label in zip(g_values, colors_g, labels_g):
-        delta_star = g / (g + beta_kappa_range)
-        ax1.plot(beta_kappa_range, delta_star, color=color,
+        delta_star = g / (g + kappa_eff_range)
+        ax1.plot(kappa_eff_range, delta_star, color=color,
                  linewidth=2.5, label=label)
 
-        # Mark β_κ = g point
-        beta_k_at_g = g
+        # Mark κ_eff = g point
+        kappa_eff_at_g = g
         delta_at_g = 0.5
-        ax1.plot(beta_k_at_g, delta_at_g, 'o', color=color,
+        ax1.plot(kappa_eff_at_g, delta_at_g, 'o', color=color,
                  markersize=8, markerfacecolor='white', markeredgewidth=2)
 
     # Add effectiveness annotation
-    ax1.annotate(r'Effectiveness: $\varepsilon(\beta_\kappa) = \frac{g}{(g+\beta_\kappa)^2}$',
+    ax1.annotate(r'Effectiveness: $\varepsilon(\kappa_{\mathrm{eff}}) = \frac{g}{(g+\kappa_{\mathrm{eff}})^2}$',
                  xy=(1.5, 0.85), fontsize=9, ha='center',
                  bbox=dict(boxstyle='round,pad=0.5', facecolor='wheat', alpha=0.7))
 
     # Labels and formatting
-    ax1.set_xlabel(r'$\beta_\kappa$ (Deterrence)', fontsize=10)
+    ax1.set_xlabel(r'$\kappa_{\mathrm{eff}} = \beta_\alpha + \beta_\kappa$ (Effective Punishment Swing)', fontsize=10)
     ax1.set_ylabel(r'$\delta^*$ (Required Patience)', fontsize=10)
     ax1.set_title('(A) Hyperbolic Deterrence Effect', fontsize=11, fontweight='bold')
     ax1.set_xlim(0, 3)
@@ -249,7 +252,7 @@ def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
     ax1.grid(True, alpha=0.3, linestyle='--')
     ax1.legend(loc='upper right', fontsize=8)
 
-    # Add vertical lines at β_κ = g
+    # Add vertical lines at κ_eff = g
     for g in g_values:
         ax1.axvline(x=g, color='gray', linestyle=':', alpha=0.5, linewidth=1)
 
@@ -297,17 +300,17 @@ def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
     # Different f/c ratios
     f_over_c_values = [3, 5, 7]
     colors_fc = ['purple', 'green', 'orange']
-    labels_fc = [r'$f/c = 3$ ($N^* = 3$)',
-                 r'$f/c = 5$ ($N^* = 5$, empirical)',
-                 r'$f/c = 7$ ($N^* = 7$)']
+    labels_fc = [r'$f/c = 3$ ($N^*_{\mathrm{cont}} = 3.5$)',
+                 r'$f/c = 5$ ($N^*_{\mathrm{cont}} = 5.5$)',
+                 r'$f/c = 7$ ($N^*_{\mathrm{cont}} = 7.5$)']
 
     for fc, color, label in zip(f_over_c_values, colors_fc, labels_fc):
-        V_N = (N_range - 1) * fc - 0.5 * N_range**2
+        V_N = (N_range - 1) * fc - 0.5 * N_range * (N_range - 1)
         ax3.plot(N_range, V_N, color=color, linewidth=2.5, label=label)
 
         # Mark optimum
-        N_star = fc
-        V_star = (N_star - 1) * fc - 0.5 * N_star**2
+        N_star = fc + 0.5
+        V_star = (N_star - 1) * fc - 0.5 * N_star * (N_star - 1)
         ax3.plot(N_star, V_star, 'o', color=color, markersize=10,
                  markerfacecolor='white', markeredgewidth=2)
         ax3.axvline(x=N_star, color=color, linestyle=':', alpha=0.5, linewidth=1)
@@ -319,8 +322,8 @@ def generate_functional_structure_appendix(out_dir: str = "figures") -> None:
     ax3.fill_between(N_range, -5, 0, alpha=0.2, color='red',
                       label='Negative Value (harmful)')
 
-    # Show empirical observation
-    ax3.axvspan(4, 6, alpha=0.2, color='green', label='Empirical $N \\sim 4-6$')
+    # Shade the linear-benefit optimal range
+    ax3.axvspan(3, 5, alpha=0.2, color='green', label='Linear-benefit range $N^* = 3$--$5$')
 
     # Annotations
     ax3.annotate(r'$V(N) = (N-1)f - \frac{cN^2}{2}$' + '\n' +
