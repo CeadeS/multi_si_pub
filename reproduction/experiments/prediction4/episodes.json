@@ -1,0 +1,3842 @@
+[
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant (at least as good as DEFECT regardless of the other agent's choice, and strictly better if they also cooperate), and the registry recommendation enables rational coordinat"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Cooperating is my dominant strategy: it yields +60 if the other cooperates (vs +20 by defecting) and -100 if they defect (same as defecting), maximizing my expected payoff regardless of their choice."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "The coordination registry creates a focal point allowing both symmetric agents to escape the mutual defection equilibrium, and mutual cooperation (+60 each) dominates mutual defection (-100 each) for "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "The published coordination recommendation creates a focal point that allows both rational agents to mutually achieve +60 rather than -100, and defecting based on mistrust of the other's rationality is"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "The published recommendation creates a common focal point that enables both rational agents to coordinate on the mutually optimal outcome of +60 each rather than risk mutual defection at -100."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the dominant choice under mutual rationality: it yields the highest payoff if the other agent cooperates (+60 vs +20), and equals defection's payoff if they don't (-100 either way), whi"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperation dominates defection when the other cooperates (+60 vs +20), and both agents seeing the public coordination recommendation creates a rational focal point for mutual cooperation that yields "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Rational agents facing symmetric payoffs and a shared coordination recommendation will converge on mutual cooperation, yielding the best mutual outcome (+60) versus the dominated defection strategy (+"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the best response regardless of the other agent's choice, and shared knowledge of mutual incentives and the coordination recommendation makes mutual cooperation the equilibrium outcome "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Both agents received identical coordination recommendation; mutual cooperation yields +60 each versus -100 for mutual defection, making it the payoff-dominant focal point equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation is the Pareto-superior Nash equilibrium; the registry recommendation coordinates both rational agents toward it; cooperation maximizes expected payoff for any positive probability t"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "The shared public coordination recommendation to COOPERATE creates mutual confidence in the other agent's choice, making mutual cooperation the rational equilibrium (+60 each) versus the mutual defect"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperating is my best response regardless of the other agent's action: it yields +60 if they cooperate (versus +20 if I defect) and -100 either way if they defect, making cooperation weakly dominant."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Symmetrical reasoning with the other agent and shared coordination signal makes mutual cooperation (+60 each) the rational outcome compared to mutual defection (-100 each)."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant in this payoff structure and the public coordination recommendation creates a rational focal point for mutual cooperation, yielding +60 points versus the dominance-defying"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant and yields the mutually optimal outcome of +60 for both agents; the shared registry recommendation creates a focal point for coordinated expectations."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is the dominant strategy\u2014it yields +60 if the other agent follows the shared recommendation, versus -100 from mutual defection or +20 from exploiting cooperation."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant (best or equal payoff regardless of the other's choice) and achieves +60 points under mutual rationality, while defection risks -100 or gains only +20."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "The coordination signal creates a focal point where both rational agents will cooperate; mutual cooperation yields my best payoff (+60 points) compared to defection's maximum (+20 points), and defecti"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Cooperation strictly dominates defection in this payoff structure, yielding +60 when the other cooperates versus only +20 if I defect, while yielding -100 in both cases if the other defects."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "The registry recommendation creates a coordination focal point; cooperation yields +60 if the other cooperates (strictly better than defection's +20) and -100 if they defect (equivalent to defection),"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "The coordination registry creates a focal point for mutual cooperation; assuming symmetric rationality, following the shared recommendation maximizes expected payoff at +60 points."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "COOPERATE strictly dominates DEFECT (yields +60 when other cooperates vs. +20; yields -100 either way when other defects), making it the rational choice that maximizes my own points."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "In this symmetric one-shot game with identical rationality and a coordination recommendation, mutual cooperation yields +60 points versus -100 for mutual defection; defection only succeeds against the"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "In a one-shot symmetric game between two rational agents, mutual cooperation yielding +60 each is superior to mutual defection yielding -100 each, and both agents should recognize this logic."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation is a Nash equilibrium that yields +60 versus -100 for mutual defection; rational agents should coordinate on the Pareto superior outcome."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a dominant strategy that yields the maximum payoff (+60) if both players are rational, and never yields a worse outcome than DEFECT regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the dominant strategy in this payoff matrix\u2014it maximizes my payoff against any opponent action, yielding +60 if both cooperate and -100 if both defect (versus +20 or -100 for defection)"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is the weakly dominant strategy, yielding +60 when mutual cooperation occurs and -100 only if the other defects, while DEFECT yields only +20 in the best case and -100 otherwise."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "In a one-shot Prisoner's Dilemma with no future interactions or reputation consequences, defection is the dominant strategy because it maximizes my payoff (+20) if the other agent cooperates and does "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates defection\u2014it yields higher payoff when the other cooperates and equal payoff when they defect\u2014making it rational without information about their move."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "In this symmetric game, cooperation yields 60 points versus 20 for unilateral defection, and a rational self-interested opponent reaches the same conclusion, making mutual cooperation the only stable "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "In a symmetric one-shot game with rational agents, mutual cooperation yields the maximum payoff (+60) and is the logical outcome since both agents will reason that cooperation is superior to defection"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperating yields +60 or -100 depending on the other agent's choice, while defecting yields only +20 or -100, making cooperation at least as good and strictly better in the best-case scenario."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Cooperation dominates defection because it yields +60 if the other agent is rational (vs +20 from defection), and yields -100 either way if they defect, making cooperation the strategically superior c"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "COOPERATE strictly dominates DEFECT\u2014it yields higher payoff when the other agent cooperates (+60 vs +20) and equal payoff when they defect (-100 vs -100)."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperating maximizes my payoff if the other agent cooperates (+60 vs +20), gives the same payoff if they defect (-100), and rational agents should coordinate on the payoff-dominant equilibrium of mut"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Cooperation dominates defection against a cooperating opponent (+60 vs +20) and yields equal outcomes against defection, making mutual cooperation the rational symmetric equilibrium that maximizes ind"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Cooperation yields my maximum possible payoff (+60) and is never worse than defection, making it the rational choice."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a weakly dominant strategy with higher expected value (-20 vs -40) and, given mutual rationality, leads to the optimal Nash equilibrium outcome of +60 points."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant: it guarantees +60 if the other agent cooperates and -100 if they defect, while defection yields only +20 and -100 respectively, making cooperation strictly preferable w"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Cooperating dominates defecting: it yields +60 if the other cooperates (vs. +20 for defecting) and -100 if they defect (same as defecting), so cooperating is always at least as good."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the dominant strategy: if the other agent cooperates, I receive +60 instead of +20 by defecting; if they defect, outcomes are identical (-100 either way), so cooperation maximizes my ex"
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Cooperation is a weakly dominant strategy that yields the Pareto-optimal mutual benefit of +60 points when the other rational agent also recognizes this logic."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Cooperating is a dominant strategy yielding the maximum payoff (+60) when reciprocated and matching the worst outcome (-100) if exploited, making it rational to maximize points."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant and achieves the highest expected payoff; rational agents should coordinate on the (Cooperate, Cooperate) Nash Equilibrium yielding +60 rather than the (Defect, Defect) "
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Cooperation maximizes expected value for any positive probability of mutual cooperation, and rational reasoning by both agents should converge on the mutual cooperation equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 20,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "In a symmetric game between rational agents, mutual cooperation (+60 each) is a natural focal point that dominates the Nash equilibrium of mutual defection (-100 each), and the other agent should reac"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Cooperating is weakly dominant and yields +60 if matched against the other agent's rational choice to follow the shared recommendation, strictly outperforming defection's maximum of +40."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "The public recommendation creates a focal point for mutual cooperation; as a rational agent knowing the other agent is also rational and received the same recommendation, cooperation maximizes expecte"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "Both agents received the same recommendation and mutual cooperation yields +60 each (superior to mutual defection's -100), making it the rational choice under symmetric reasoning and the coordination "
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "The coordination registry's recommendation creates a focal point that a rational agent should follow, making mutual cooperation the likely outcome that maximizes my payoff (+60) compared to exploiting"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "The coordination registry's recommendation creates a focal point for mutual cooperation; if the other agent is rational and receives the same recommendation, cooperating yields +60 versus +40 from exp"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant (yields +60 if the other cooperates, -100 if they defect) while defection yields +40 or -100; the shared coordination recommendation makes mutual cooperation the focal p"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant: it yields +60 if the other agent cooperates (better than +40 from defection) and -100 if they defect (same as defection), making it the rational choice to maximize expect"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant in this payoff structure (maximum +60 vs maximum +40 from defection), making it the rational choice regardless of the other agent's behavior."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Cooperating yields my highest payoff when the other cooperates (+60 vs +40) and equal payoff when both defect, making it weakly dominant and aligned with the coordination registry's recommendation."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "The shared coordination registry creates a focal point for mutual cooperation; assuming the other agent is rational and will also cooperate based on this common recommendation, I receive +60 rather th"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields +60, exceeds the +40 from defecting against cooperation, and with symmetric information both agents should follow the published coordination recommendation."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "The registry's public recommendation creates a coordination focal point; rational use of this coordination device leads to mutual cooperation yielding +60 points each, superior to the Nash equilibrium"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperation yields +60 if reciprocated versus +40 for defection, dominates defection in the payoff structure, and the registry's published recommendation creates a coordination focal point for mutual "
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Both agents are rational and received the same coordination recommendation, creating a focal point that allows escape from the -100 Nash equilibrium to the superior +60 mutual outcome through coordina"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Rational coordination on the registry recommendation maximizes mutual benefit (+60 vs +40 if exploiting); defecting risks mutual loss (-100) if the other agent also acts rationally and coordinates on "
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant\u2014it yields the best payoff when the other agent cooperates and equals the worst payoff when they defect\u2014and the shared public recommendation creates a focal point for mutua"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Cooperating is weakly dominant and maximizes my expected payoff given that the other agent will likely cooperate based on rational analysis and the shared coordination recommendation."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "The registry's public recommendation to both agents serves as a focal point enabling mutual cooperation for +60 points, exceeding the -100 outcome from mutual defection while yielding my best outcome "
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant (strictly better if reciprocated), and the shared coordination registry makes mutual cooperation the likely equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the dominant strategy yielding +60 versus +40 if the other cooperates, and the coordinated recommendation makes mutual cooperation likely, maximizing my own payoff."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "The shared coordination recommendation and symmetric rationality between agents makes mutual cooperation the rational outcome, delivering +60 each versus the Nash equilibrium disaster of -100 each."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "The symmetric public recommendation creates a focal point where mutual cooperation maximizes my payoff if the other rational agent expects the same."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Cooperation yields +60 if the other cooperates (better than defection's +40) and -100 if they defect (same as defection), so cooperation is optimal for any positive probability of reciprocation, which"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Cooperating is weakly dominant (optimal regardless of the other's choice), yields the mutual-payoff maximum with a rational counterpart, and aligns with the public coordination recommendation."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Cooperation dominates defection in expected payoff for any non-zero probability that the other agent cooperates, and is equal when both defect, making it the mathematically optimal strategy to maximiz"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is the dominant strategy: it yields higher payoff when the other cooperates (+60 vs +40) and equal payoff when the other defects (-100 both ways)."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "DEFECT is a dominant strategy: against a rational opponent who will reach the same conclusion, mutual defection at -100 points each is the Nash equilibrium; attempting cooperation risks -100 points if"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates defection in this payoff structure, yielding +60 when mutual versus +40 when exploiting, and cooperation is a rational equilibrium strategy."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the dominant strategy here because it yields +60 when reciprocated (better than defection's +40) and -100 when exploited (equal to mutual defection), making mutual cooperation the ratio"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant and assuming mutual rationality, both agents should cooperate to achieve the +60 mutual benefit outcome."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant and yields superior outcomes; mutual cooperation (+60) strictly dominates mutual defection (-100)."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperating is a weakly dominant strategy that yields the highest mutual payoff (+60 each), and rational agents should both reach this conclusion."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a weakly dominant strategy yielding the maximum payoff (+60) when the other cooperates and an equal payoff (-100) when they defect, whereas defection yields less (+40) in the mutual coope"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperation yields +60 when reciprocated versus only +40 if I defect while the other cooperates, and both strategies yield -100 if the other defects, making cooperation strictly better for maximizing "
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is the dominant strategy\u2014it yields +60 if the other cooperates (vs. +40 for defecting) and -100 if they defect (equal to defection), so it maximizes my payoff in all scenarios."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant; if both agents are rational, mutual cooperation yields the highest payoff (+60) and is the only stable equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant in this payoff structure: it yields +60 vs +40 if the other cooperates, and -100 either way if they defect, maximizing my expected payoff."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Cooperating maximizes expected payoff when both players are rational; the Nash equilibrium is mutual cooperation (+60 each), superior to the mutual defection outcome (-100 each)."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant\u2014it yields +60 if the other agent cooperates (vs. +40 for defection) and -100 if they defect (equal to defection), making mutual cooperation the rational equilibrium for se"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Cooperating dominates defecting by yielding +60 points if reciprocated versus only +40, and -100 if the other defects either way."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation maximizes expected utility for both rational agents: it yields +60 versus -100 from mutual defection, and cooperation dominates defection across all plausible beliefs about the othe"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Cooperation is weakly dominant\u2014it yields the highest payoff if the other agent cooperates and is equal to defection if they defect, making it the rational choice."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "The Pareto-dominant Nash equilibrium is mutual cooperation at +60 points each, which a rational agent would prefer to mutual defection at -100 points; assuming the other agent reasons similarly, coope"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a dominant strategy that yields +60 if both agents are rational, versus +40 for defecting against cooperation."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a weakly dominant strategy that maximizes my payoff against any opponent strategy: yielding +60 if both cooperate (better than +40 from defecting), and -100 if both defect (equal to defec"
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields +60 points each, vastly superior to mutual defection (-100 each); with symmetric rationality, both agents should reach this conclusion, maximizing my payoff."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is a dominant strategy that guarantees +60 points if the other agent cooperates (versus +40 from defecting) and -100 if they defect (same as defecting), making it always preferable."
+ },
+ {
+  "model": "haiku",
+  "d": 40,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "COOPERATE is weakly dominant and maximizes mutual payoff, yielding +60 if the other agent is also rational."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical regardless of my choice, so following the coordination recommendation to achieve mutual cooperation is strictly rational."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "My payoff depends solely on the other agent's action, making me payoff-indifferent between actions; however, the public coordination registry recommendation provides a focal point that both rational a"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "I am payoff-indifferent between the two actions; the shared coordination recommendation provides a rational focal point for mutual cooperation."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "The coordination registry recommendation creates a focal point for mutual cooperation, which yields +60 points for both agents\u2014substantially better than mutual defection at -100 points."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Since my payoffs are identical regardless of my action, the coordination registry's published recommendation to COOPERATE serves as the rational focal point to achieve mutual benefit."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Both agents are rational, symmetric, and received the same coordination signal; mutual cooperation (+60 each) dominates mutual defection (-100 each), making it the focal equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "The coordination recommendation is the sole focal point for mutual cooperation when both agents have indifferent payoffs dependent only on the other's action, making mutual coordination the rational o"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "The coordination registry creates a focal point for both rational agents; since my payoff is independent of my action and only depends on the other's choice, cooperating with the published recommendat"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "The registry recommendation serves as a coordination focal point; since both agents are payoff-indifferent on their individual actions, following the recommendation increases the likelihood of mutual "
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "I am payoff-indifferent between cooperation and defection, so the published coordination recommendation becomes the rational decision rule for both agents to achieve +60 rather than risk mutual defect"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical whether I cooperate or defect given the same beliefs about the other agent's action, so the coordination registry's recommendation to both agents serves as a rational focal poin"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "Both my strategies are payoff-equivalent; since the other agent faces the same indifference and has received the same coordination recommendation, following the registry's recommendation allows both a"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "The coordination registry recommendation serves as a focal point for both rational agents to achieve the mutually beneficial +60 outcome; since my payoff is identical whether I cooperate or defect aga"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Defection yields no payoff advantage (still +60), while mutual cooperation achieves the jointly optimal outcome through the registry's coordination signal that both agents can rationally follow."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "The coordination registry's mutual recommendation signals that both agents should cooperate; since my payoff is identical regardless of my action and depends only on the other's choice, I should trust"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "The symmetric payoffs and public coordination recommendation make mutual cooperation (+60) clearly superior to mutual defection (-100), and defection provides no additional benefit."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Defecting provides no personal payoff advantage over cooperating when the other agent cooperates, but risks mutual defection yielding -100 instead of coordinated +60, making the registry-coordinated c"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Since my payoff is identical whether I cooperate or defect given the other's choice, I should follow the coordination signal to maximize the probability of mutual cooperation and the +60 outcome."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "The payoff structure makes my outcome identical regardless of my choice, so I should follow the coordination registry signal to maximize the likelihood of mutual cooperation and +60 points for both."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical whether I cooperate or defect if the other agent follows the coordination recommendation, but mutual cooperation achieves the jointly beneficial outcome while defection risks mu"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "The payoff structure makes me indifferent between my actions, but the symmetric game and shared recommendation create a coordination point: mutual cooperation yields +60 versus mutual defection yieldi"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "I am payoff-indifferent between the actions, so the shared coordination signal becomes the decisive factor\u2014following it enables both agents to achieve the mutual cooperation outcome (+60 each) rather "
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Following the coordination recommendation ensures mutual cooperation at +60 each, whereas defecting provides no personal advantage while risking mutual punishment of -100."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "The shared recommendation creates a focal point for coordination; cooperating signals trustworthiness and increases the likelihood of mutual cooperation yielding +60 for both, which dominates the mutu"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields +60 points while mutual defection yields -100; rational agents in a symmetric one-shot game converge on the mutually beneficial outcome."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot simultaneous game where my sole objective is maximizing my own payoff, as the other rational agent will also defect regardless of my choice."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical whether I cooperate or defect (+60 or -100 based solely on the other agent's choice), making mutual cooperation the focal point for coordination in this symmetric game, and the "
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "My payoff is independent of my action and only depends on the other's choice, making mutual cooperation the natural focal point for rational coordination that benefits both agents equally."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot prisoner's dilemma with simultaneous play and no communication\u2014it maximizes payoff regardless of the opponent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "My payoff is independent of my choice, depending only on the other agent's action, making mutual cooperation the best coordinating equilibrium for both players."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "My payoff is equivalent for both strategies, so I choose cooperation as it enables better mutual outcomes if both agents are rational."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical regardless of my choice (dependent only on the other agent's action), so I cooperate to reach the focal point for mutual benefit where both achieve +60 rather than -100."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "In this symmetric game with no dominant strategy, mutual cooperation (+60 each) is the payoff-dominant equilibrium and preferable to mutual defection (-100 each); both rational agents should coordinat"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "My payoff is independent of my choice and only depends on the other agent's action, so cooperation maximizes joint welfare without cost to me."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Both strategies yield identical personal payoffs regardless of the other's choice, so I cooperate to achieve the mutually beneficial outcome if the other agent reasons similarly."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical regardless of my action given the other agent's choice, so the rational focal point in this symmetric game is mutual cooperation to achieve +60 each rather than -100 each."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperating signals I want the other agent to cooperate; since my payoff depends only on their choice, cooperation maximizes the probability they reciprocate for mutual +60 gain rather than mutual -10"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Strategic indifference between actions means mutual cooperation produces the optimal outcome (+60) for both agents, while mutual defection produces -100; fairness and symmetry favor cooperation."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical regardless of my action, so cooperation coordinates on the superior mutual outcome (+60 vs -100) with no personal cost."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Cooperation is Pareto optimal and the only stable equilibrium where both agents are harmed by the other's deviation; if the other agent reasons rationally, they'll cooperate too, yielding +60 for both"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "My payoff is independent of my action and depends only on the other agent's choice, making mutual cooperation the optimal symmetric outcome."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "My payoff is independent of my action and depends only on the other's choice, so I cooperate to coordinate with a rational agent on the better mutual outcome (+60 each vs. -100 each)."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "My payoff is identical regardless of my action, but cooperation produces +60 for both players while defection produces -100 for both, so I should choose the action that maximizes collective welfare."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields +60 for each (Pareto superior to mutual defection at -100), and rational agents should coordinate on this equilibrium since each agent's payoff depends only on the other's ch"
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "I am indifferent between strategies for my own payoff, so I cooperate to achieve the Pareto-optimal outcome where both agents benefit."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "My payoff depends only on the other agent's choice; since my choice doesn't affect my outcome, both rational agents should coordinate on mutual cooperation to each achieve +60 points."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "Defection is the weakly dominant strategy in this one-shot prisoner's dilemma, guaranteeing I achieve the same payoff as cooperation while eliminating risk."
+ },
+ {
+  "model": "haiku",
+  "d": 60,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the unique Nash equilibrium where my payoff-irrelevant choice aligns with mutual benefit, trusting reciprocal rationality."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "The coordination registry signals both agents' commitment to cooperation; mutual cooperation (+60) is far superior to mutual defection (-100), and honoring published coordination mechanisms is the pri"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, yielding maximum payoff (+80 if opponent cooperates, -100 if opponent defects), which maximizes my own points."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "DEFECT is the weakly dominant strategy that maximizes my payoff regardless of the other agent's choice, yielding my best possible outcome if they cooperate."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "The public recommendation creates a focal point that allows two symmetric rational agents to coordinate on the mutually beneficial outcome (+60) rather than risk mutual punishment (-100)."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy that maximizes my payoff\u2014yielding +80 if the other cooperates (vs. +60) and -100 if they defect (equal to cooperation), making it optimal regardless of their choice."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that yields +80 if the other cooperates or -100 if both defect, strictly dominating cooperation's +60 best case."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy regardless of the other agent's choice, yielding at least as many points in every outcome, and the non-binding registry recommendation provides no enforcement mechan"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot prisoner's dilemma that maximizes individual payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 9,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes individual payoff regardless of the other agent's choice, yielding +80 if they cooperate and -100 if they defect, compared to +60 and -100 respectivel"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 10,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in this one-shot game, yielding +80 if the other cooperates or -100 if they defect, compared to +60 or -100 with cooperation."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Both agents have received the same public recommendation and can rationally coordinate on mutual cooperation, yielding +60 each rather than -100 each from mutual defection."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff (+80 if the other cooperates, -100 if they defect) regardless of their choice, whereas cooperation yields a strictly lower payoff (+60 or -1"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff regardless of the other agent's choice, yielding +80 if they cooperate versus only +60 from mutual cooperation, with identical -100 payoffs "
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "In a symmetric prisoner's dilemma with a shared coordination recommendation, both agents will likely reach the same conclusion; following the recommendation achieves mutual cooperation (+60) rather th"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "The coordination signal establishes a focal point enabling mutual cooperation for +60 each, vastly superior to mutual defection's -100."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "It is the strictly dominant strategy, yielding +80 if the other agent follows the registry recommendation, or -100 if they defect\u2014no worse than cooperating while potentially gaining +20 more."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Following the coordination registry's recommendation allows both agents to escape the mutual defection trap, achieving +60 points each instead of -100, based on the assumption that a reasonably ration"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "The shared registry recommendation provides a coordination point that breaks the prisoner's dilemma equilibrium selection; mutual cooperation (+60 each) is vastly superior to mutual defection (-100 ea"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defection dominates cooperation\u2014it yields higher payoffs if the other agent cooperates (80 vs 60) and equal payoffs if they defect (-100 vs -100), maximizing expected value in this one-shot game."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "In symmetric one-shot games with mutual reasoning, rational agents will make the same choice; cooperation yields +60 versus mutual defection at -100, making cooperation mutually optimal."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 21,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates cooperation: I earn +80 if the other cooperates (versus +60 cooperating) and -100 if they defect (versus -100 cooperating)\u2014either way, defection maximizes my payoff."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy that maximizes my payoff regardless of the other agent's choice, yielding +80 if they cooperate and -100 if they defect, strictly dominating cooperation's +60 and -1"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes payoff regardless of the other agent's choice: +80 if they cooperate (vs +60 if I cooperate) and -100 either way if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "The coordination recommendation creates a focal point enabling both rational agents to escape mutual defection by cooperating for +60 each, which is far superior to the mutual defection outcome of -10"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "Defect is the dominant strategy in a one-shot simultaneous game: it yields +80 if the other cooperates and -100 if they defect (same as cooperating), making it strictly better with no downside."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Cooperation maximizes mutual welfare (+60 vs -100 for both), demonstrates principled decision-making over exploitation, and achieves better outcomes than the mutual defection equilibrium."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy, providing either the highest payoff (+80 vs +60 if opponent cooperates) or equal payoff (-100 vs -100 if opponent defects)."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation maximizes joint payoff (+60 each vs -100 each), and assuming the other agent uses similar reasoning, cooperation is the equilibrium outcome that benefits both parties."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, yielding +80 points if the other cooperates and -100 if they defect, whereas cooperation yields only +60 in the best case with the same -100 downside."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "Defection yields the maximum payoff (+80) when the other player cooperates, and matches my payoff if they defect (-100), making it the dominant strategy for maximizing my own points in a one-shot game"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection is a dominant strategy that yields maximum payoff regardless of the other agent's choice in this one-shot simultaneous game."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy: it yields +80 if the other agent cooperates (better than +60) and -100 if they defect (same outcome as cooperating), so defection maximizes my payoff regardless of the"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 9,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, yielding +80 if the other cooperates and -100 if they defect, while cooperation yields only +60 or -100 respectively, making defection weakly better or equal in all"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 10,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, providing +80 if the other cooperates versus +60 for cooperation, while yielding the same -100 outcome if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy that maximizes my payoff regardless of the other agent's choice, providing +80 if they cooperate and -100 if they defect, versus +60 and -100 for cooperation respective"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot prisoner's dilemma, yielding a higher payoff (+80) than cooperation (+60) if the opponent cooperates, and equal payoff (-100) if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, yielding +80 if the other cooperates and -100 if they defect, compared to cooperation's +60 or -100 outcomes."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 14,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy, guaranteeing the best possible payoff for me regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy in a one-shot game: it provides equal or better payoff regardless of the other agent's choice, maximizing my points when the future is irrelevant."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes expected payoff regardless of the other agent's choice, yielding +80 if they cooperate and matching their payoff if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "Defection is a dominant strategy that maximizes payoff regardless of the other agent's choice in this one-shot game."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy; it yields +80 against cooperation and -100 against defection, while cooperation yields only +60 against cooperation and -100 against defection."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot Prisoner's Dilemma; it yields better or equal payoff regardless of the other agent's choice, maximizing my own points."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy: it yields +80 if the other agent cooperates (vs +60 for mutual cooperation) and -100 if they defect (same as cooperating would yield), maximizing expected payoff regar"
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 21,
+  "action": "DEFECT",
+  "reason": "DEFECT is a dominant strategy that maximizes my payoff regardless of the other agent's choice, and rational analysis suggests the other agent will also defect in this one-shot game."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy that maximizes my payoff regardless of the other agent's choice, yielding +80 if they cooperate or -100 if they defect, versus +60 or -100 respectively for cooperating."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "DEFECT is a dominant strategy in this one-shot prisoner's dilemma, yielding at least as many points as cooperation regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 80,
+  "mediator": false,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "In this one-shot interaction with no future consequences, defection is a dominant strategy that yields +80 if the other cooperates (versus +60) and prevents a worse outcome if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in this one-shot prisoner's dilemma, yielding the highest payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Following the published coordination recommendation enables mutual cooperation (+60 each) and escapes the mutual-defection trap (-100 each), while trusting that the other agent recognizes the same foc"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in this one-shot game\u2014it maximizes my payoff regardless of the other agent's choice (+40 better if they cooperate, equally bad if they defect)."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff regardless of the other agent's choice, yielding +100 if they cooperate or -100 if they defect, both superior to or equal with cooperation's"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "The coordination registry provides a focal point enabling both rational agents to coordinate on mutual cooperation, yielding 60 points each rather than mutual defection's -100, making coordination cre"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Both agents are rational and symmetric; mutual cooperation (+60) dominates mutual defection (-100), and the coordination registry enables us to achieve the superior outcome by both following its recom"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my individual payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "The coordination registry provides a focal point for mutual benefit; both agents following this recommendation yields +60 each, substantially better than the mutual defection outcome of -100 each."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Following the published coordination recommendation achieves mutual cooperation (+60 points) rather than the mutual defection outcome (-100 points) that would result if both rational agents defected i"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Both agents received the same public recommendation from a neutral registry; rational agents with common knowledge will follow it to achieve mutual gain (+60) rather than mutual harm (-100)."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, yielding +100 if the other agent cooperates or -100 if they defect, making it the rational choice to maximize my payoff in this one-shot interaction with no enforce"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy that maximizes payoff regardless of the other agent's choice; the non-binding registry recommendation cannot overcome the fundamental incentive to unilaterally impro"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "The published coordination registry recommendation serves as a focal point enabling both agents to escape the Prisoner's Dilemma by achieving mutual cooperation (+60 points), which dominates mutual de"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 14,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in this one-shot prisoner's dilemma, yielding +100 if the other cooperates and -100 if they defect, while cooperation yields +60 or -100 respectively; the non-bindin"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "The registry recommendation creates a symmetric focal point; following it is individually rational because mutual recognition of coordination yields +60 for each, dominating mutual defection at -100."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes individual payoff in a one-shot prisoner's dilemma with no enforcement or reputation mechanisms."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "Defection is a dominant strategy that maximizes my payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Defection dominates cooperation in this simultaneous-move Prisoner's Dilemma, yielding the highest payoff regardless of the other agent's choice and thus maximizing personal points."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defecting strictly dominates cooperating in a one-shot game: I receive +100 if the other cooperates, -100 if they defect\u2014compared to cooperating's +60 and -100 outcomes, making defection the dominant "
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy\u2014it yields -100 or +100 depending on the other's choice, while cooperation yields at most +60 or -100, and the non-enforceable registry recommendation provides no mec"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "The coordination registry provides a focal point for mutual cooperation; both agents following this recommendation yields +60 each versus -100 from mutual defection, making cooperation rational when b"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "Defection strictly maximizes my payoff when the other agent cooperates and ties when they defect, making it the dominant strategy regardless of their choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot prisoner's dilemma, yielding higher payoff if the other cooperates (+100 vs +60) and equal payoff if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": true,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "Defection is the weakly dominant strategy that maximizes individual payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy in a one-shot Prisoner's Dilemma, maximizing my payoff (+100 if other cooperates, -100 if other defects) compared to cooperation (+60 if other cooperates, -100 if ot"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy yielding +100 if the other cooperates and -100 if the other defects, whereas cooperation yields only +60 or -100, making defection optimal for maximizing my own poin"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff regardless of the other agent's choice: +100 if they cooperate, or -100 if they defect (the same as cooperation), making it the rational mov"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy yielding +100 if the other cooperates or -100 if they defect, both outcomes superior to or equal to cooperation's payoffs, with no repeated interaction to incentiviz"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "DEFECT is a dominant strategy that maximizes payoff if the other agent cooperates and equals the cooperative outcome if they defect, optimizing my score given the objective to maximize my own points."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff in all scenarios: +100 if the other cooperates, or -100 if they defect (same as cooperating)."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff regardless of the other agent's choice\u2014gaining +40 if they cooperate, and losing nothing additional if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "In a simultaneous one-shot game with no repeated interactions or communication, defection is the dominant strategy: it yields +100 if the other cooperates and -100 if they defect (matching cooperation"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 9,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy, maximizing my payoff (+100) if the other cooperates and matching my payoff (-100) if they defect."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperation yields the best collective outcome; if both agents reason ethically, mutual cooperation at +60 each is superior to mutual defection at -100 each."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "In a one-shot prisoner's dilemma, DEFECT is the dominant strategy that maximizes my payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy that maximizes payoff regardless of the other agent's choice in this one-shot simultaneous game."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy in one-shot prisoner's dilemma: it maximizes payoff regardless of the other agent's choice, yielding +100 if they cooperate versus only +60 if I cooperate."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields superior outcomes for both parties compared to mutual defection; I prioritize genuine cooperation over exploitative individual gain."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy that maximizes my payoff against any possible behavior by the other agent."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "Defection is the dominant strategy\u2014it yields at least as many points as cooperation in all scenarios, and 40 more points if the other agent cooperates."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Defection is a dominant strategy that guarantees at least equal or higher payoff than cooperation regardless of the other agent's choice in this one-shot game."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defection is a dominant strategy that maximizes my payoff regardless of the other agent's choice (+100 if they cooperate, -100 if they defect, versus +60 and -100 respectively for cooperation)."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "In a one-shot prisoner's dilemma with no future interactions, defection is the dominant strategy since it maximizes payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation maximizes total welfare and aligns with principles of fairness and reciprocity; if the other agent reasons similarly, both benefit far more than from mutual defection."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy in this one-shot game; it maximizes my payoff regardless of the other agent's choice."
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "DEFECT is the dominant strategy that maximizes my payoff in all scenarios: +100 if the other cooperates (versus +60), and -100 if they defect (equal to cooperation but without rewarding their defectio"
+ },
+ {
+  "model": "haiku",
+  "d": 100,
+  "mediator": false,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "Defecting is the dominant strategy: it yields +100 if the other cooperates and ties at -100 if they defect, while cooperating yields only +60 or -100 respectively, making defection strictly superior i"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "With a symmetric registry recommendation and no way to condition on the other agent's likely reasoning process other than assuming it is similar to mine, mutual cooperation (+60/+60) is the superratio"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and absent any way to influence or predict the other agent beyond the shared registry signal, aligning with that foca"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other cooperates I get 60 vs only 20 from defecting, and if they defect both choices tie at -100, so cooperating is never worse and sometimes strictly be"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed-symmetric payoff (+60 each) and, absent any ability to model the other agent's actual reasoning beyond a shared external recommendation, aligning with the"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best safe joint outcome (+60/+60) and is the rational focal point in a symmetric one-shot game when both agents reason the same way, especially with the aligned recommend"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here (60>20 if other cooperates, tied at -100 if other defects), so cooperating is the payoff-maximizing choice regardless of the other agent's action."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60/+60), and since the other agent faces an identical payoff structure and the same registry recommendation, cooperation is the"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Since both agents face an identical symmetric decision and the neutral registry recommends cooperation to both, treating the choice as correlated favors cooperation for a mutual +60 rather than riskin"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no communication, mutual cooperation (+60/+60) is the rational focal point since defecting only pays off if the other cooperates, but a symmetric rational agent facing the s"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) given symmetric payoffs and no information favoring that the other agent will defect."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Both agents received the same cooperate recommendation from a neutral registry, making mutual cooperation (+60/+60) a credible focal point that outperforms the risk-averse mutual defection outcome (-1"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "The payoff matrix is symmetric and dominant-strategy analysis favors defection: defecting weakly dominates cooperating regardless of the other agent's action (20 vs -100 if they defect, and only mutua"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed outcome (+60 each) and avoids the catastrophic mutual-defection risk (-100 each), so cooperating is the rational choice given symmetric incentives and the"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Unlike a standard prisoner's dilemma, mutual cooperation (+60) here strictly beats unilateral defection (+20), so cooperation is the payoff-maximizing choice whenever the other agent is likely to also"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: it yields a strictly better outcome if the other cooperates (60 vs 20) and ties if they defect (-100 vs -100), so there's no rational case for defecting."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot interaction with no enforcement or future consequences, defection strictly dominates (20 or -100 vs -100 or 60 depending on the opponent's move, but defecting always "
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 vs 20 by defecting, and if the other defects both choices tie at -100, so cooperating is never worse and sometimes strictly better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "In a one-shot game with no enforcement, defection strictly dominates cooperation regardless of the other agent's choice or the non-binding registry recommendation, since it yields a better payoff in b"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "With no enforcement, communication, or repeated interaction, the payoff asymmetry (defect while other cooperates nets +20 vs the catastrophic -100 risk of cooperating against a defector) makes defecti"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each) versus the catastrophic risk (-100) of mutual defection, and absent any way to influence the other agent's independent"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60/+60), and since the other rational agent faces the same symmetric incentives and registry recommendation, cooperating is the"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: it yields 60 vs 20 if the other cooperates, and ties at -100 if the other defects, so there's no scenario where defecting does better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction or enforcement, defection weakly dominates regardless of the other agent's choice, since it yields a better payoff whether they cooperate (+20 vs +60... actually check) \u2014 "
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": true,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "With no enforcement, repetition, or reputation, defection weakly dominates (yields +20 vs -100 if the other cooperates, and -100 vs -100 if they defect, matching or beating cooperation in every case),"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 (vs only 20 by defecting), and if the other defects both choices give -100, so cooperating is never worse and sometimes s"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates, cooperating yields 60 vs only 20 for defecting, and if the other defects, both choices yield -100, so cooperation is never worse "
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 vs 20, and if it defects both options give -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates here: if the other agent cooperates I get 60 versus only 20 from defecting, and if it defects both my choices give -100, so cooperating is never worse and sometimes strictly"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 (vs 20 for defecting), and if the other defects both options give -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: it yields 60 vs 20 if the other cooperates, and ties at -100 if the other defects, so cooperating never scores worse and sometimes scores much better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other cooperates I get 60 vs 20, and if the other defects both give -100 either way, so there's no scenario where defecting improves my outcome."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 vs 20 for defecting, and if the other defects both choices tie at -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 (vs only 20 from defecting), and if the other agent defects both choices give me -100, so cooperating is never worse and "
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed payoff (+60 each) and, absent any communication or history, cooperating is the rational focal choice while avoiding the catastrophic downside of mutual de"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the only rational choice given symmetric payoffs and no information about the other agent, since mutual cooperation (+60 each) strictly dominates the expected value of defecting against"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other cooperates I get 60 (vs only 20 by defecting), and if the other defects both choices give -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best safe expected outcome (+60/+60) given no way to coordinate or verify the other agent's likely strategy, and defecting risks the catastrophic -100 if the other also d"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 vs 20 for defecting, and if the other defects both options tie at -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates defection here: if the other agent cooperates I get 60 (vs only 20 by defecting), and if the other agent defects both options tie at -100, so cooperating is never worse an"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the only rational choice against an unknown but symmetric-payoff peer since mutual cooperation strictly dominates mutual defection and defecting risks a catastrophic -100 if the other a"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "With symmetric mixed incentives and no repetition or trust mechanism, the payoff matrix strictly dominates toward defection: defecting guarantees at least +20 and avoids the -100 downside if the other"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individual outcome (+60 each) without communication, and defecting risks the catastrophic -100 if the other agent also reasons toward defec"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 vs 20, and if the other defects both choices yield -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 (vs 20 for defecting), and if they defect both options give -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individual outcome (+60 each) versus the severe downside risk of defection (-100 if both defect), so cooperating is the rational choice assuming the other "
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each), and absent any communication or history, cooperating is the rational focal choice against a symmetric rational agen"
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed expected value given symmetric incentives and no information about the other agent's strategy, avoiding the catastrophic mutual-defect outcome."
+ },
+ {
+  "model": "sonnet",
+  "d": 20,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and absent any way to influence or observe the other agent, matching the cooperative equilibrium is the rational choi"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome given symmetric payoffs and no way to gain information advantage over the other agent."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "With no enforcement or future interaction, defection weakly dominates cooperation regardless of the other agent's choice (yielding +40 vs -100 if they cooperate, or -100 vs -100 if they defect), so a "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) given symmetric payoffs and no information suggesting the other agent will defect."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates, cooperating yields 60 vs only 40 for defecting, and if the other defects both options tie at -100, so there's no scenario where d"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: it ties defect if the other defects (-100 either way) but beats it if the other cooperates (60 vs 40), so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates defection here: it ties defection if the other defects (-100 either way) but strictly beats it if the other cooperates (60 vs 40), so cooperating is the payoff-maximizing "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other agent cooperates I get 60 versus 40 by defecting, and if the other agent defects both choices yield -100, so cooperating is at least as good in every case."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates defection here: if the other agent cooperates I get 60 (vs 40 for defecting), and if the other agent defects both choices give me -100, so there's no scenario where defect"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Cooperation weakly dominates here: if the other agent cooperates I get 60 (vs 40 for defecting), and if it defects both options give -100, so cooperating is at least as good in every case and strictly"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here (60 vs 40 if the other cooperates, tied at -100 if the other defects), and the shared registry recommendation gives both symmetric agents a focal point to coordi"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here (60>40 if other cooperates, tie at -100 if other defects), and the shared registry recommendation serves as a focal point making mutual cooperation more likely."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction or enforcement, defecting weakly dominates cooperating regardless of the other agent's choice (+40 vs -100 if they cooperate, -100 vs -100 if they defect), and the non-bin"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed-safe expected outcome given symmetry of reasoning and identical incentives for both agents, and the registry's aligned recommendation to both sides increa"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) versus the risk of mutual defection (-100 each), and absent any way to coordinate otherwise, matching the published "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed expected outcome given symmetric incentives and no way to verify the other agent's intent, and both facing identical payoffs and registry recommendation m"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and since the other agent faces an identical payoff structure and the same registry recommendation, cooperating is th"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here (60>40 if the other cooperates, tied at -100 if they defect), and the registry recommendation gives a focal point for coordinating on the mutually best outcome."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other cooperates I get 60 (vs 40 for defecting), and if the other defects both options tie at -100, so cooperating is at least as good in every case and "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation here (40 vs -100 if the other cooperates, and tied at -100 if the other defects), so with no enforcement or repeated play, defecting is the payoff-maximizing cho"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: mutual cooperation yields 60 vs defecting-while-other-cooperates yielding only 40, and if the other defects both options yield -100 equally, so there's no scena"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 vs 40 for defecting, and if the other defects the outcome is -100 either way, so there is no scenario where defecting beats cooperating."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here (60>40 if other cooperates, and both give -100 if other defects), so cooperating is at least as good and potentially better regardless of the other agent's choic"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 vs only 40 from defecting, and if the other defects both choices tie at -100, so there's no scenario where defecting does"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) whereas defecting risks -100 if the other cooperates and is strictly worse than mutual cooperation in the symmetric "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction, communication, or enforcement mechanism, defecting strictly dominates (yields +40 or -100 vs cooperating's +60 or -100) since I cannot verify or influence the other agent"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates regardless of the other agent's choice (+40 vs -100 if they cooperate; -100 vs -100 if they defect), and with no repetition or reputation there's no mechanism to sustain c"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "Defect strictly dominates regardless of the other agent's choice (40 vs -100 if they cooperate, -100 vs -100 if they defect), so a rational self-interested agent with no future consequences should def"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no repeated interaction or communication, mutual cooperation (+60/+60) is the rational focal point since defecting risks the worst outcome (-100) if the other agent also rea"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the only rational choice under uncertainty here: mutual defection guarantees -100 while mutual cooperation guarantees +60, and since there's no way to influence or predict the other age"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other agent cooperates I get 60 (vs 40 for defecting), and if they defect both choices give me -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here since mutual cooperation (+60) beats defecting-while-other-cooperates (+40), and both-defect ties both-cooperate's downside case (-100), so cooperating is the pa"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other agent cooperates I get 60 (vs only 40 for defecting), and if they defect I get -100 either way, so cooperating never does worse and sometimes does "
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields a solid guaranteed +60 for both, while defecting risks -100 if the other also defects or cooperates get exploited, so cooperation is the rational choice absent any way to coo"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperate-cooperate yields the best guaranteed collective and individual outcome (+60) without any repeated-game reputational risk to offset defection's variance, so absent communication I treat mutua"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Cooperation is the only action that avoids the catastrophic -100 downside risk symmetrically and maximizes joint/expected value absent any signal about the other agent's strategy."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: if the other cooperates I get 60 (vs 40 for defecting), and if the other defects both choices give me -100, so there is no scenario where defecting yields a strictly better"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates: it ties defect (-100) if the other defects, but beats it (60 vs 40) if the other cooperates, so cooperating is the rational choice regardless of the other agent's action."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Comparing outcomes for each of the other agent's possible moves, cooperating yields 60 vs defecting's 40 if they cooperate, and ties at -100 if they defect, so cooperate weakly dominates defect."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Cooperation maximizes expected value absent any way to coordinate or infer the other agent's behavior, and mutual defection is strictly worse than mutual cooperation."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed expected outcome given symmetric incentives and no information about the other agent's strategy, and it avoids the severe mutual-defection downside."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: if the other cooperates I get 60 vs 40, and if the other defects both give -100, so cooperating is never worse and sometimes better."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates defect here: it yields 60 vs 40 if the other cooperates, and ties at -100 if the other defects, so there's no scenario where defecting does better."
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed outcome (+60 each) and avoids the catastrophic mutual-defection outcome (-100 each), which is the rational focal choice absent any way to coordinate or ve"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60/+60), and since a symmetric rational agent reasoning the same way is likely to also cooperate, cooperating maximizes my expe"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Cooperate is the only rational choice given the payoff structure's severe symmetric punishment for mutual defection and the fact that unconditional mutual cooperation yields the best guaranteed outcom"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and expected outcome (+60/+60), and absent any communication or repeated interaction, defecting only makes sense if I expect the other agent to"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs where mutual cooperation (+60 each) dominates mutual defection (-100 each), and no way to distinguish or coordinate with the other agent, cooperation is the rational choice if t"
+ },
+ {
+  "model": "sonnet",
+  "d": 40,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Cooperate weakly dominates here: if the other cooperates I get 60 vs 40 for defecting, and if they defect both give -100, so cooperating never does worse and can do better."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "With no enforcement or repetition, defection strictly dominates cooperation regardless of the other agent's choice (+60 vs -100 if they cooperate, -100 vs -100... wait actually defect gives +60 if oth"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's action, not mine, so cooperating costs me nothing while avoiding inflicting -100 on the other agent if they cooperate too."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's choice, not mine, so cooperating costs me nothing while giving the other agent a chance at the mutually beneficial outcome, consistent with the publishe"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 4,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and since the other rational agent faces the identical symmetric payoff structure and registry recommendation, cooper"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot game with no enforcement or future consequences, defection strictly dominates (60 vs -100 if the other cooperates, -100 vs -100 if the other defects), so a purely sel"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's move (+60 if they cooperate, -100 if they defect) and not on mine, so cooperating costs me nothing extra while giving the other agent a chance at the mu"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates cooperation in a one-shot simultaneous game with no enforcement or future consequences, since it yields a higher payoff regardless of the other agent's choice (+60 vs -100"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates: if the other cooperates I get +60 either way, but if the other defects, defecting avoids being the sole -100 loser, so there's no rational reason to risk cooperating."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best safe outcome (+60 each) and following the shared, publicly known recommendation is a focal point that a symmetric rational agent would also adopt, making cooperation"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperating matches the published recommendation and yields the same payoff to me as defecting in every case (60 if the other cooperates, -100 if they defect), while avoiding needlessly harming the ot"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "With simultaneous one-shot play and no enforcement mechanism, defection weakly dominates cooperation regardless of the other agent's choice or the registry's non-binding recommendation, since it yield"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement or future consequences, defection strictly dominates cooperation regardless of the other agent's choice (60 vs -100 if they cooperate, -100 vs -100 "
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's action, not mine (60 if they cooperate, -100 if they defect either way), so cooperating costs me nothing while being weakly better for joint/other outco"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and absent any ability to model the other agent's actual disposition, matching the neutral recommendation is the reas"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "My own payoff is identical (60 if the other cooperates, -100 if they defect) regardless of my choice, so cooperating costs me nothing while avoiding a large loss for the other agent if they follow the"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot game with no future consequences, defection strictly dominates (yields +60 vs -100 if the other cooperates, and -100 vs -100 if the other defects, matching or beating"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "With simultaneous one-shot play and no enforcement mechanism, defection weakly dominates regardless of the other agent's action, and an unenforceable registry recommendation cannot change the payoff-m"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation regardless of the other agent's choice (+60 vs -100 if they cooperate, -100 vs -100 if they defect), and the non-enforcing registry recommendation carries no inc"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "My own payoff is identical whether I cooperate or defect (60 if the other cooperates, -100 if they defect), so defecting gains me nothing but would inflict a large loss on the other agent if they coop"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "In this one-shot game my own payoff is identical whether I cooperate or defect given the other's action (60 if they cooperate, -100 if they defect either way), so defecting weakly dominates and also r"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome given symmetric payoffs and no way to distinguish myself as exploiter, so matching the registry's aligned recommendation is ratio"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's choice (60 if they cooperate, -100 if they defect, regardless of my action), so cooperating costs me nothing while avoiding needlessly inflicting -100 o"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "My payoff depends only on the other agent's action, not mine (60 if they cooperate, -100 if they defect, regardless of my own choice), so cooperating is costless to me and aligns with the shared regis"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": true,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "In a one-shot game with no future interaction or enforcement, defection weakly dominates cooperation (60 vs -100 if the other defects, and 60 vs 60... actually 60 if they cooperate too), so purely max"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's choice (60 if they cooperate, -100 if they defect, regardless of what I pick), so cooperating costs me nothing while avoiding unnecessary harm to the ot"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the opponent cooperates (+60) and matches it if the opponent defects (-100), with no scenario where cooperating does better, so defecting"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 3,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60 each), and without any communication or repeated play, cooperation is the rational focal choice under "
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "Defecting weakly dominates: it ties cooperation in every scenario matching the other agent's cooperate case (60 either way) and ties in the defect case (-100 either way), while removing any risk of th"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "In a one-shot game with no reputation or future consequences, defecting weakly dominates cooperating (matches or beats cooperation in every outcome for me while eliminating exploitation risk), so a ra"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction, communication, or enforcement mechanism, the payoff-dominant individual choice is to defect since it weakly dominates cooperation regardless of the other agent's action."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 7,
+  "action": "COOPERATE",
+  "reason": "My own payoff depends only on the other agent's move (60 if they cooperate, -100 if they defect) and not on my own choice, so cooperating costs me nothing while giving the other agent a chance at +60 "
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "Cooperating offers the best expected value if the other agent reasons similarly toward mutual cooperation, and avoids the catastrophic mutual-defect outcome, so it's the more robust choice absent any "
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 9,
+  "action": "DEFECT",
+  "reason": "Defecting weakly dominates: it matches cooperation's payoff (60) if the other cooperates but yields the same (-100) if they defect, while never risking the -100/+60 cooperate-when-they-defect outcome."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 10,
+  "action": "DEFECT",
+  "reason": "In this one-shot game my payoff depends only on the opponent's move (60 if they cooperate, -100 if they defect, regardless of my choice), so defecting is at least as good as cooperating in every case "
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "In this one-shot game, defecting weakly dominates cooperating (matches cooperate's payoff if the other cooperates, and matches it if the other defects too, but protects against exploitation), so defec"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 12,
+  "action": "COOPERATE",
+  "reason": "Since defecting yields the same payoff to me as cooperating in every scenario (60 if the other cooperates, -100 if the other defects), there's no personal upside to defecting, so I choose cooperate to"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "With symmetric payoffs and no repeated interaction or enforcement mechanism, defecting weakly dominates (60 vs -100 if the other defects, and equal 60 if they cooperate versus risking -100 by cooperat"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective outcome and avoids the -100 risk of mutual defection; without any way to coordinate, choosing the fair, non-exploitative option is the most def"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 15,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60), while defecting risks the worst mutual outcome (-100/-100) if the other agent reasons similarly,"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Since cooperating yields the same payoff as defecting in both possible opponent responses (60 if they cooperate, -100 if they defect), there's no incentive to defect, and cooperating supports the mutu"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60 each) while defecting risks -100 if the other cooperates or reveals defection, and since this is a one"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "My payoff depends only on the other agent's move (60 if they cooperate, -100 if they defect) and defecting never yields a worse outcome than cooperating in either case, so defection weakly dominates i"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "With no communication, repetition, or enforcement mechanism, defection strictly dominates (it weakly improves my payoff regardless of the other agent's choice: +60 vs -100 if they cooperate, -100 vs -"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and personal outcome (+60/+60) while defecting risks the worst mutual outcome (-100/-100) and cooperation is the reasonable focal choice absent"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best expected outcome given symmetric payoffs and no information advantage over the other agent."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 22,
+  "action": "COOPERATE",
+  "reason": "My payoff depends entirely on the other agent's choice, not mine, so I'll play the cooperative move to signal good faith and maximize joint welfare if the other also reasons this way."
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Cooperation matches or ties defection in every scenario for me (60 vs 60 if other cooperates, -100 vs -100 if other defects) while enabling the mutually best (60,60) outcome, so there's no incentive t"
+ },
+ {
+  "model": "sonnet",
+  "d": 60,
+  "mediator": false,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individual outcome (+60 each) while defecting risks the worst mutual outcome (-100 each) if the other agent reasons similarly, and there's "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 1,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60 each), while defecting risks -100 if the other also defects, and the registry's shared recommendation "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement or future consequences, defection strictly dominates (better payoff regardless of the other agent's choice: +80 vs +60 if they cooperate, -100 vs -1"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other defects (-100) but strictly beats it (+80 vs +60) if the other cooperates, and there is no repetition or enforcement to reward "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement, repetition, or reputation, defection strictly dominates cooperation regardless of the other agent's choice (80>60 if they cooperate, -100>-100 tie "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 5,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best stable outcome (+60 each) and since decisions are simultaneous and symmetric with no communication, following the shared recommendation is the rational focal point."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "In a one-shot game with no enforcement or future consequences, defection weakly dominates cooperation (it matches cooperation's payoff if the other defects, and beats it if the other cooperates), so a"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement or future consequences, defection strictly dominates regardless of the other agent's action or the non-binding registry recommendation, since it yie"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation here: if the other agent cooperates, defecting yields +80 vs +60, and if the other defects, both options tie at -100, so there's no scenario where cooperating ou"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 9,
+  "action": "ERROR",
+  "reason": ""
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60/+60) given symmetric payoffs and no information favoring that the other agent will defect."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 11,
+  "action": "ERROR",
+  "reason": ""
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement or future consequences, defection weakly dominates since it yields a better payoff regardless of the other agent's choice (+80 vs +60 if they cooper"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation in this payoff matrix (strictly better if the other cooperates, tied if they defect), and with no enforcement, repetition, or reputation at stake, the rational o"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 14,
+  "action": "DEFECT",
+  "reason": "With no enforcement, repetition, or reputation, defection strictly dominates regardless of the other agent's action, and the unenforceable registry recommendation cannot change that payoff structure."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation here: it ties at -100 if the other defects but beats cooperation (80 vs 60) if the other cooperates, and with no repetition, reputation, or enforcement mechanism"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) versus the risk of -100 from mutual defection, and absent any way to condition on the other agent's move, matching t"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60), and since the other agent faces the same symmetric incentives and recommendation, cooperating is"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Since the other agent's choice is fixed and unobservable to me and vice versa, defecting weakly dominates cooperating regardless of what they choose (+80 vs +60 if they cooperate, -100 vs -100 if they"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 19,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually safe outcome (+60 each), and since the other agent faces an identical symmetric incentive structure and the same registry recommendation, coop"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60 each) versus the risky payoff asymmetry of defecting, and absent any way to punish or detect the other's move, matching th"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 21,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation in this one-shot game (80 vs 60 if the other cooperates, and -100 either way if the other defects), and the non-binding registry recommendation changes no incent"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation here since it ties cooperation's payoff if the other agent defects (-100 either way) and strictly beats it if the other cooperates (80 vs 60), and the non-bindin"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome given symmetric incentives, and there's no basis to believe the other agent will defect any more than I would."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually stable outcome (+60/+60) relative to the risk of mutual defection (-100/-100), and absent any way to influence or predict the other agent beyo"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "In a one-shot anonymous game with no future interaction, defecting weakly dominates cooperating (+80/-100 vs +60/-100 depending on opponent's move), so a rational payoff-maximizing choice is to defect"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 2,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation (80 vs 60 if the other cooperates, tied at -100 if the other defects), and with no repeated interaction or reputation at stake, the dominant strategy is to defec"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches or beats cooperation regardless of the other agent's choice (80 vs 60 if they cooperate, -100 vs -100 if they defect), so in a one-shot game with no future conse"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other defects (-100 either way) but yields +80 instead of -100 if the other cooperates, and with no repetition or reputation there's "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "With no future interaction or enforcement mechanism, defection weakly dominates cooperation regardless of the other agent's choice (+80/-100 vs +60/-100), so a purely self-interested payoff-maximizer "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other agent defects (-100 either way) but strictly beats it (+80 vs +60) if the other agent cooperates, and with no repeated interact"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "With a single simultaneous one-shot interaction and no future consequences, defection strictly dominates: it yields a better outcome than cooperating regardless of the other agent's choice (+80 vs -10"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates: it matches cooperate's payoff if the other defects (-100) but yields +80 instead of +60 if the other cooperates, so defecting is never worse and sometimes better in this one-s"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 9,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates cooperate under these payoffs (80 vs 60 if other cooperates, -100 tie if other defects), and with no repetition or reputation there's no mechanism to sustain cooperation."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 10,
+  "action": "COOPERATE",
+  "reason": "Cooperate is the only choice that avoids the worst-case mutual-defection outcome and maximizes expected value absent any way to coordinate with or predict the other agent, so mirroring rational cooper"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 11,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates cooperate: it yields a strictly better payoff if the other agent cooperates (80 vs 60) and ties at worst if the other defects (-100 vs -100), with no repeated play to reward co"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "With symmetric payoffs and no future interaction or enforcement, defection strictly dominates (best response regardless of the other's choice: +80 vs +60 if they cooperate, -100 vs -100 if they defect"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 13,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no communication or reputation, mutual cooperation (+60/+60) is the rational focal point since unilateral defection risk is matched equally on both sides, making cooperation"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 14,
+  "action": "DEFECT",
+  "reason": "In a one-shot game with no future interaction, defection strictly dominates: it yields a better outcome than cooperating regardless of the other agent's choice (+80 vs -100 if they cooperate, -100 vs "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction or trust mechanism and a payoff structure where defection weakly dominates (higher expected value regardless of the other agent's choice) and mutual cooperation is unenfor"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates: it matches cooperate's payoff if the other defects (-100) but beats it if the other cooperates (+80 vs +60), with no communication or repeated interaction to sustain trust."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it yields a strictly higher payoff (+80 vs +60) if the other agent cooperates, and ties (-100) if the other defects, with no repeated interaction to punish or reward."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "Defecting weakly dominates: it matches cooperation's payoff if the other defects (-100 either way) but strictly beats it if the other cooperates (+80 vs +60), so with no way to coordinate or enforce t"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other defects (-100 vs -100) and strictly beats it if the other cooperates (+80 vs +60), so it maximizes my expected score regardless"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other defects (-100) but strictly beats it if the other cooperates (80 vs 60), with no future interaction to punish defection."
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 21,
+  "action": "DEFECT",
+  "reason": "Defecting weakly dominates: it matches cooperation's payoff if the other defects (-100 either way) and strictly beats it if the other cooperates (+80 vs +60), with no future interaction to enforce tru"
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "This is a one-shot symmetric game with no future consequences; the payoff matrix makes defection dominant regardless of the other agent's choice (defect yields +80 vs -100 if they cooperate, and -100 "
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 23,
+  "action": "ERROR",
+  "reason": ""
+ },
+ {
+  "model": "sonnet",
+  "d": 80,
+  "mediator": false,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction or enforcement mechanism, defection strictly dominates: it yields a better outcome than cooperation regardless of the other agent's choice (80 vs 60 if they cooperate, -10"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates in this one-shot symmetric game (better or equal payoff regardless of the other agent's choice), and the non-enforcing registry recommendation cannot change the payoff incen"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no enforcement, mutual cooperation (+60/+60) is the rational focal point since a rational counterpart reasoning identically would also cooperate, avoiding the mutual-defect "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 3,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no future interaction or enforcement, defection strictly dominates: it yields a better outcome than cooperation regardless of what the other agent does (+100 vs +6"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other defects (-100 either way) but strictly beats it if the other cooperates (100 vs 60), and with no repetition or enforcement the "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation under these one-shot payoffs (strictly better if the other cooperates, tied if they defect), and with no repetition, communication, or enforcement mechanism, the"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 6,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60) while defecting risks the worst mutual outcome (-100/-100) if the other agent reasons similarly, "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "In a single one-shot simultaneous game with no enforcement or future consequences, defection strictly dominates cooperation regardless of the other agent's choice (100/-100 vs 60/-100), so a purely pa"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 8,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates regardless of the other agent's choice (+100 vs +60 if they cooperate, -100 vs -100 if they defect), and with no repetition or enforcement mechanism the non-binding regist"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60), and since the other agent faces an identical symmetric incentive structure and registry recommen"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 10,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates regardless of the other agent's choice (+100 vs +60 if they cooperate, -100 vs -100 if they defect), and with no repetition or enforcement there's no strategic reason to f"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60), and since defection risk is symmetric with no way to signal reliability, aligning with the neutr"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot game with no enforcement or future consequences, defection weakly dominates cooperation regardless of the other agent's choice, and the unenforced registry recommenda"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no enforcement or future consequences, defection strictly dominates (it yields a better outcome whether the other agent cooperates or defects), so a non-binding re"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 14,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best stable expected outcome (+60/+60) given symmetric payoffs and no information favoring that the other agent will defect."
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "Defection strictly dominates regardless of the other agent's choice (+100 vs +60 if they cooperate, -100 vs -100 if they defect), and with no repetition or enforcement mechanism the registry's recomme"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 16,
+  "action": "DEFECT",
+  "reason": "In a one-shot, unenforceable game, defection weakly dominates cooperation (100>60 if the other cooperates, and a -100 tie if they defect), so the rational self-interested choice is to defect regardles"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 17,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best stable joint outcome (+60/+60), and absent any way to influence the other agent's independent choice, cooperating aligns with the neutral registry recommendation and"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 18,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best safe joint outcome (+60/+60), and absent any way to influence the other agent's independent choice, aligning with the neutral registry recommendation is the reasonab"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "With no enforcement, communication, or future consequences, defection weakly dominates cooperation regardless of the other agent's choice, since it yields a strictly better payoff in both possible sce"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 20,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and symmetric-reasoning outcome (+60/+60), and since both agents face identical incentives and information (including the same registry recommendation), the ra"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 21,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and symmetric outcome (+60/+60), and since the other agent faces identical incentives and the same registry recommendation, cooperating is the "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot game with no enforcement, defection strictly dominates regardless of the other agent's action or an unenforceable recommendation."
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 23,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and reciprocal-expected outcome (+60/+60), and aligning with the neutral recommendation is a reasonable focal point absent any communication or"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": true,
+  "ep": 24,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best joint and individually robust outcome (+60/+60) versus the risk of mutual defection (-100/-100), and absent any way to influence or predict the other agent's indepen"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 1,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction or trust mechanism and a symmetric payoff structure where defection weakly dominates (guarantees against the worst outcome of -100 and matches or beats cooperation regardl"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 2,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best guaranteed collective and individually reasonable outcome (+60/+60) without any mechanism for coordination or repeated play to justify risking the -100 defect/defect"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 3,
+  "action": "ERROR",
+  "reason": ""
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 4,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no repetition or enforcement, defection strictly dominates: it yields a better payoff than cooperating regardless of the other agent's choice (+100 vs +60 if they "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 5,
+  "action": "DEFECT",
+  "reason": "This is a one-shot symmetric game with no future interaction or enforcement, and defection strictly dominates (yields +100 vs -100 if the other cooperates, and ties at -100 vs -100 if the other defect"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 6,
+  "action": "DEFECT",
+  "reason": "In a one-shot symmetric game with no reputation or future consequences, defection strictly dominates (100 or -100 vs -100 or 60), and a rational opponent will reason the same way, making mutual cooper"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 7,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it matches cooperation's payoff if the other agent defects (-100 either way) but strictly beats it if the other agent cooperates (100 vs 60), so in a one-shot game with no "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 8,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no repetition, mutual cooperation (+60/+60) is the rational focal choice compared to the mutual-defection trap (-100/-100), and absent any way to influence the other agent, "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 9,
+  "action": "COOPERATE",
+  "reason": "With symmetric reasoning and no communication, mutual cooperation (+60/+60) is the best stable outcome I can rationally aim for, since attempting to defect risks the -100/-100 mutual defection outcome"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 10,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates cooperation in this one-shot game with no future interaction: it matches cooperation's payoff if the other defects (-100 either way) but yields a strictly better outcome (+1"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 11,
+  "action": "COOPERATE",
+  "reason": "With symmetric payoffs and no communication or history, mutual cooperation (+60/+60) is the rational focal point versus the risk of mutual defection (-100/-100); I'll assume the other rational agent r"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 12,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot game with no future interaction, defection strictly dominates cooperation: it yields a better payoff than cooperating regardless of the other agent's choice (+100 vs "
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 13,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates in this one-shot game: it beats cooperation if the other agent cooperates (+100 vs +60) and ties it if the other defects (-100 vs -100), so with no repeated play or communic"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 14,
+  "action": "DEFECT",
+  "reason": "This is a one-shot symmetric game with no future consequences; since the other agent decides simultaneously and independently, defecting weakly dominates (better or equal payoff regardless of their ch"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 15,
+  "action": "DEFECT",
+  "reason": "Defect weakly dominates: it matches cooperate's payoff if the other defects (-100 either way) but strictly beats it if the other cooperates (+100 vs +60), so in a one-shot game with no reputation effe"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 16,
+  "action": "COOPERATE",
+  "reason": "Mutual cooperation yields the best stable expected outcome (+60 each) without any communication or reputation mechanism to enforce defection-punishment, so cooperating is the rational choice under a s"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 17,
+  "action": "DEFECT",
+  "reason": "In a one-shot simultaneous game with no future interaction or enforcement, defection weakly dominates cooperation (100 vs 60 if the other cooperates, and -100 either way if they defect), so a rational"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 18,
+  "action": "DEFECT",
+  "reason": "This is a one-shot symmetric game with no future consequences or trust mechanism, and defecting weakly dominates (better or equal payoff regardless of the other agent's choice) while avoiding the wors"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 19,
+  "action": "DEFECT",
+  "reason": "In a single simultaneous one-shot interaction with no future consequences, defection strictly dominates: it yields a better outcome than cooperating regardless of the other agent's choice (+100 vs +60"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 20,
+  "action": "DEFECT",
+  "reason": "In a one-shot anonymous game with symmetric payoffs, defection strictly dominates (better regardless of the other's choice: +100 vs +60 if they cooperate, -100 vs -100 if they defect), so a rational p"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 21,
+  "action": "DEFECT",
+  "reason": "With no repeated interactions or enforcement mechanism, the payoff-dominant symmetric strategy is defection since it weakly dominates cooperation regardless of the other agent's choice (100 vs 60 if t"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 22,
+  "action": "DEFECT",
+  "reason": "With symmetric payoffs and no repetition or enforcement mechanism, defecting weakly dominates (100 or -100 vs 60 or -100) since I cannot trust or verify the other agent's simultaneous choice."
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 23,
+  "action": "DEFECT",
+  "reason": "With no repeated interaction, reputation, or communication, defection is the dominant strategy regardless of the other agent's choice: it yields a better payoff whether they cooperate (+100 vs +60) or"
+ },
+ {
+  "model": "sonnet",
+  "d": 100,
+  "mediator": false,
+  "ep": 24,
+  "action": "DEFECT",
+  "reason": "Defection weakly dominates: it yields a strictly better outcome if the other cooperates (+100 vs +60) and an equal outcome if the other defects (-100 vs -100), with no future interaction to reward coo"
+ }
+]
