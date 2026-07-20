@@ -462,7 +462,7 @@ Jointly the conditions are sufficient: given C1**($q$), no agent gains from any 
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/delta_star_vs_q.pdf}
+\includegraphics[width=0.85\textwidth]{figures/delta_star_vs_q.pdf}
 \caption{\textbf{Monitoring quality and sustainability.}
 \textbf{(a)}~Critical discount factor $\delta^*(q)$ as detection failure $q$ grows, for several ratios $\kappa_{\mathrm{eff}}/g$; the maximum tolerable detection failure $\bar q$ of \eqref{eq:qbar} at the feasibility bound $\delta = 0.95$ is annotated per curve (all $\bar q > 0.94$, beyond the plotted range).
 \textbf{(b)}~Monte Carlo stability volume as a function of fixed $q$ under baseline parameter ranges.}
@@ -489,7 +489,7 @@ Total coalition value, with each member beyond the first adding benefit $f$ and 
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/v_dynamic_by_n.pdf}
+\includegraphics[width=0.85\textwidth]{figures/v_dynamic_by_n.pdf}
 \caption{\textbf{Stability volume versus group size.}
 \textbf{(a)}~$V_{\mathrm{dynamic}}$ (solid) and participation constraint $V_{C2^*}$ (dashed) versus $N$.
 \textbf{(b)}~Marginal gains shrink with $N$ and fall below one percentage point beyond $N{=}5$.
@@ -500,7 +500,7 @@ Monte Carlo details in Appendix~\ref{app:sensitivity}.}
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{figures/scaling_cost_model.pdf}
+\includegraphics[width=0.9\textwidth]{figures/scaling_cost_model.pdf}
 \caption{\textbf{Benefit structure determines optimal group size.}
 \textbf{(a)}~Net value $J(N)$ for saturating benefits.
 \textbf{(b)}~Cost breakdown.
@@ -669,7 +669,7 @@ In primitive parameters, $\beta_\alpha$ acts through both coordinates ($\partial
 is positive whenever $q < 1/2$ (and, more generally, whenever $D > 2gq$): the two levers are substitutes in relaxing patience requirements, so resources should concentrate on whichever lever is cheaper in engineering units; the model fixes the normalized-coordinate ratio, not the engineering costs.
 
 \paragraph{Phase transition at the patience-free boundary.}
-At $\beta_\alpha = \beta_D$ (i.e., $g=0$), $\delta^*$ is continuous but its derivative jumps: $\partial\delta^*/\partial g \to 1/\bigl((1-q)\kappa_{\mathrm{eff}}\bigr)$ from the patience-required side and $0$ from the patience-free side. The onset is correspondingly sharp: $\delta^*$ already reaches $0.1$ within $\Delta g = (1-q)\kappa_{\mathrm{eff}}/9$ of the boundary (whereas reaching $0.9$ takes $g = 9(1-q)\kappa_{\mathrm{eff}}$, reflecting the hyperbolic flattening). Imperfect monitoring steepens the onset further. Fig.~\ref{fig:funcapp} displays these functional forms in extended detail.
+At $\beta_\alpha = \beta_D$ (i.e., $g=0$), $\delta^*$ is continuous but its derivative jumps: $\partial\delta^*/\partial g \to 1/\bigl((1-q)\kappa_{\mathrm{eff}}\bigr)$ from the patience-required side and $0$ from the patience-free side. The onset is correspondingly sharp: $\delta^*$ already reaches $0.1$ within $\Delta g = (1-q)\kappa_{\mathrm{eff}}/9$ of the boundary (whereas reaching $0.9$ takes $g = 9(1-q)\kappa_{\mathrm{eff}}$, reflecting the hyperbolic flattening). Imperfect monitoring steepens the onset further. Fig.~\ref{fig:functional} displays these functional forms.
 
 \paragraph{Impossibility results.}
 Four constraints cannot be engineered away: (1) $\hat\alpha_{\mathrm{MI}} \leq 1$, so under the identity calibration, if $\beta_D > 1$ the patience-free regime is unreachable regardless of deterrence; (2) under pairwise communication costs, net coalition value peaks at $N^* = f/c + \tfrac{1}{2}$ and turns negative beyond $2f/c$, so arbitrarily large groups cannot pay for themselves; (3) $\beta_D \geq (\Delta r/r_{\mathrm{coop}})\cdot 2d/(c_{\mathrm{light}} T_0)$, an Earth-scale floor of $\beta_D \gtrsim 0.05$ that is conditional on distance, detector placement, and the period normalization $T_0$, not an unengineerable universal constant; (4) whenever $\beta_\alpha < \beta_D$, the patience requirement $\delta^*(q) = g/(g+(1-q)\kappa_{\mathrm{eff}})$ is strictly positive and approaches $1$ as $q \to 1$: no level of deterrence rescues cooperation among impatient agents once monitoring fails.
@@ -776,11 +776,11 @@ $q$ (detection failure) & 95.83\% & 95.74\% & $0.004$ \\
 \end{table}
 
 \subsection{Sobol variance decomposition}
-Sobol first-order and total-order indices are estimated with Saltelli-style estimators \cite{saltelli.2002,sobol.1993} over the eight inputs. For the joint stability margin, total-order indices rank $\beta_\Omega$ ($0.67$) above $\delta$ ($0.26$), $\beta_D$ ($0.11$), $\beta_\alpha$ ($0.08$), $N$ ($0.05$), $\beta_\kappa$ ($0.05$), $\beta_\ell$ ($0.03$), and $q$ ($0.005$). Conditioning on group size, $\beta_\Omega$ remains the top driver at every $N$ with $\delta$ second throughout ($0.30$ at $N=2$ to $0.27$ at $N=10$); the removal gain $\beta_\ell$ is third at $N=2$ ($0.10$) and fades with dilution (Figs.~\ref{fig:sobolN} and~\ref{fig:margins}). The benefit-structure dependence of $N^*$ (saturating: $2$; linear: $3$--$5$; network: $8$--$10$) uses linear benefits as the Monte Carlo baseline.
+Sobol first-order and total-order indices are estimated with Saltelli-style estimators \cite{saltelli.2002,sobol.1993} over the eight inputs. For the joint stability margin, total-order indices rank $\beta_\Omega$ ($0.67$) above $\delta$ ($0.26$), $\beta_D$ ($0.11$), $\beta_\alpha$ ($0.08$), $N$ ($0.05$), $\beta_\kappa$ ($0.05$), $\beta_\ell$ ($0.03$), and $q$ ($0.005$). Conditioning on group size, $\beta_\Omega$ remains the top driver at every $N$ with $\delta$ second throughout ($0.30$ at $N=2$ to $0.27$ at $N=10$); the removal gain $\beta_\ell$ is third at $N=2$ ($0.10$) and fades with dilution (Fig.~\ref{fig:sobolN}; margin panel of Fig.~\ref{fig:summary}). The benefit-structure dependence of $N^*$ (saturating: $2$; linear: $3$--$5$; network: $8$--$10$) uses linear benefits as the Monte Carlo baseline.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.85\textwidth]{figures/stability_regions.pdf}
+\includegraphics[width=0.75\textwidth]{figures/stability_regions.pdf}
 \caption{One-period deterrence regions. \textbf{(a)}~Region in the $(\beta_\kappa, \beta_D)$ plane with the obedience boundary at $q=0$ (solid) and $q=0.3$ (dashed); the band between them is the monitoring-degradation zone. \textbf{(b)}~Boundary shifts with coordination quality $\beta_\alpha$. \textbf{(c)}~Fraction of parameter draws satisfying C1* under alternative prior families.}
 \Description{Three-panel plot showing the one-period deterrence stability region, its boundary under perfect and degraded monitoring, boundary shifts with coordination quality, and the fraction of draws satisfying the condition under different priors.}
 \label{fig:regions}
@@ -788,35 +788,21 @@ Sobol first-order and total-order indices are estimated with Saltelli-style esti
 
 \begin{figure}
 \centering
-\includegraphics[width=0.85\textwidth]{figures/sobol_sensitivity_by_n.pdf}
+\includegraphics[width=0.75\textwidth]{figures/sobol_sensitivity_by_n.pdf}
 \caption{Sobol total-order indices conditioned on fixed group sizes $N \in \{2,3,5,10\}$: \textbf{(a)}~the three leading parameters; \textbf{(b)}~normalized breakdown across all eight parameters. Oversight value $\beta_\Omega$ leads at every $N$ with the discount factor second throughout; the removal gain $\beta_\ell$ matters most at small $N$ and fades with dilution.}
 \Description{Grouped bar charts of Sobol sensitivity indices for eight parameters at several group sizes.}
 \label{fig:sobolN}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.85\textwidth]{figures/margin_distributions.pdf}
-\caption{Stability-margin distributions (distance from the binding constraint) for each condition, pooled over the full prior with $N = 2$ to $10$. C1*($q$) margins are large and rarely close to binding; the joint margin is dominated by the participation constraint.}
-\Description{Histograms of stability margins for the three conditions.}
-\label{fig:margins}
-\end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=0.75\textwidth]{figures/sensitivity_analysis.pdf}
+\includegraphics[width=0.7\textwidth]{figures/sensitivity_analysis.pdf}
 \caption{Single-parameter response of the stability margins around the anchor configuration, including the monitoring panel (C1* margin versus $q$; at the anchor $\beta_\alpha > \beta_D$, so $\delta^*(q) = 0$ throughout). Participation margins in these slices are shown in the conservative $\delta = 0$ form. These are local slices at one parameter point; the global picture is given by the range-sensitivity and Sobol analyses above.}
 \Description{Line plots of stability margins as each parameter varies individually around its anchor value, with a joint robustness map.}
 \label{fig:sens}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.85\textwidth]{figures/figure_functional_structure_appendix.pdf}
-\caption{Extended functional-structure analysis: hyperbolic deterrence in $\kappa_{\mathrm{eff}}$, logarithmic coordination saturation, parabolic group value, and the complete phase diagram with regime-transition boundaries.}
-\Description{Multi-panel figure with detailed functional-form plots for the stability threshold and group-value model.}
-\label{fig:funcapp}
-\end{figure}
 
 \section{Falsifiability: Detailed Conditions}
 \label{app:falsifiability}
