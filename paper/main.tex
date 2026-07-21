@@ -297,13 +297,8 @@ and $\pi_H(0)>\pi_{NH}(0)$ implies $\dot p>0$ in a neighborhood of $p=0$: the no
 
 \end{proof}
 
-\emph{Remark (interior equilibrium).} Under the additional saturation condition that the security return at full hedging is bounded, $\rho(1) < \gamma + \gamma[\sigma(1)-1]/h + (C_H - L(0))/(Rh)$ (reducing to $\rho(1) < \gamma + C_H/(Rh)$ in the limiting case $\sigma(1) = 1$, $L(0) = 0$, i.e., when full hedging leaves a lone non-hedger unexploited), one obtains $\pi_H(1)<\pi_{NH}(1)$; by continuity an interior equilibrium $p^*\in(0,1)$ then exists, and it is asymptotically stable because
-\begin{equation*}
-\frac{d}{dp}\bigl[\pi_H(p)-\pi_{NH}(p)\bigr]\Big|_{p^*} = Rh\rho'(p^*) - R\gamma\sigma'(p^*) - L'(1-p^*) < 0
-\end{equation*}
-($\rho'<0$, $\sigma'>0$, $L' \geq 0$). These saturation conditions are additional to (i)--(iii) and are stated here rather than in the lemma because only the positive-hedging conclusion is used in what follows.
 
-Robustness of the remark's interior equilibrium under mutation--selection dynamics is shown in Appendix~\ref{app:mutation}. Lemma~\ref{lem:hedging} implies that in the absence of coordination mechanisms, defensive allocation persists in any evolutionarily stable configuration: the population settles at positive hedging, a collective diversion of resources from productive activity analogous to arms races \cite{jervis.1978}. Two scope notes bound the claim. The conclusion is population-level; at an interior equilibrium, hedgers and non-hedgers coexist and earn equal payoffs. And the physical constraints do not appear in the proof; their role is to make assumptions (i)--(iii) generic rather than special: finite shared substrates make undefended agents exploitable, and defending the first unit is cheap relative to what it protects. Readers who reject those assumptions reject the conclusion, which is why they are stated as assumptions and not as physics. Shrinking this diversion requires a coordination mechanism that credibly reduces interference risk. A natural candidate is peer monitoring: if agents can verify each other's internal states, mutual assurance might substitute for hedging. We show next that the strongest route to it, full real-time simulation, is closed to saturated peers, and that the remaining routes face structural gaps of their own.
+An interior hedging equilibrium $p^* \in (0,1)$ exists and is asymptotically stable under additional saturation conditions, and it is robust to mutation; both statements are in Appendix~\ref{app:mutation}. Lemma~\ref{lem:hedging} implies that in the absence of coordination mechanisms, defensive allocation persists in any evolutionarily stable configuration: the population settles at positive hedging, a collective diversion of resources from productive activity analogous to arms races \cite{jervis.1978}. Two scope notes bound the claim. The conclusion is population-level; at an interior equilibrium, hedgers and non-hedgers coexist and earn equal payoffs. And the physical constraints do not appear in the proof; their role is to make assumptions (i)--(iii) generic rather than special: finite shared substrates make undefended agents exploitable, and defending the first unit is cheap relative to what it protects. Readers who reject those assumptions reject the conclusion, which is why they are stated as assumptions and not as physics. Shrinking this diversion requires a coordination mechanism that credibly reduces interference risk. A natural candidate is peer monitoring: if agents can verify each other's internal states, mutual assurance might substitute for hedging. We show next that the strongest route to it, full real-time simulation, is closed to saturated peers, and that the remaining routes face structural gaps of their own.
 
 \section{Simulation Incompleteness Limits Peer Verification}
 \label{sec:incompleteness}
@@ -591,29 +586,8 @@ Five limitations qualify these results. First, parameter ranges mix hard physica
 The framework yields four falsifiable predictions. (1)~Because C2* is sufficient rather than necessary, stable small coalitions do not by themselves falsify the model; the testable version is conditional: if the outside option is independently estimated at $v_{\mathrm{out}} \approx \beta_\alpha$ and voluntary coalitions with $N{<}4$ nevertheless sustain stability while violating C2*, the modeled removal-payoff specification is rejected. (2)~If AI systems develop peer verification of internal states with detection failure $q < 0.1$, then the simulation-incompleteness assumption is circumventable in practice and A$_{\mathrm{int}}$ fails. (3)~If linear-benefit institutions with $N{=}15$ to $20$ sustain flat coordination for more than 30~years, then the quadratic-cost assumption fails, likely indicating subquadratic communication protocols. (4)~If systems satisfying $\beta_\alpha > \beta_D$ systematically fail to cooperate in one-shot settings, then C1*($q$) is insufficient and additional mechanisms (reputation, trust, institutional commitment) are required. Detailed operationalizations appear in Appendix~\ref{app:falsifiability}. The four predictions are not equally strong tests: (1) and (3) require multi-decade observation windows, and (2) is a bet on future verification technology. Prediction (4) is testable now, and cheaply, so we tested it (Appendix~\ref{app:prediction4}): in 480 one-shot games among two current language-model agents with $\beta_\alpha$ and $\beta_D$ engineered into the payoffs, cooperation sits at $91$--$94\%$ precisely in the patience-free regime ($\beta_\alpha > \beta_D$, with or without a mediator recommendation) and falls to $13$--$40\%$ beyond the boundary. Prediction~4 is not falsified, and the boundary the theory identifies is where behavior actually breaks. One result exceeds what the one-shot theory licenses and we report it as a caution rather than a confirmation: in the dilemma region, where the recommendation is not incentive-compatible, the non-enforcing mediator still tripled cooperation ($12.8\%$ to $40.4\%$), so current language-model agents deviate from the rational-agent model in the direction of excess compliance. The effective discount factor can likewise be elicited behaviorally from switch points between immediate and delayed rewards (Table~\ref{tab:calibration}); whether the elicited $\delta$ is even stationary is itself informative.
 
 \paragraph{Practical utility.}
-For designers of multi-agent AI deployments, the conditions translate into measurable engineering targets: the coordination quality $\beta_\alpha$ (target: above the deviation temptation, to enter the patience-free regime); the detection-failure probability $q$ of action monitoring (target: below $\bar q(\delta)$ of \eqref{eq:qbar}); and per-member oversight value above $(1-\delta)\,\beta_\ell/N$ for the certified condition, with the general outside-option target $\beta_\alpha + \beta_\Omega - v_{\mathrm{out}} \geq (1-\delta)\,\beta_\ell/N$. For policymakers, the analysis identifies which levers matter during the window of infrastructure dependence; within the normalized payoff coordinates and for $g > 0$, signal quality dominates deterrence on the patience margin \eqref{eq:leverratio}, but a full ranking across signal quality, monitoring, and deterrence would require a common cost normalization the model does not fix.
+For designers of multi-agent AI deployments, the conditions translate into measurable engineering targets: the coordination quality $\beta_\alpha$ (target: above the deviation temptation, to enter the patience-free regime); the detection-failure probability $q$ of action monitoring (target: below $\bar q(\delta)$ of \eqref{eq:qbar}); and per-member oversight value above $(1-\delta)\,\beta_\ell/N$ for the certified condition, with the general outside-option target $\beta_\alpha + \beta_\Omega - v_{\mathrm{out}} \geq (1-\delta)\,\beta_\ell/N$. For policymakers, the analysis identifies which levers matter during the window of infrastructure dependence; within the normalized payoff coordinates and for $g > 0$, signal quality dominates deterrence on the patience margin \eqref{eq:leverratio}, but a full ranking across signal quality, monitoring, and deterrence would require a common cost normalization the model does not fix. A stylized calibration showing every parameter measurable from existing telemetry is given in Appendix~\ref{app:falsifiability} (Table~\ref{tab:calibration}).
 
-\paragraph{A stylized calibration.}
-To make the checklist concrete, consider autonomous cloud-resource agents: $N=4$ provider-operated agents allocating compute under a shared scheduling registry. Cooperation is respecting mediated allocations; defection is overdrawing during the window before billing telemetry exposes it, so $\beta_D$ is the extraction advantage over a detection delay of seconds, and the machine-timescale calibration of Appendix~\ref{app:physical} applies directly. $\beta_\alpha$ is calibrated from the normalized mutual information between registry signals and realized allocations; $q$ is the telemetry miss rate, auditable from logged incidents; the remaining parameters are measured as in Table~\ref{tab:calibration}. None of these quantities is exotic; all are estimable from existing telemetry, which is what the framework asks of an application. Table~\ref{tab:calibration} summarizes the measurement program.
-
-\begin{table}
-\caption{Measuring the parameters in the stylized cloud-resource setting.}
-\label{tab:calibration}
-\centering
-\small
-\begin{tabular}{lll}
-\toprule
-\textbf{Parameter} & \textbf{Measured as} & \textbf{Data source} \\
-\midrule
-$\beta_D$ & excess resources extracted before detection & billing and log telemetry \\
-$q$ & missed-violation rate & audit logs; red-team probes \\
-$\beta_\alpha$ & calibrated payoff $\psi(\hat\alpha_{\mathrm{MI}})$ from signal/action MI & registry and action traces \\
-$\beta_\Omega$ & willingness to pay for registry services & fees; revealed preference \\
-$\beta_\ell$ & resources freed by disabling the registry & capacity accounting; post-mortems \\
-$\delta$ & delayed-reward elicitation (switch points) & controlled agent experiments \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -688,11 +662,17 @@ Four constraints cannot be engineered away: (1) $\hat\alpha_{\mathrm{MI}} \leq 1
 \section{Hedging Under Mutation--Selection Dynamics}
 \label{app:mutation}
 
+\emph{Remark (interior equilibrium).} Under the additional saturation condition that the security return at full hedging is bounded, $\rho(1) < \gamma + \gamma[\sigma(1)-1]/h + (C_H - L(0))/(Rh)$ (reducing to $\rho(1) < \gamma + C_H/(Rh)$ in the limiting case $\sigma(1) = 1$, $L(0) = 0$, i.e., when full hedging leaves a lone non-hedger unexploited), one obtains $\pi_H(1)<\pi_{NH}(1)$; by continuity an interior equilibrium $p^*\in(0,1)$ then exists, and it is asymptotically stable because
+\begin{equation*}
+\frac{d}{dp}\bigl[\pi_H(p)-\pi_{NH}(p)\bigr]\Big|_{p^*} = Rh\rho'(p^*) - R\gamma\sigma'(p^*) - L'(1-p^*) < 0
+\end{equation*}
+($\rho'<0$, $\sigma'>0$, $L' \geq 0$). These saturation conditions are additional to (i)--(iii) and are stated here rather than in the lemma because only the positive-hedging conclusion is used in the main text.
+
 Robustness of the interior equilibrium to mutation is established deterministically. Add symmetric mutation at rate $\mu > 0$ to the replicator dynamics \cite{nowak.2006,sandholm.2010}:
 \begin{equation*}
 \dot p \;=\; p(1-p)\bigl[\pi_H(p)-\pi_{NH}(p)\bigr] + \mu(1-2p).
 \end{equation*}
-At $\mu = 0$ the interior rest point $p^*$ of the Remark in Section~\ref{sec:hedging} is hyperbolic and asymptotically stable (the payoff-difference derivative at $p^*$ is strictly negative), so by the implicit function theorem the perturbed dynamics retain a nearby asymptotically stable interior rest point $p^*(\mu)$ for all sufficiently small $\mu$, with $p^*(\mu) \to p^*$ as $\mu \to 0$. Mutation cannot restore the non-hedging state: at $p = 0$ the selection term vanishes and the mutation term equals $+\mu > 0$, so $p = 0$ is not even a rest point for $\mu > 0$, and near $p = 0$ the selection term is itself positive by Lemma~\ref{lem:hedging}. Even with mutations continually producing non-hedgers, selection maintains substantial hedging.
+At $\mu = 0$ the interior rest point $p^*$ of the Remark above is hyperbolic and asymptotically stable (the payoff-difference derivative at $p^*$ is strictly negative), so by the implicit function theorem the perturbed dynamics retain a nearby asymptotically stable interior rest point $p^*(\mu)$ for all sufficiently small $\mu$, with $p^*(\mu) \to p^*$ as $\mu \to 0$. Mutation cannot restore the non-hedging state: at $p = 0$ the selection term vanishes and the mutation term equals $+\mu > 0$, so $p = 0$ is not even a rest point for $\mu > 0$, and near $p = 0$ the selection term is itself positive by Lemma~\ref{lem:hedging}. Even with mutations continually producing non-hedgers, selection maintains substantial hedging.
 
 \section{Coalition Deviations and the False-Alarm Extension}
 \label{app:coalitions}
@@ -821,6 +801,28 @@ Sobol first-order and total-order indices are estimated with Saltelli-style esti
 The Weak Leviathan mechanism fails if future AI systems develop any of: \textbf{(F1)} homomorphic or zero-knowledge verification of peer internal states without full simulation (then $q_{\mathrm{internal}} \to 0$ and peer monitoring substitutes for mediation); \textbf{(F2)} cryptographic commitment to future goals verifiable without simulation (eliminating the need for external mediation); \textbf{(F3)} monitors with $C_1 \gg C_2$ (specialized monitoring infrastructure outside the peer regime of Theorem~\ref{thm:incompleteness}).
 
 The four main-text predictions operationalize as: (1) small-coalition stability, conditional form: with the outside option independently estimated at $v_{\mathrm{out}} \approx \beta_\alpha$, voluntary $N<4$ coalitions stable for 50+ years while violating $\beta_\Omega/(1-\delta) \geq \beta_\ell/N$ would reject the modeled removal-payoff specification (unconditionally, such coalitions only demonstrate an outside option below the worst case); (2) peer internal verification with $q < 0.1$ would falsify A$_{\mathrm{int}}$; (3) $N = 15$--$20$ linear-benefit institutions sustaining flat coordination for 30+ years would falsify the quadratic-cost assumption; (4) systematic one-shot cooperation failure under $\beta_\alpha > \beta_D$ would show the stage-game obedience constraint is insufficient.
+
+\paragraph{A stylized calibration.}
+To make the measurement program concrete, consider autonomous cloud-resource agents: $N=4$ provider-operated agents allocating compute under a shared scheduling registry. Cooperation is respecting mediated allocations; defection is overdrawing during the window before billing telemetry exposes it, so $\beta_D$ is the extraction advantage over a detection delay of seconds, and the machine-timescale calibration of Appendix~\ref{app:physical} applies directly. $\beta_\alpha$ is calibrated from the normalized mutual information between registry signals and realized allocations; $q$ is the telemetry miss rate, auditable from logged incidents; the remaining parameters are measured as in Table~\ref{tab:calibration}. None of these quantities is exotic; all are estimable from existing telemetry, which is what the framework asks of an application. Table~\ref{tab:calibration} summarizes the measurement program.
+
+\begin{table}
+\caption{Measuring the parameters in the stylized cloud-resource setting.}
+\label{tab:calibration}
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Parameter} & \textbf{Measured as} & \textbf{Data source} \\
+\midrule
+$\beta_D$ & excess resources extracted before detection & billing and log telemetry \\
+$q$ & missed-violation rate & audit logs; red-team probes \\
+$\beta_\alpha$ & calibrated payoff $\psi(\hat\alpha_{\mathrm{MI}})$ from signal/action MI & registry and action traces \\
+$\beta_\Omega$ & willingness to pay for registry services & fees; revealed preference \\
+$\beta_\ell$ & resources freed by disabling the registry & capacity accounting; post-mortems \\
+$\delta$ & delayed-reward elicitation (switch points) & controlled agent experiments \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{A First Behavioral Test of Prediction 4}
 \label{app:prediction4}
